@@ -1,5 +1,5 @@
 #########################################################################
-# File: stringCompare.py												
+# File: string_compare.py
 # Descriptions: String comparison techniques for file path similarity	
 # Input: The arguments f1, f2 are strings of file path 					
 # Output: Number of common file path components in f1 and f2
