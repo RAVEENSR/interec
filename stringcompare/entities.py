@@ -25,13 +25,20 @@ class PullRequest:
         self.core_team_follows_requester = data.core_team_follows_requester
 
 
-class ReviewPullRequest(PullRequest):
-    def __init__(self, data):
+class MergedPullRequest(PullRequest):
+    def __init__(self, integrator):
         super().__init__(self)
-        self.prev_pr_similarity = []
-        # TODO [0][0] = PR object | [0][1] algo1 | [0][2] algo2 | [0][3] algo3 | [0][4] algo3
-        '''
-            # TODO create a common object to hold each new pr details( ex. ine object to hold the file path similarity
-            , one object to hold the textual similarity) These things should be done without repeating the saving 
-            details again and again.
-        '''
+        self.longest_common_prefix_score = 0
+        self.longest_common_suffix_score = 0
+        self.longest_common_sub_string_score = 0
+        self.longest_common_sub_sequence_score = 0
+        self.pr_title_similarity = 0
+        self.pr_description_similarity = 0
+        self.integrator = integrator
+        self.integrator_activeness = 0
+
+
+class Integrator:
+    def __init__(self, data):
+        self.integrator_id = data.integrator_id
+        self.integrator_login = data.integrator_login

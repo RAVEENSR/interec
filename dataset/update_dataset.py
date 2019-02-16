@@ -19,7 +19,7 @@ try:
             pull_number = row[0]
             pr = repo.get_pull(pull_number)
             prNumber += 1
-            print("" + str(prNumber) + "- " + str(pr))
+            print("" + str(prNumber) + " - " + str(pr))
             num_of_commits = pr.commits
             num_of_changed_files = pr.changed_files
             num_of_added_lines = pr.additions
