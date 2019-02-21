@@ -28,7 +28,7 @@ def longest_common_suffix(f1, f2):
     f2 = path_to_list(f2)
     common_path = 0
     r = range(min(len(f1), len(f2)))
-    r.reverse()
+    reversed(r)
     for i in r:
         if f1[i] == f2[i]:
             common_path += 1
