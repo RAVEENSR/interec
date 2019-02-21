@@ -16,6 +16,7 @@ def update_with_github_api():
         with connection.cursor() as cursor:
             # Read records
             sql_1 = "SELECT pull_number FROM pull_request"
+            # sql_1 = "SELECT pull_number FROM pull_request LIMIT 1000 OFFSET 1000"
             cursor.execute(sql_1)
             result = cursor.fetchall()
             for row in result:
@@ -42,6 +43,7 @@ def update_with_github_api():
                 cursor.execute(sql_2, inputs)
         connection.commit()
     finally:
+        # connection.commit()
         connection.close()
 
 
@@ -57,6 +59,8 @@ def update_latest_time(latest_date_object, limit):
                 latest_time = latest_date_object - row[1]
                 if hasattr(latest_time, 'days'):
                     latest_time = latest_time.days
+                    if latest_time < 0:
+                        latest_time = 0
                 else:
                     latest_time = 0
                 # Update record
@@ -69,5 +73,7 @@ def update_latest_time(latest_date_object, limit):
         connection.close()
 
 
-latest_date = datetime.strptime('2015-05-20 17:23:17', '%Y-%m-%d %H:%M:%S')
-update_latest_time(latest_date, 2000)
+latest_date = datetime.strptime('2014-06-10 17:52:31', '%Y-%m-%d %H:%M:%S')
+update_latest_time(latest_date, 6156)
+
+# update_with_github_api()
