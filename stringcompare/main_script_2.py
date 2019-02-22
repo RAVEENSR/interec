@@ -66,6 +66,7 @@ df1 = pd.DataFrame()
 
 for new_pr in all_prs:
     new_pr = PullRequest(new_pr)
+    print(new_pr.pr_id)
     pr_integrator = Integrator(new_pr.integrator_login)
 
     # Connection to MySQL  database
