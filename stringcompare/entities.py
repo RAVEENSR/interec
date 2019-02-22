@@ -49,3 +49,6 @@ class Integrator:
         self.pr_title_similarity = 0
         self.pr_description_similarity = 0
         self.activeness = 0
+        self.num_of_first_pulls = 0
+        self.num_of_prs = 0
+        self.total_commits = 0
