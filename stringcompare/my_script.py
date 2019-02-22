@@ -47,7 +47,7 @@ try:
         cursor.execute(query1)
         test_prs = cursor.fetchall()
 
-        query2 = "SELECT * FROM integrator"
+        query2 = "SELECT integrator_login FROM integrator"
         cursor.execute(query2)
         integrators = cursor.fetchall()
 finally:
@@ -68,7 +68,6 @@ df1 = pd.DataFrame()
 
 for test_pr in test_prs:
     test_pr = PullRequest(test_pr)
-    print(test_pr.pr_id)
 
     for integrator in integrators:
         pr_integrator = Integrator(integrator[0])
@@ -80,7 +79,7 @@ for test_pr in test_prs:
             with connection.cursor() as cursor:
                 # Read records
                 query2 = "SELECT * FROM pull_request WHERE merged_date <%s AND integrator_login =%s"
-                inputs = (test_pr.created_date.strftime('%Y-%m-%d %H:%M:%S'), test_pr.integrator_login)
+                inputs = (test_pr.created_date.strftime('%Y-%m-%d %H:%M:%S'), pr_integrator.integrator_login)
                 cursor.execute(query2, inputs)
                 integrator_reviewed_prs = cursor.fetchall()
         finally:
@@ -149,6 +148,7 @@ for test_pr in test_prs:
                'activeness': pr_integrator.activeness,
                'first_pull': first_pull_similarity,
                'avg_commits': average_commits}
+        print(row)
         df1 = df1.append(row, ignore_index=True)
 
         # print(pr_integrator.longest_common_prefix_score)
