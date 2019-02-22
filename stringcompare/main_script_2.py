@@ -1,6 +1,5 @@
 import string
 
-import numpy as np
 import pandas as pd
 import pymysql
 from nltk.corpus import stopwords
@@ -44,7 +43,7 @@ connection = pymysql.connect(host='localhost', port=3306, user='root', passwd=''
 try:
     with connection.cursor() as cursor:
         # Read records
-        query1 = "SELECT * FROM pull_request LIMIT 100"
+        query1 = "SELECT * FROM pull_request"
         # df1 = pd.read_sql(query1, connection)
         cursor.execute(query1)
         all_prs = cursor.fetchall()
@@ -83,10 +82,6 @@ for new_pr in all_prs:
         connection.close()
 
     for integrator_reviewed_pr in integrator_reviewed_prs:
-        # calculate file path similarity
-        # calculate cosine similarity for each pr
-        # calculate activeness according to time decaying parameter
-        # TODO: calculate the mean of the number of commits,first pull,number of added lines,number of deleted lines
         # TODO: Finally calculate the accuracy and add a grid search like functionality
 
         old_pr = PullRequest(integrator_reviewed_pr)
@@ -101,13 +96,13 @@ for new_pr in all_prs:
             for file_path in old_pr_file_paths:
                 max_file_path_length = max(len(new_pr_file_path.split("/")), len(file_path.split("/")))
                 pr_integrator.longest_common_prefix_score += \
-                    (longest_common_prefix(new_pr_file_path, file_path)/max_file_path_length)
+                    (longest_common_prefix(new_pr_file_path, file_path) / max_file_path_length)
                 pr_integrator.longest_common_suffix_score += \
-                    (longest_common_suffix(new_pr_file_path, file_path)/max_file_path_length)
+                    (longest_common_suffix(new_pr_file_path, file_path) / max_file_path_length)
                 pr_integrator.longest_common_sub_string_score += \
-                    (longest_common_sub_string(new_pr_file_path, file_path)/max_file_path_length)
+                    (longest_common_sub_string(new_pr_file_path, file_path) / max_file_path_length)
                 pr_integrator.longest_common_sub_sequence_score += \
-                    (longest_common_sub_sequence(new_pr_file_path, file_path)/max_file_path_length)
+                    (longest_common_sub_sequence(new_pr_file_path, file_path) / max_file_path_length)
 
         # calculate cosine similarity of title
         pr_integrator.pr_title_similarity += cos_similarity(new_pr.title, old_pr.title)
@@ -123,7 +118,7 @@ for new_pr in all_prs:
         else:
             activeness = 0
         if activeness > 0:
-            pr_integrator.activeness += activeness**const_lambda
+            pr_integrator.activeness += activeness ** const_lambda
 
         if old_pr.first_pull == 1:
             pr_integrator.num_of_first_pulls += 1
@@ -134,8 +129,8 @@ for new_pr in all_prs:
         first_pull_similarity = 0
         average_commits = 0
     else:
-        first_pull_similarity = pr_integrator.num_of_first_pulls/pr_integrator.num_of_prs
-        average_commits = pr_integrator.total_commits/pr_integrator.num_of_prs
+        first_pull_similarity = pr_integrator.num_of_first_pulls / pr_integrator.num_of_prs
+        average_commits = pr_integrator.total_commits / pr_integrator.num_of_prs
 
     row = {'lcp': pr_integrator.longest_common_prefix_score,
            'lcs': pr_integrator.longest_common_suffix_score,
@@ -157,5 +152,6 @@ for new_pr in all_prs:
     # print(pr_integrator.activeness)
     # print("")
 
+df1.to_csv('all_pr_stats.csv', index=False)
 print(df1)
-df1.to_csv('all_pr.csv', index=False)
+
