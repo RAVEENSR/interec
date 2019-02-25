@@ -5,10 +5,123 @@ import pymysql
 from nltk.corpus import stopwords
 from nltk.stem.porter import *
 
-from stringcompare.entities import PullRequest, Integrator
-from stringcompare.string_compare import longest_common_prefix, longest_common_suffix, longest_common_sub_string, \
-    longest_common_sub_sequence
 from sklearn.feature_extraction.text import TfidfVectorizer
+
+import logging
+
+logging.basicConfig(level=logging.INFO, filename='app.log', format='%(name)s - %(levelname)s - %(message)s')
+
+
+def path_to_list(file_string):
+    return file_string.split("/")
+
+
+def longest_common_prefix(f1, f2):
+    f1 = path_to_list(f1)
+    f2 = path_to_list(f2)
+    common_path = 0
+    min_length = min(len(f1), len(f2))
+    for i in range(min_length):
+        if f1[i] == f2[i]:
+            common_path += 1
+        else:
+            break
+    return common_path
+
+
+def longest_common_suffix(f1, f2):
+    f1 = path_to_list(f1)
+    f2 = path_to_list(f2)
+    common_path = 0
+    r = range(min(len(f1), len(f2)))
+    reversed(r)
+    for i in r:
+        if f1[i] == f2[i]:
+            common_path += 1
+        else:
+            break
+    return common_path
+
+
+def longest_common_sub_string(f1, f2):
+    f1 = path_to_list(f1)
+    f2 = path_to_list(f2)
+    common_path = 0
+    if len(set(f1) & set(f2)) > 0:
+        mat = [[0 for x in range(len(f2) + 1)] for x in range(len(f1) + 1)]
+        for i in range(len(f1) + 1):
+            for j in range(len(f2) + 1):
+                if i == 0 or j == 0:
+                    mat[i][j] = 0
+                elif f1[i - 1] == f2[j - 1]:
+                    mat[i][j] = mat[i - 1][j - 1] + 1
+                    common_path = max(common_path, mat[i][j])
+                else:
+                    mat[i][j] = 0
+    return common_path
+
+
+def longest_common_sub_sequence(f1, f2):
+    f1 = path_to_list(f1)
+    f2 = path_to_list(f2)
+    if len(set(f1) & set(f2)) > 0:
+        l = [[0 for x in range(len(f2) + 1)] for x in range(len(f1) + 1)]
+        for i in range(len(f1) + 1):
+            for j in range(len(f2) + 1):
+                if i == 0 or j == 0:
+                    l[i][j] = 0
+                elif f1[i - 1] == f2[j - 1]:
+                    l[i][j] = l[i - 1][j - 1] + 1
+                else:
+                    l[i][j] = max(l[i - 1][j], l[i][j - 1])
+        common_path = l[len(f1)][len(f2)]
+    else:
+        common_path = 0
+    return common_path
+
+
+class PullRequest:
+
+    @staticmethod
+    def initialise_files(files_string):
+        return files_string.split("|")
+
+    def __init__(self, data):
+        self.pr_id = data[0]
+        self.first_pull = data[1]
+        self.location = data[2]
+        self.pull_number = data[3]
+        self.requester_login = data[4]
+        self.title = data[5]
+        self.description = data[6]
+        self.created_date = data[7]
+        self.merged_data = data[8]
+        self.latest_time = data[9]
+        self.integrator_login = data[10]
+        self.num_of_commits = data[11]
+        self.num_of_added_lines = data[12]
+        self.num_of_deleted_lines = data[13]
+        self.total_lines = data[14]
+        self.num_of_changed_files = data[15]
+        self.files = self.initialise_files(data[16])
+        self.developer_type = data[17]
+        self.requester_follows_core_team = data[18]
+        self.core_team_follows_requester = data[19]
+
+
+class Integrator:
+    def __init__(self, login_name):
+        self.integrator_login = login_name
+        self.longest_common_prefix_score = 0
+        self.longest_common_suffix_score = 0
+        self.longest_common_sub_string_score = 0
+        self.longest_common_sub_sequence_score = 0
+        self.pr_title_similarity = 0
+        self.pr_description_similarity = 0
+        self.activeness = 0
+        self.num_of_first_pulls = 0
+        self.num_of_prs = 0
+        self.total_commits = 0
 
 
 def rearrange_file_paths(file_paths_string):
@@ -38,12 +151,12 @@ def text_process(string_variable):
 
 
 # Connection to MySQL  database
-connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='rails')
+connection = pymysql.connect(host='34.73.65.150', port=3306, user='root', passwd='Rahula123', db='rails')
 
 try:
     with connection.cursor() as cursor:
         # Read records
-        query1 = "SELECT * FROM pull_request LIMIT 2 OFFSET 6156"
+        query1 = "SELECT * FROM pull_request LIMIT 3000 OFFSET 6156"
         cursor.execute(query1)
         test_prs = cursor.fetchall()
 
@@ -68,12 +181,13 @@ df1 = pd.DataFrame()
 
 for test_pr in test_prs:
     test_pr = PullRequest(test_pr)
-
+    logging.info(test_pr.pr_id)
+    print(test_pr.pr_id)
     for integrator in integrators:
         pr_integrator = Integrator(integrator[0])
 
         # Connection to MySQL  database
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='rails')
+        connection = pymysql.connect(host='34.73.65.150', port=3306, user='root', passwd='Rahula123', db='rails')
 
         try:
             with connection.cursor() as cursor:
@@ -86,7 +200,6 @@ for test_pr in test_prs:
             connection.close()
 
         for integrator_reviewed_pr in integrator_reviewed_prs:
-            # TODO: Finally calculate the accuracy and add a grid search like functionality
 
             old_pr = PullRequest(integrator_reviewed_pr)
 
@@ -148,17 +261,7 @@ for test_pr in test_prs:
                'activeness': pr_integrator.activeness,
                'first_pull': first_pull_similarity,
                'avg_commits': average_commits}
-        print(row)
         df1 = df1.append(row, ignore_index=True)
-
-        # print(pr_integrator.longest_common_prefix_score)
-        # print(pr_integrator.longest_common_suffix_score)
-        # print(pr_integrator.longest_common_sub_string_score)
-        # print(pr_integrator.longest_common_sub_sequence_score)
-        # print(pr_integrator.pr_title_similarity)
-        # print(pr_integrator.pr_description_similarity)
-        # print(pr_integrator.activeness)
-        # print("")
 
 df1.to_csv('test_pr_stats.csv', index=False)
 print(df1)

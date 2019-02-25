@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/interec.iml" filepath="$PROJECT_DIR$/.idea/interec.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/pr-dataset.iml" filepath="$PROJECT_DIR$/.idea/pr-dataset.iml" />
     </modules>
   </component>
 </project>

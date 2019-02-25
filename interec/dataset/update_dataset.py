@@ -2,21 +2,21 @@ from datetime import datetime
 from github import Github
 import pymysql
 
-# Connection to MySQL  database
-connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='rails')
 
+def update_with_github_api(database, repo):
+    # Connection to MySQL  database
+    connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=database)
 
-def update_with_github_api():
     # Connection to GitHub
     g = Github('91e299613b59fe50950fb110d079c2b7f39c70f8')
     # Accessing the required repository
-    repo = g.get_repo("rails/rails")
+    repo = g.get_repo(repo)
     pr_number = 0
     try:
         with connection.cursor() as cursor:
             # Read records
-            sql_1 = "SELECT pull_number FROM pull_request"
-            # sql_1 = "SELECT pull_number FROM pull_request LIMIT 1000 OFFSET 1000"
+            # sql_1 = "SELECT pull_number FROM pull_request"
+            sql_1 = "SELECT pull_number FROM pull_request LIMIT 1320"
             cursor.execute(sql_1)
             result = cursor.fetchall()
             for row in result:
@@ -43,11 +43,13 @@ def update_with_github_api():
                 cursor.execute(sql_2, inputs)
         connection.commit()
     finally:
-        # connection.commit()
+        connection.commit()
         connection.close()
 
 
-def update_latest_time(latest_date_object, limit):
+def update_latest_time(latest_date_object, limit, database):
+    # Connection to MySQL  database
+    connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=database)
     try:
         with connection.cursor() as cursor:
             # Read records
@@ -73,7 +75,7 @@ def update_latest_time(latest_date_object, limit):
         connection.close()
 
 
-latest_date = datetime.strptime('2014-06-10 17:52:31', '%Y-%m-%d %H:%M:%S')
-update_latest_time(latest_date, 6156)
+# latest_date = datetime.strptime('2014-06-10 17:52:31', '%Y-%m-%d %H:%M:%S')
+# update_latest_time(latest_date, 6156, 'rails')
 
-# update_with_github_api()
+update_with_github_api('bitcoin', 'bitcoin/bitcoin')
