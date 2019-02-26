@@ -14,3 +14,7 @@ def calculate_integrator_activeness(new_pr, old_pr):
         activeness = activeness ** const_lambda
 
     return activeness
+
+
+def get_activeness_ranked_list(data_frame):
+    return True

@@ -32,3 +32,7 @@ tfidf_vectorizer = TfidfVectorizer(analyzer=text_process)
 def cos_similarity(string1, string2):
     term_frequency = tfidf_vectorizer.fit_transform([string1, string2])
     return (term_frequency * term_frequency.T).A[0, 1]
+
+
+def get_text_similarity_ranked_list(data_frame):
+    return True

@@ -2,89 +2,125 @@ import pandas as pd
 import pymysql
 import logging
 
-from interec.activeness.integrator_activeness import calculate_integrator_activeness
+from interec.activeness.integrator_activeness import calculate_integrator_activeness, get_activeness_ranked_list
 from interec.entities.Integrator import Integrator
 from interec.entities.PullRequest import PullRequest
-from interec.text_similarity.cos_similarity import cos_similarity
+from interec.text_similarity.cos_similarity import cos_similarity, get_text_similarity_ranked_list
 from interec.string_compare.string_compare import longest_common_prefix, longest_common_suffix, \
-    longest_common_sub_string, longest_common_sub_sequence
+    longest_common_sub_string, longest_common_sub_sequence, get_file_path_similarity_ranked_list
 
 
 def calculate_scores(database, new_pr):
-    pr_integrator = Integrator(new_pr.integrator_login)
+    df1 = pd.DataFrame()
 
     # Connection to MySQL  database
     connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=database)
 
+    # Get all the integrators
     try:
         with connection.cursor() as cursor:
-            # Read records
-            query2 = "SELECT * FROM pull_request WHERE merged_date <%s AND integrator_login =%s"
-            inputs = (new_pr.created_date.strftime('%Y-%m-%d %H:%M:%S'), new_pr.integrator_login)
-            cursor.execute(query2, inputs)
-            integrator_reviewed_prs = cursor.fetchall()
+            # Read records to get integrators
+            query1 = "SELECT * FROM integrator"
+            cursor.execute(query1)
+            integrators = cursor.fetchall()
     finally:
         connection.close()
 
-    for integrator_reviewed_pr in integrator_reviewed_prs:
+    # Calculate scores for each integrator
+    for integrator in integrators:
+        pr_integrator = Integrator(integrator.integrator_login)
 
-        old_pr = PullRequest(integrator_reviewed_pr)
-        old_pr_file_paths = old_pr.files
+        # Connection to MySQL  database
+        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=database)
 
-        # calculate file path similarity
-        for new_pr_file_path in new_pr.files:
-            for file_path in old_pr_file_paths:
-                max_file_path_length = max(len(new_pr_file_path.split("/")), len(file_path.split("/")))
-                pr_integrator.longest_common_prefix_score += \
-                    (longest_common_prefix(new_pr_file_path, file_path) / max_file_path_length)
-                pr_integrator.longest_common_suffix_score += \
-                    (longest_common_suffix(new_pr_file_path, file_path) / max_file_path_length)
-                pr_integrator.longest_common_sub_string_score += \
-                    (longest_common_sub_string(new_pr_file_path, file_path) / max_file_path_length)
-                pr_integrator.longest_common_sub_sequence_score += \
-                    (longest_common_sub_sequence(new_pr_file_path, file_path) / max_file_path_length)
+        try:
+            with connection.cursor() as cursor:
+                # Read all the PRs integrator reviewed before
+                query2 = "SELECT * FROM pull_request WHERE merged_date <%s AND integrator_login =%s"
+                inputs = (new_pr.created_date.strftime('%Y-%m-%d %H:%M:%S'), integrator.integrator_login)
+                cursor.execute(query2, inputs)
+                integrator_reviewed_prs = cursor.fetchall()
+        finally:
+            connection.close()
 
-        # calculate cosine similarity of title
-        pr_integrator.pr_title_similarity += cos_similarity(new_pr.title, old_pr.title)
+        for integrator_reviewed_pr in integrator_reviewed_prs:
+            old_pr = PullRequest(integrator_reviewed_pr)
+            old_pr_file_paths = old_pr.files
 
-        # calculate cosine similarity of description
-        if new_pr.description != "" and old_pr.description != "":
-            pr_integrator.pr_description_similarity += cos_similarity(new_pr.description, old_pr.description)
+            # Calculate file path similarity
+            for new_pr_file_path in new_pr.files:
+                for file_path in old_pr_file_paths:
+                    max_file_path_length = max(len(new_pr_file_path.split("/")), len(file_path.split("/")))
+                    pr_integrator.longest_common_prefix_score += \
+                        (longest_common_prefix(new_pr_file_path, file_path) / max_file_path_length)
+                    pr_integrator.longest_common_suffix_score += \
+                        (longest_common_suffix(new_pr_file_path, file_path) / max_file_path_length)
+                    pr_integrator.longest_common_sub_string_score += \
+                        (longest_common_sub_string(new_pr_file_path, file_path) / max_file_path_length)
+                    pr_integrator.longest_common_sub_sequence_score += \
+                        (longest_common_sub_sequence(new_pr_file_path, file_path) / max_file_path_length)
 
-        # calculate activeness of the integrator
-        pr_integrator.activeness = calculate_integrator_activeness(new_pr, old_pr)
+            # Calculate cosine similarity of title
+            pr_integrator.pr_title_similarity += cos_similarity(new_pr.title, old_pr.title)
 
-        # calculate number of first pulls merged, total number of prs and total commits
-        if old_pr.first_pull == 1:
-            pr_integrator.num_of_first_pulls += 1
-        pr_integrator.num_of_prs += 1
-        pr_integrator.total_commits += old_pr.num_of_commits
+            # Calculate cosine similarity of description
+            if new_pr.description != "" and old_pr.description != "":
+                pr_integrator.pr_description_similarity += cos_similarity(new_pr.description, old_pr.description)
 
-    # calculate first pull similarity and average commits
-    if pr_integrator.num_of_prs == 0:
-        first_pull_similarity = 0
-        average_commits = 0
-    else:
-        first_pull_similarity = pr_integrator.num_of_first_pulls / pr_integrator.num_of_prs
-        average_commits = pr_integrator.total_commits / pr_integrator.num_of_prs
+            # Calculate activeness of the integrator
+            pr_integrator.activeness = calculate_integrator_activeness(new_pr, old_pr)
 
-    row = {'lcp': pr_integrator.longest_common_prefix_score,
-           'lcs': pr_integrator.longest_common_suffix_score,
-           'lc_substr': pr_integrator.longest_common_sub_string_score,
-           'ls_subseq': pr_integrator.longest_common_sub_sequence_score,
-           'cos_title': pr_integrator.pr_title_similarity,
-           'cos_description': pr_integrator.pr_description_similarity,
-           'activeness': pr_integrator.activeness,
-           'first_pull': first_pull_similarity,
-           'avg_commits': average_commits}
-    return row
+            # Calculate number of first pulls merged, total number of prs and total commits
+            if old_pr.first_pull == 1:
+                pr_integrator.num_of_first_pulls += 1
+            pr_integrator.num_of_prs += 1
+            pr_integrator.total_commits += old_pr.num_of_commits
+
+        # Calculate first pull similarity and average commits
+        if pr_integrator.num_of_prs == 0:
+            first_pull_similarity = 0
+            average_commits = 0
+        else:
+            first_pull_similarity = pr_integrator.num_of_first_pulls / pr_integrator.num_of_prs
+            average_commits = pr_integrator.total_commits / pr_integrator.num_of_prs
+
+        row = {'lcp': pr_integrator.longest_common_prefix_score,
+               'lcs': pr_integrator.longest_common_suffix_score,
+               'lc_substr': pr_integrator.longest_common_sub_string_score,
+               'ls_subseq': pr_integrator.longest_common_sub_sequence_score,
+               'cos_title': pr_integrator.pr_title_similarity,
+               'cos_description': pr_integrator.pr_description_similarity,
+               'activeness': pr_integrator.activeness,
+               'first_pull': first_pull_similarity,
+               'avg_commits': average_commits}
+        df1 = df1.append(row, ignore_index=True)
+    return df1
 
 
-def calculate_scores_for_prs(database, starting_pr_number, limit):
+def combine_ranked_lists(file_path_similarity_ranked_list, text_similarity_ranked_list, activeness_ranked_list):
+    return False
+
+
+def generate_ranked_list(database, new_pr):
+    data_frame = calculate_scores(database, new_pr)
+    file_path_similarity_ranked_list = get_file_path_similarity_ranked_list(data_frame)
+    text_similarity_ranked_list = get_text_similarity_ranked_list(data_frame)
+    activeness_ranked_list = get_activeness_ranked_list(data_frame)
+
+    combined_ranked_lists = combine_ranked_lists(file_path_similarity_ranked_list, text_similarity_ranked_list,
+                                                 activeness_ranked_list)
+    return combined_ranked_lists
+
+
+def test_accuracy(database, new_pr, top1=True, top3=False, top5=False):
+    actual_pr_integrator = new_pr.integrator_login
+    ranked_list = generate_ranked_list(database, new_pr)
+    return False
+
+
+def test_accuracy_for_all_prs(database, starting_pr_number, limit):
     # TODO ADD comments for all the scripts
     logging.basicConfig(level=logging.INFO, filename='app.log', format='%(name)s - %(levelname)s - %(message)s')
-    df1 = pd.DataFrame()
-
     # Connection to MySQL  database
     connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=database)
 
@@ -100,13 +136,9 @@ def calculate_scores_for_prs(database, starting_pr_number, limit):
 
     for new_pr in all_prs:
         new_pr = PullRequest(new_pr)
-        row = calculate_scores(database, new_pr)
-        df1 = df1.append(row, ignore_index=True)
-        logging.info(new_pr.pr_id)
-        print(new_pr.pr_id)
-
-    df1.to_csv('pr_stats.csv', index=False)
-    print(df1)
+        test_accuracy(database, new_pr)
+        logging.info(new_pr.pr_id + "-" + test_accuracy)
+        print(new_pr.pr_id + "-" + test_accuracy)
 
 
-calculate_scores_for_prs('rails', 0, 2000)
+test_accuracy_for_all_prs('rails', 0, 2000)

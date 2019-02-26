@@ -72,3 +72,7 @@ def longest_common_sub_sequence(f1, f2):
     else:
         common_path = 0
     return common_path
+
+
+def get_file_path_similarity_ranked_list(data_frame):
+    return True

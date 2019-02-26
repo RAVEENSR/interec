@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7ed1af3-6581-48b9-98b4-6e3daf6210d0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/interec/main_script-old.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/activeness/integrator_activeness.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/activeness/integrator_activeness.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/interec/main_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/main_script.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/string_compare/string_compare.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/string_compare/string_compare.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/text_similarity/cos_similarity.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/text_similarity/cos_similarity.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -37,8 +41,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/interec/main_script.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="773">
-              <caret line="111" column="24" selection-start-line="111" selection-end-line="111" selection-end-column="24" />
+            <state relative-caret-position="331">
+              <caret line="116" column="18" selection-start-line="116" selection-start-column="18" selection-end-line="116" selection-end-column="18" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -63,6 +67,7 @@
       <find>old_pr_merged_date</find>
       <find>rearrange_file_paths</find>
       <find>print</find>
+      <find>open</find>
     </findStrings>
     <replaceStrings>
       <replace>l_c_suff</replace>
@@ -95,10 +100,12 @@
         <option value="$PROJECT_DIR$/stringcompare/main_script_2.py" />
         <option value="$PROJECT_DIR$/stringcompare/my_script.py" />
         <option value="$PROJECT_DIR$/interec/machine_learning/my_script.py" />
-        <option value="$PROJECT_DIR$/interec/activeness/integrator_activeness.py" />
         <option value="$PROJECT_DIR$/other/main_script_2.py" />
         <option value="$PROJECT_DIR$/other/vm_file.py" />
         <option value="$PROJECT_DIR$/interec/dataset/update_dataset.py" />
+        <option value="$PROJECT_DIR$/interec/activeness/integrator_activeness.py" />
+        <option value="$PROJECT_DIR$/interec/string_compare/string_compare.py" />
+        <option value="$PROJECT_DIR$/interec/text_similarity/cos_similarity.py" />
         <option value="$PROJECT_DIR$/interec/main_script.py" />
       </list>
     </option>
@@ -127,6 +134,12 @@
               <item name="interec" type="462c0819:PsiDirectoryNode" />
               <item name="interec" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="interec" type="b2602c69:ProjectViewProjectNode" />
+              <item name="interec" type="462c0819:PsiDirectoryNode" />
+              <item name="interec" type="462c0819:PsiDirectoryNode" />
+              <item name="activeness" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -140,6 +153,9 @@
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec\machine_learning" />
       <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec" />
@@ -196,7 +212,7 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/interec/main_script.py" />
+      <option name="SCRIPT_NAME" value="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec\main_script-old.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -324,7 +340,7 @@
       <workItem from="1551033285876" duration="170000" />
       <workItem from="1551033688333" duration="770000" />
       <workItem from="1551095289185" duration="20741000" />
-      <workItem from="1551199501389" duration="1350000" />
+      <workItem from="1551199501389" duration="4989000" />
     </task>
     <task id="LOCAL-00001" summary="Add initial files">
       <created>1550081193929</created>
@@ -417,11 +433,18 @@
       <option name="project" value="LOCAL" />
       <updated>1551127404518</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Update project - Old Version for calculation">
+      <created>1551201949118</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1551201949118</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="164571000" />
+    <option name="totallyTimeSpent" value="168210000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
@@ -488,7 +511,8 @@
     <MESSAGE value="Update the project" />
     <MESSAGE value="Reformat Code" />
     <MESSAGE value="Update project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Update project" />
+    <MESSAGE value="Update project - Old Version for calculation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update project - Old Version for calculation" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/dataset/__init__.py" />
@@ -520,20 +544,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
           <caret line="150" column="8" selection-start-line="150" selection-start-column="8" selection-end-line="150" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/pymysql/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1632">
-          <caret line="107" selection-start-line="107" selection-end-line="107" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/pymysql/connections.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="525" lean-forward="true" selection-start-line="525" selection-end-line="525" />
         </state>
       </provider>
     </entry>
@@ -610,13 +620,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interec/activeness/integrator_activeness.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/interec/entities/Integrator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="722">
@@ -631,27 +634,58 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/interec/main_script-old.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1717">
+          <caret line="101" column="36" selection-start-line="101" selection-start-column="36" selection-end-line="101" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/pymysql/connections.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="287">
+          <caret line="366" column="12" selection-start-line="366" selection-start-column="8" selection-end-line="366" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/pymysql/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="467">
+          <caret line="97" column="43" selection-start-line="97" selection-start-column="33" selection-end-line="97" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/interec/string_compare/string_compare.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="986">
-          <caret line="58" column="25" selection-start-line="58" selection-start-column="25" selection-end-line="58" selection-end-column="25" />
+        <state relative-caret-position="756">
+          <caret line="76" column="40" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/interec/text_similarity/cos_similarity.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="34" lean-forward="true" selection-start-line="34" selection-end-line="34" />
+        <state relative-caret-position="612">
+          <caret line="36" column="35" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="35" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/interec/activeness/integrator_activeness.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" column="30" selection-start-line="18" selection-start-column="4" selection-end-line="18" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/interec/main_script.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="773">
-          <caret line="111" column="24" selection-start-line="111" selection-end-line="111" selection-end-column="24" />
+        <state relative-caret-position="331">
+          <caret line="116" column="18" selection-start-line="116" selection-start-column="18" selection-end-line="116" selection-end-column="18" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
