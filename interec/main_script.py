@@ -10,11 +10,11 @@ from interec.string_compare.string_compare import longest_common_prefix, longest
     longest_common_sub_string, longest_common_sub_sequence
 
 
-def calculate_scores(new_pr):
+def calculate_scores(database, new_pr):
     pr_integrator = Integrator(new_pr.integrator_login)
 
     # Connection to MySQL  database
-    connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='rails')
+    connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=database)
 
     try:
         with connection.cursor() as cursor:
@@ -80,18 +80,19 @@ def calculate_scores(new_pr):
     return row
 
 
-def calculate_scores_for_prs(starting_pr_number, limit):
+def calculate_scores_for_prs(database, starting_pr_number, limit):
+    # TODO ADD comments for all the scripts
     logging.basicConfig(level=logging.INFO, filename='app.log', format='%(name)s - %(levelname)s - %(message)s')
     df1 = pd.DataFrame()
 
     # Connection to MySQL  database
-    connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db='rails')
+    connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=database)
 
     try:
         with connection.cursor() as cursor:
             # Read records
             query1 = "SELECT * FROM pull_request LIMIT %s OFFSET %s"
-            inputs = (starting_pr_number, limit)
+            inputs = (limit, starting_pr_number)
             cursor.execute(query1, inputs)
             all_prs = cursor.fetchall()
     finally:
@@ -99,7 +100,7 @@ def calculate_scores_for_prs(starting_pr_number, limit):
 
     for new_pr in all_prs:
         new_pr = PullRequest(new_pr)
-        row = calculate_scores(new_pr)
+        row = calculate_scores(database, new_pr)
         df1 = df1.append(row, ignore_index=True)
         logging.info(new_pr.pr_id)
         print(new_pr.pr_id)
@@ -108,4 +109,4 @@ def calculate_scores_for_prs(starting_pr_number, limit):
     print(df1)
 
 
-calculate_scores_for_prs(2000, 0)
+calculate_scores_for_prs('rails', 0, 2000)
