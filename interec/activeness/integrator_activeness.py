@@ -16,5 +16,5 @@ def calculate_integrator_activeness(new_pr, old_pr):
     return activeness
 
 
-def get_activeness_ranked_list(data_frame):
-    return True
+def add_activeness_ranking(data_frame):
+    data_frame["activeness_rank"] = data_frame["activeness"].rank(method='min', ascending=False)

@@ -2,12 +2,12 @@ import pandas as pd
 import pymysql
 import logging
 
-from interec.activeness.integrator_activeness import calculate_integrator_activeness, get_activeness_ranked_list
+from interec.activeness.integrator_activeness import calculate_integrator_activeness, add_activeness_ranking
 from interec.entities.Integrator import Integrator
 from interec.entities.PullRequest import PullRequest
-from interec.text_similarity.cos_similarity import cos_similarity, get_text_similarity_ranked_list
+from interec.text_similarity.cos_similarity import cos_similarity, add_text_similarity_ranking
 from interec.string_compare.string_compare import longest_common_prefix, longest_common_suffix, \
-    longest_common_sub_string, longest_common_sub_sequence, get_file_path_similarity_ranked_list
+    longest_common_sub_string, longest_common_sub_sequence, add_file_path_similarity_ranking
 
 
 def calculate_scores(database, new_pr):
@@ -28,7 +28,7 @@ def calculate_scores(database, new_pr):
 
     # Calculate scores for each integrator
     for integrator in integrators:
-        pr_integrator = Integrator(integrator.integrator_login)
+        pr_integrator = Integrator(integrator[1])
 
         # Connection to MySQL  database
         connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=database)
@@ -37,7 +37,7 @@ def calculate_scores(database, new_pr):
             with connection.cursor() as cursor:
                 # Read all the PRs integrator reviewed before
                 query2 = "SELECT * FROM pull_request WHERE merged_date <%s AND integrator_login =%s"
-                inputs = (new_pr.created_date.strftime('%Y-%m-%d %H:%M:%S'), integrator.integrator_login)
+                inputs = (new_pr.created_date.strftime('%Y-%m-%d %H:%M:%S'), pr_integrator.integrator_login)
                 cursor.execute(query2, inputs)
                 integrator_reviewed_prs = cursor.fetchall()
         finally:
@@ -50,15 +50,18 @@ def calculate_scores(database, new_pr):
             # Calculate file path similarity
             for new_pr_file_path in new_pr.files:
                 for file_path in old_pr_file_paths:
+                    number_of_file_combinations = len(old_pr_file_paths)*len(new_pr.files)
                     max_file_path_length = max(len(new_pr_file_path.split("/")), len(file_path.split("/")))
+                    divider = max_file_path_length * number_of_file_combinations
+
                     pr_integrator.longest_common_prefix_score += \
-                        (longest_common_prefix(new_pr_file_path, file_path) / max_file_path_length)
+                        (longest_common_prefix(new_pr_file_path, file_path) / divider)
                     pr_integrator.longest_common_suffix_score += \
-                        (longest_common_suffix(new_pr_file_path, file_path) / max_file_path_length)
+                        (longest_common_suffix(new_pr_file_path, file_path) / divider)
                     pr_integrator.longest_common_sub_string_score += \
-                        (longest_common_sub_string(new_pr_file_path, file_path) / max_file_path_length)
+                        (longest_common_sub_string(new_pr_file_path, file_path) / divider)
                     pr_integrator.longest_common_sub_sequence_score += \
-                        (longest_common_sub_sequence(new_pr_file_path, file_path) / max_file_path_length)
+                        (longest_common_sub_sequence(new_pr_file_path, file_path) / divider)
 
             # Calculate cosine similarity of title
             pr_integrator.pr_title_similarity += cos_similarity(new_pr.title, old_pr.title)
@@ -68,7 +71,7 @@ def calculate_scores(database, new_pr):
                 pr_integrator.pr_description_similarity += cos_similarity(new_pr.description, old_pr.description)
 
             # Calculate activeness of the integrator
-            pr_integrator.activeness = calculate_integrator_activeness(new_pr, old_pr)
+            pr_integrator.activeness += calculate_integrator_activeness(new_pr, old_pr)
 
             # Calculate number of first pulls merged, total number of prs and total commits
             if old_pr.first_pull == 1:
@@ -84,7 +87,8 @@ def calculate_scores(database, new_pr):
             first_pull_similarity = pr_integrator.num_of_first_pulls / pr_integrator.num_of_prs
             average_commits = pr_integrator.total_commits / pr_integrator.num_of_prs
 
-        row = {'lcp': pr_integrator.longest_common_prefix_score,
+        row = {'integrator': pr_integrator.integrator_login,
+               'lcp': pr_integrator.longest_common_prefix_score,
                'lcs': pr_integrator.longest_common_suffix_score,
                'lc_substr': pr_integrator.longest_common_sub_string_score,
                'ls_subseq': pr_integrator.longest_common_sub_sequence_score,
@@ -97,28 +101,30 @@ def calculate_scores(database, new_pr):
     return df1
 
 
-def combine_ranked_lists(file_path_similarity_ranked_list, text_similarity_ranked_list, activeness_ranked_list):
+def combine_ranked_lists(data_frame):
+    num_of_non_zero_candidates = len(data_frame['avg_commits'].to_numpy().nonzero()[0])
+    # TODO think about the people who gor same rank ex: rank 2 was given to 5. in that case count the candidates.
     return False
 
 
 def generate_ranked_list(database, new_pr):
     data_frame = calculate_scores(database, new_pr)
-    file_path_similarity_ranked_list = get_file_path_similarity_ranked_list(data_frame)
-    text_similarity_ranked_list = get_text_similarity_ranked_list(data_frame)
-    activeness_ranked_list = get_activeness_ranked_list(data_frame)
+    add_file_path_similarity_ranking(data_frame)
+    add_text_similarity_ranking(data_frame)
+    add_activeness_ranking(data_frame)
 
-    combined_ranked_lists = combine_ranked_lists(file_path_similarity_ranked_list, text_similarity_ranked_list,
-                                                 activeness_ranked_list)
+    data_frame.to_csv('pr_stats.csv', index=False)
+    combined_ranked_lists = combine_ranked_lists(data_frame)
     return combined_ranked_lists
 
-
+# TODO: add a global variable for database- add getter and setter
 def test_accuracy(database, new_pr, top1=True, top3=False, top5=False):
     actual_pr_integrator = new_pr.integrator_login
     ranked_list = generate_ranked_list(database, new_pr)
     return False
 
 
-def test_accuracy_for_all_prs(database, starting_pr_number, limit):
+def test_accuracy_for_all_prs(database, offset, limit):
     # TODO ADD comments for all the scripts
     logging.basicConfig(level=logging.INFO, filename='app.log', format='%(name)s - %(levelname)s - %(message)s')
     # Connection to MySQL  database
@@ -128,7 +134,7 @@ def test_accuracy_for_all_prs(database, starting_pr_number, limit):
         with connection.cursor() as cursor:
             # Read records
             query1 = "SELECT * FROM pull_request LIMIT %s OFFSET %s"
-            inputs = (limit, starting_pr_number)
+            inputs = (limit, offset)
             cursor.execute(query1, inputs)
             all_prs = cursor.fetchall()
     finally:
@@ -141,4 +147,4 @@ def test_accuracy_for_all_prs(database, starting_pr_number, limit):
         print(new_pr.pr_id + "-" + test_accuracy)
 
 
-test_accuracy_for_all_prs('rails', 0, 2000)
+test_accuracy_for_all_prs('rails', 6136, 1)
