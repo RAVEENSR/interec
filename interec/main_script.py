@@ -50,7 +50,7 @@ def calculate_scores(database, new_pr):
             # Calculate file path similarity
             for new_pr_file_path in new_pr.files:
                 for file_path in old_pr_file_paths:
-                    number_of_file_combinations = len(old_pr_file_paths)*len(new_pr.files)
+                    number_of_file_combinations = len(old_pr_file_paths) * len(new_pr.files)
                     max_file_path_length = max(len(new_pr_file_path.split("/")), len(file_path.split("/")))
                     divider = max_file_path_length * number_of_file_combinations
 
@@ -102,9 +102,15 @@ def calculate_scores(database, new_pr):
 
 
 def combine_ranked_lists(data_frame):
-    num_of_non_zero_candidates = len(data_frame['avg_commits'].to_numpy().nonzero()[0])
-    # TODO think about the people who gor same rank ex: rank 2 was given to 5. in that case count the candidates.
-    return False
+    num_of_non_zero_candidates_in_file_similarity = len(data_frame['file_similarity'].to_numpy().nonzero()[0])
+    num_of_non_zero_candidates_in_text_similarity = len(data_frame['text_similarity'].to_numpy().nonzero()[0])
+    num_of_non_zero_candidates_in_activeness = len(data_frame['activeness'].to_numpy().nonzero()[0])
+
+    data_frame['combined_score'] = (num_of_non_zero_candidates_in_file_similarity - data_frame['file_path_rank']) + \
+                                   (num_of_non_zero_candidates_in_text_similarity - data_frame['text_rank']) + \
+                                   (num_of_non_zero_candidates_in_activeness - data_frame['activeness_rank'])
+    data_frame["final_rank"] = data_frame["combined_score"].rank(method='min', ascending=False)
+    return data_frame
 
 
 def generate_ranked_list(database, new_pr):
@@ -113,19 +119,66 @@ def generate_ranked_list(database, new_pr):
     add_text_similarity_ranking(data_frame)
     add_activeness_ranking(data_frame)
 
-    data_frame.to_csv('pr_stats.csv', index=False)
-    combined_ranked_lists = combine_ranked_lists(data_frame)
-    return combined_ranked_lists
+    # data_frame.to_csv('pr_stats.csv', index=False)
+    combined_ranked_list = combine_ranked_lists(data_frame)
+    return combined_ranked_list
+
+
+def is_in_top_k(ranked_df, actual_pr_integrator):
+    is_included = False
+    for row in ranked_df.itertuples(index=False):
+        if row.integrator == actual_pr_integrator:
+            is_included = True
+    return is_included
+
+
+def test_accuracy_by_field(ranked_data_frame, new_pr, column_name='final_rank', top1=True, top3=False, top5=False):
+    included_in_top1 = False
+    included_in_top3 = False
+    included_in_top5 = False
+    actual_pr_integrator = new_pr.integrator_login
+
+    sorted_ranked_data_frame = ranked_data_frame.sort_values(column_name, ascending=True)
+    accuracy = lambda: None
+
+    if top1:
+        ranked_one_df = sorted_ranked_data_frame[sorted_ranked_data_frame[column_name] == 1]
+        included_in_top1 = is_in_top_k(ranked_one_df, actual_pr_integrator)
+        setattr(accuracy, "top1", included_in_top1)
+
+    if top3:
+        ranked_three_df = sorted_ranked_data_frame[sorted_ranked_data_frame[column_name] <= 3]
+        included_in_top3 = is_in_top_k(ranked_three_df, actual_pr_integrator)
+        setattr(accuracy, "top3", included_in_top3)
+
+    if top5:
+        ranked_five_df = sorted_ranked_data_frame[sorted_ranked_data_frame[column_name] <= 5]
+        included_in_top5 = is_in_top_k(ranked_five_df, actual_pr_integrator)
+        setattr(accuracy, "top5", included_in_top5)
+
+    return accuracy
+
+
+def test_file_path_similarity_accuracy(ranked_data_frame, new_pr, top1=True, top3=False, top5=False):
+    return test_accuracy_by_field(ranked_data_frame, new_pr, 'file_path_rank', top1, top3, top5)
+
+
+def test_text_similarity_accuracy(ranked_data_frame, new_pr, top1=True, top3=False, top5=False):
+    return test_accuracy_by_field(ranked_data_frame, new_pr, 'text_rank', top1, top3, top5)
+
+
+def test_activeness_accuracy(ranked_data_frame, new_pr, top1=True, top3=False, top5=False):
+    return test_accuracy_by_field(ranked_data_frame, new_pr, 'activeness_rank', top1, top3, top5)
+
+
+def test_combined_accuracy(ranked_data_frame, new_pr, top1=True, top3=False, top5=False):
+    return test_accuracy_by_field(ranked_data_frame, new_pr, 'final_rank', top1, top3, top5)
+
 
 # TODO: add a global variable for database- add getter and setter
-def test_accuracy(database, new_pr, top1=True, top3=False, top5=False):
-    actual_pr_integrator = new_pr.integrator_login
-    ranked_list = generate_ranked_list(database, new_pr)
-    return False
-
-
+# TODO ADD comments like ''' some text ''' for all the scripts
+# Implement Recall
 def test_accuracy_for_all_prs(database, offset, limit):
-    # TODO ADD comments for all the scripts
     logging.basicConfig(level=logging.INFO, filename='app.log', format='%(name)s - %(levelname)s - %(message)s')
     # Connection to MySQL  database
     connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=database)
@@ -140,11 +193,94 @@ def test_accuracy_for_all_prs(database, offset, limit):
     finally:
         connection.close()
 
+    total_prs = 0
+    cmb_accuracy_array = [0, 0, 0]
+    file_accuracy_array = [0, 0, 0]
+    txt_accuracy_array = [0, 0, 0]
+    act_accuracy_array = [0, 0, 0]
+
     for new_pr in all_prs:
+        total_prs += 1
         new_pr = PullRequest(new_pr)
-        test_accuracy(database, new_pr)
-        logging.info(new_pr.pr_id + "-" + test_accuracy)
-        print(new_pr.pr_id + "-" + test_accuracy)
+        print(new_pr.pr_id)
+        ranked_data_frame = generate_ranked_list(database, new_pr)
+        combined_accuracy = test_combined_accuracy(ranked_data_frame, new_pr, True, True, True)
+        file_path_accuracy = test_file_path_similarity_accuracy(ranked_data_frame, new_pr, True, True, True)
+        text_accuracy = test_text_similarity_accuracy(ranked_data_frame, new_pr, True, True, True)
+        activeness_accuracy = test_activeness_accuracy(ranked_data_frame, new_pr, True, True, True)
+
+        if hasattr(combined_accuracy, 'top1') and combined_accuracy.top1:
+            cmb_accuracy_array[0] += 1
+        if hasattr(combined_accuracy, 'top3') and combined_accuracy.top3:
+            cmb_accuracy_array[1] += 1
+        if hasattr(combined_accuracy, 'top5') and combined_accuracy.top5:
+            cmb_accuracy_array[2] += 1
+
+        if hasattr(file_path_accuracy, 'top1') and file_path_accuracy.top1:
+            file_accuracy_array[0] += 1
+        if hasattr(file_path_accuracy, 'top3') and file_path_accuracy.top3:
+            file_accuracy_array[1] += 1
+        if hasattr(file_path_accuracy, 'top5') and file_path_accuracy.top5:
+            file_accuracy_array[2] += 1
+
+        if hasattr(text_accuracy, 'top1') and text_accuracy.top1:
+            txt_accuracy_array[0] += 1
+        if hasattr(text_accuracy, 'top3') and text_accuracy.top3:
+            txt_accuracy_array[1] += 1
+        if hasattr(text_accuracy, 'top5') and text_accuracy.top5:
+            txt_accuracy_array[2] += 1
+
+        if hasattr(activeness_accuracy, 'top1') and activeness_accuracy.top1:
+            act_accuracy_array[0] += 1
+        if hasattr(activeness_accuracy, 'top3') and activeness_accuracy.top3:
+            act_accuracy_array[1] += 1
+        if hasattr(activeness_accuracy, 'top5') and activeness_accuracy.top5:
+            act_accuracy_array[2] += 1
+
+        # logging.info(new_pr.pr_id + "- File Path accuracy top1: " + file_path_accuracy.top1 + " top3: " +
+        #              file_path_accuracy.top3 + " top5: " + file_path_accuracy.top5)
+        # logging.info(new_pr.pr_id + "- Text accuracy top1: " + text_accuracy.top1 + " top3: " +
+        #              text_accuracy.top3 + " top5: " + text_accuracy.top5)
+        # logging.info(new_pr.pr_id + "- Activeness accuracy top1: " + activeness_accuracy.top1 + " top3: " +
+        #              activeness_accuracy.top3 + " top5: " + activeness_accuracy.top5)
+        # logging.info(new_pr.pr_id + "- Combined accuracy top1: " + combined_accuracy.top1 + " top3: " +
+        #              combined_accuracy.top3 + " top5: " + combined_accuracy.top5)
+        #
+        # print(new_pr.pr_id + "- File Path accuracy top1: " + file_path_accuracy.top1 + " top3: " +
+        #       file_path_accuracy.top3 + " top5: " + file_path_accuracy.top5)
+        # print(new_pr.pr_id + "- Text accuracy top1: " + text_accuracy.top1 + " top3: " +
+        #       text_accuracy.top3 + " top5: " + text_accuracy.top5)
+        # print(new_pr.pr_id + "- Activeness accuracy top1: " + activeness_accuracy.top1 + " top3: " +
+        #       activeness_accuracy.top3 + " top5: " + activeness_accuracy.top5)
+        # print(new_pr.pr_id + "- Combined accuracy top1: " + combined_accuracy.top1 + " top3: " +
+        #       combined_accuracy.top3 + " top5: " + combined_accuracy.top5)
+
+    avg_combined_top1_accuracy = cmb_accuracy_array[0]/total_prs
+    avg_combined_top3_accuracy = cmb_accuracy_array[1] / total_prs
+    avg_combined_top5_accuracy = cmb_accuracy_array[2] / total_prs
+
+    avg_file_path_top1_accuracy = file_accuracy_array[0] / total_prs
+    avg_file_path_top3_accuracy = file_accuracy_array[1] / total_prs
+    avg_file_path_top5_accuracy = file_accuracy_array[2] / total_prs
+
+    avg_text_top1_accuracy = txt_accuracy_array[0] / total_prs
+    avg_text_top3_accuracy = txt_accuracy_array[1] / total_prs
+    avg_text_top5_accuracy = txt_accuracy_array[2] / total_prs
+
+    avg_act_top1_accuracy = act_accuracy_array[0] / total_prs
+    avg_act_top3_accuracy = act_accuracy_array[1] / total_prs
+    avg_act_top5_accuracy = act_accuracy_array[2] / total_prs
+
+    print("---------------------------------------------------------------------------")
+    print("                         Top1          Top3            Top3")
+    print("Combined Accuracy         " + str(avg_combined_top1_accuracy) + "          " +
+          str(avg_combined_top3_accuracy) + "         " + str(avg_combined_top5_accuracy))
+    print("File Path Accuracy        " + str(avg_file_path_top1_accuracy) + "          " +
+          str(avg_file_path_top3_accuracy) + "         " + str(avg_file_path_top5_accuracy))
+    print("Text Accuracy             " + str(avg_text_top1_accuracy) + "          " +
+          str(avg_text_top3_accuracy) + "         " + str(avg_text_top5_accuracy))
+    print("Activeness Accuracy       " + str(avg_act_top1_accuracy) + "          " +
+          str(avg_act_top3_accuracy) + "         " + str(avg_act_top5_accuracy))
 
 
-test_accuracy_for_all_prs('rails', 6136, 1)
+test_accuracy_for_all_prs('scala', 640, 400)
