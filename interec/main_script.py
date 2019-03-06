@@ -1,8 +1,6 @@
 import pandas as pd
-import pymysql
 import logging
 
-from pyspark.sql.functions import to_timestamp, date_format
 
 from pyspark.sql import SparkSession
 from interec.activeness.integrator_activeness import calculate_integrator_activeness, add_activeness_ranking
@@ -49,19 +47,6 @@ all_integrators = spark.sql(query).collect()
 def calculate_scores(new_pr):
     df1 = pd.DataFrame()
 
-    # # Connection to MySQL  database
-    # connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=database)
-    #
-    # # Get all the integrators
-    # try:
-    #     with connection.cursor() as cursor:
-    #         # Read records to get integrators
-    #         query1 = "SELECT * FROM integrator"
-    #         cursor.execute(query1)
-    #         integrators = cursor.fetchall()
-    # finally:
-    #     connection.close()
-
     # Calculate scores for each integrator
     for integrator in all_integrators:
         pr_integrator = Integrator(integrator[1])
@@ -70,19 +55,6 @@ def calculate_scores(new_pr):
         query1 = "SELECT * FROM pull_request WHERE merged_date < timestamp('%s') AND integrator_login = '%s'" % \
                  (new_pr.created_date, pr_integrator.integrator_login)
         integrator_reviewed_prs = spark.sql(query1).collect()
-
-        # # Connection to MySQL  database
-        # connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=database)
-        #
-        # try:
-        #     with connection.cursor() as cursor:
-        #         # Read all the PRs integrator reviewed before
-        #         query2 = "SELECT * FROM pull_request WHERE merged_date <%s AND integrator_login =%s"
-        #         inputs = (new_pr.created_date.strftime('%Y-%m-%d %H:%M:%S'), pr_integrator.integrator_login)
-        #         cursor.execute(query2, inputs)
-        #         integrator_reviewed_prs = cursor.fetchall()
-        # finally:
-        #     connection.close()
 
         for integrator_reviewed_pr in integrator_reviewed_prs:
             old_pr = PullRequest(integrator_reviewed_pr)
@@ -222,52 +194,12 @@ def test_combined_accuracy(ranked_data_frame, new_pr, top1=True, top3=False, top
 # TODO Add a method to a new coming PR- make it applicable for PullRequest object
 def test_accuracy_for_all_prs(database, offset, limit):
     logging.basicConfig(level=logging.INFO, filename='app.log', format='%(name)s - %(levelname)s - %(message)s')
-    # # Connection to MySQL  database
-    # connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=database)
-
-    # spark = SparkSession \
-    #     .builder \
-    #     .master('local') \
-    #     .appName("Interec") \
-    #     .getOrCreate()
-    # spark.sparkContext.setLogLevel("WARN")
-    #
-    # all_prs_df = spark.read \
-    #     .format("jdbc") \
-    #     .option("url", "jdbc:mysql://localhost:3306/" + database) \
-    #     .option("driver", 'com.mysql.cj.jdbc.Driver') \
-    #     .option("dbtable", "pull_request") \
-    #     .option("user", "root") \
-    #     .option("password", "") \
-    #     .load()
-    #
-    # all_integrators_df = spark.read \
-    #     .format("jdbc") \
-    #     .option("url", "jdbc:mysql://localhost:3306/rails") \
-    #     .option("driver", 'com.mysql.cj.jdbc.Driver') \
-    #     .option("dbtable", "integrator") \
-    #     .option("user", "root") \
-    #     .option("password", "") \
-    #     .load()
-    #
-    # all_prs_df.createOrReplaceTempView("pull_request")
-    # all_integrators_df.createOrReplaceTempView("integrator")
 
     query1 = "SELECT * FROM pull_request " \
              "WHERE pr_id > '%s' and pr_id <= '%s' " \
              "ORDER BY pr_id " \
              "LIMIT %d" % (offset, offset + limit, limit)
     all_prs = spark.sql(query1)
-
-    # try:
-    #     with connection.cursor() as cursor:
-    #         # Read records
-    #         query1 = "SELECT * FROM pull_request LIMIT %s OFFSET %s"
-    #         inputs = (limit, offset)
-    #         cursor.execute(query1, inputs)
-    #         all_prs = cursor.fetchall()
-    # finally:
-    #     connection.close()
 
     total_prs = 0
     cmb_accuracy_array = [0, 0, 0]
@@ -312,24 +244,6 @@ def test_accuracy_for_all_prs(database, offset, limit):
             act_accuracy_array[1] += 1
         if hasattr(activeness_accuracy, 'top5') and activeness_accuracy.top5:
             act_accuracy_array[2] += 1
-
-        # logging.info(new_pr.pr_id + "- File Path accuracy top1: " + file_path_accuracy.top1 + " top3: " +
-        #              file_path_accuracy.top3 + " top5: " + file_path_accuracy.top5)
-        # logging.info(new_pr.pr_id + "- Text accuracy top1: " + text_accuracy.top1 + " top3: " +
-        #              text_accuracy.top3 + " top5: " + text_accuracy.top5)
-        # logging.info(new_pr.pr_id + "- Activeness accuracy top1: " + activeness_accuracy.top1 + " top3: " +
-        #              activeness_accuracy.top3 + " top5: " + activeness_accuracy.top5)
-        # logging.info(new_pr.pr_id + "- Combined accuracy top1: " + combined_accuracy.top1 + " top3: " +
-        #              combined_accuracy.top3 + " top5: " + combined_accuracy.top5)
-        #
-        # print(new_pr.pr_id + "- File Path accuracy top1: " + file_path_accuracy.top1 + " top3: " +
-        #       file_path_accuracy.top3 + " top5: " + file_path_accuracy.top5)
-        # print(new_pr.pr_id + "- Text accuracy top1: " + text_accuracy.top1 + " top3: " +
-        #       text_accuracy.top3 + " top5: " + text_accuracy.top5)
-        # print(new_pr.pr_id + "- Activeness accuracy top1: " + activeness_accuracy.top1 + " top3: " +
-        #       activeness_accuracy.top3 + " top5: " + activeness_accuracy.top5)
-        # print(new_pr.pr_id + "- Combined accuracy top1: " + combined_accuracy.top1 + " top3: " +
-        #       combined_accuracy.top3 + " top5: " + combined_accuracy.top5)
 
     avg_combined_top1_accuracy = cmb_accuracy_array[0]/total_prs
     avg_combined_top3_accuracy = cmb_accuracy_array[1] / total_prs

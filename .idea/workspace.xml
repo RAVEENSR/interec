@@ -2,10 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7ed1af3-6581-48b9-98b4-6e3daf6210d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interec/test_script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/interec.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/interec.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/interec/main_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/main_script.py" afterDir="false" />
     </list>
@@ -45,11 +41,20 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/interec/main_script.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="175">
-              <caret line="70" column="37" selection-start-line="70" selection-start-column="37" selection-end-line="70" selection-end-column="37" />
+            <state relative-caret-position="3213">
+              <caret line="189" lean-forward="true" selection-start-line="189" selection-end-line="189" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/interec/entities/Integrator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="27" lean-forward="true" selection-start-line="9" selection-start-column="27" selection-end-line="10" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -145,6 +150,13 @@
               <item name="interec" type="47feb1d3:ProjectViewModuleNode" />
               <item name="interec" type="462c0819:PsiDirectoryNode" />
               <item name="interec" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="interec" type="b2602c69:ProjectViewProjectNode" />
+              <item name="interec" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="interec" type="462c0819:PsiDirectoryNode" />
+              <item name="interec" type="462c0819:PsiDirectoryNode" />
+              <item name="entities" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -281,7 +293,7 @@
       <workItem from="1551849875711" duration="2302000" />
       <workItem from="1551861096625" duration="8849000" />
       <workItem from="1551875654082" duration="8505000" />
-      <workItem from="1551892632932" duration="3132000" />
+      <workItem from="1551892632932" duration="4512000" />
     </task>
     <task id="LOCAL-00001" summary="Add initial files">
       <created>1550081193929</created>
@@ -402,23 +414,30 @@
       <option name="project" value="LOCAL" />
       <updated>1551377945787</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Update project">
+      <created>1551896030958</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1551896030958</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="229449000" />
+    <option name="totallyTimeSpent" value="230829000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49584487" visible="true" weight="0.18763326" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49584487" visible="true" weight="0.18763326" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5041551" side_tool="true" weight="0.18550107" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3180851" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.24148937" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.44468084" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.44468084" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -479,6 +498,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/interec/main_script.py</url>
+          <line>58</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+      </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
           <properties notifyOnTerminate="true" exception="BaseException">
@@ -709,13 +735,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interec/entities/Integrator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="8" selection-start-line="1" selection-start-column="8" selection-end-line="1" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -779,10 +798,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/interec/entities/Integrator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="27" lean-forward="true" selection-start-line="9" selection-start-column="27" selection-end-line="10" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/interec/main_script.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="70" column="37" selection-start-line="70" selection-start-column="37" selection-end-line="70" selection-end-column="37" />
+        <state relative-caret-position="3213">
+          <caret line="189" lean-forward="true" selection-start-line="189" selection-end-line="189" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
