@@ -8,9 +8,7 @@ class Integrator:
         self.pr_title_similarity = 0
         self.pr_description_similarity = 0
         self.activeness = 0
-        self.num_of_first_pulls = 0
         self.num_of_prs = 0
-        self.total_commits = 0
 
     @property
     def integrator_login(self):
@@ -45,16 +43,8 @@ class Integrator:
         return self.__activeness
 
     @property
-    def num_of_first_pulls(self):
-        return self.__num_of_first_pulls
-
-    @property
     def num_of_prs(self):
         return self.__num_of_prs
-
-    @property
-    def total_commits(self):
-        return self.__total_commits
 
     @integrator_login.setter
     def integrator_login(self, val):
@@ -88,14 +78,6 @@ class Integrator:
     def activeness(self, val):
         self.__activeness = val
 
-    @num_of_first_pulls.setter
-    def num_of_first_pulls(self, val):
-        self.__num_of_first_pulls = val
-
     @num_of_prs.setter
     def num_of_prs(self, val):
         self.__num_of_prs = val
-
-    @total_commits.setter
-    def total_commits(self, val):
-        self.__total_commits = val

@@ -1,7 +1,6 @@
 import pandas as pd
 import logging
 
-
 from pyspark.sql import SparkSession
 from interec.activeness.integrator_activeness import calculate_integrator_activeness, add_activeness_ranking
 from interec.entities.Integrator import Integrator
@@ -10,38 +9,50 @@ from interec.text_similarity.cos_similarity import cos_similarity, add_text_simi
 from interec.string_compare.string_compare import longest_common_prefix, longest_common_suffix, \
     longest_common_sub_string, longest_common_sub_sequence, add_file_path_similarity_ranking
 
-database = 'bitcoin'
+database = 'rails'
+spark = ""
+all_prs_df = ""
+all_integrators_df = ""
+all_integrators = ""
 
-spark = SparkSession \
-    .builder \
-    .master('local') \
-    .appName("Interec") \
-    .getOrCreate()
-spark.sparkContext.setLogLevel("WARN")
 
-all_prs_df = spark.read \
-    .format("jdbc") \
-    .option("url", "jdbc:mysql://localhost:3306/" + database) \
-    .option("driver", 'com.mysql.cj.jdbc.Driver') \
-    .option("dbtable", "pull_request") \
-    .option("user", "root") \
-    .option("password", "") \
-    .load()
-all_prs_df.printSchema()
-all_integrators_df = spark.read \
-    .format("jdbc") \
-    .option("url", "jdbc:mysql://localhost:3306/" + database) \
-    .option("driver", 'com.mysql.cj.jdbc.Driver') \
-    .option("dbtable", "integrator") \
-    .option("user", "root") \
-    .option("password", "") \
-    .load()
+def initialise_app(database_name):
+    global database, spark, all_prs_df, all_integrators_df, all_integrators
 
-all_prs_df.createOrReplaceTempView("pull_request")
-all_integrators_df.createOrReplaceTempView("integrator")
+    database = database_name
+    # Create a spark session
+    spark = SparkSession \
+        .builder \
+        .master('local') \
+        .appName("Interec") \
+        .getOrCreate()
 
-query = "SELECT * FROM integrator"
-all_integrators = spark.sql(query).collect()
+    # Read table pull_request
+    all_prs_df = spark.read \
+        .format("jdbc") \
+        .option("url", "jdbc:mysql://localhost:3306/" + database) \
+        .option("driver", 'com.mysql.cj.jdbc.Driver') \
+        .option("dbtable", "pull_request") \
+        .option("user", "root") \
+        .option("password", "") \
+        .load()
+
+    # Read table integrator
+    all_integrators_df = spark.read \
+        .format("jdbc") \
+        .option("url", "jdbc:mysql://localhost:3306/" + database) \
+        .option("driver", 'com.mysql.cj.jdbc.Driver') \
+        .option("dbtable", "integrator") \
+        .option("user", "root") \
+        .option("password", "") \
+        .load()
+
+    all_prs_df.createOrReplaceTempView("pull_request")
+    all_integrators_df.createOrReplaceTempView("integrator")
+
+    # Get all the integrators for the project
+    query = "SELECT * FROM integrator"
+    all_integrators = spark.sql(query).collect()
 
 
 def calculate_scores(new_pr):
@@ -52,9 +63,13 @@ def calculate_scores(new_pr):
         pr_integrator = Integrator(integrator[1])
 
         # Read all the PRs integrator reviewed before
-        query1 = "SELECT * FROM pull_request WHERE merged_date < timestamp('%s') AND integrator_login = '%s'" % \
+        query1 = "SELECT pr_id, pull_number, requester_login, title, description, created_date, merged_date, " \
+                 "integrator_login, files " \
+                 "FROM pull_request " \
+                 "WHERE merged_date < timestamp('%s') AND integrator_login = '%s'" % \
                  (new_pr.created_date, pr_integrator.integrator_login)
         integrator_reviewed_prs = spark.sql(query1).collect()
+        print(len(integrator_reviewed_prs))  # TODO:Remove this
 
         for integrator_reviewed_pr in integrator_reviewed_prs:
             old_pr = PullRequest(integrator_reviewed_pr)
@@ -86,20 +101,6 @@ def calculate_scores(new_pr):
             # Calculate activeness of the integrator
             pr_integrator.activeness += calculate_integrator_activeness(new_pr, old_pr)
 
-            # Calculate number of first pulls merged, total number of prs and total commits
-            if old_pr.first_pull == 1:
-                pr_integrator.num_of_first_pulls += 1
-            pr_integrator.num_of_prs += 1
-            pr_integrator.total_commits += old_pr.num_of_commits
-
-        # Calculate first pull similarity and average commits
-        if pr_integrator.num_of_prs == 0:
-            first_pull_similarity = 0
-            average_commits = 0
-        else:
-            first_pull_similarity = pr_integrator.num_of_first_pulls / pr_integrator.num_of_prs
-            average_commits = pr_integrator.total_commits / pr_integrator.num_of_prs
-
         row = {'integrator': pr_integrator.integrator_login,
                'lcp': pr_integrator.longest_common_prefix_score,
                'lcs': pr_integrator.longest_common_suffix_score,
@@ -107,9 +108,7 @@ def calculate_scores(new_pr):
                'ls_subseq': pr_integrator.longest_common_sub_sequence_score,
                'cos_title': pr_integrator.pr_title_similarity,
                'cos_description': pr_integrator.pr_description_similarity,
-               'activeness': pr_integrator.activeness,
-               'first_pull': first_pull_similarity,
-               'avg_commits': average_commits}
+               'activeness': pr_integrator.activeness}
         df1 = df1.append(row, ignore_index=True)
     return df1
 
@@ -132,7 +131,6 @@ def generate_ranked_list(new_pr):
     add_text_similarity_ranking(data_frame)
     add_activeness_ranking(data_frame)
 
-    # data_frame.to_csv('pr_stats.csv', index=False)
     combined_ranked_list = combine_ranked_lists(data_frame)
     return combined_ranked_list
 
@@ -188,14 +186,14 @@ def test_combined_accuracy(ranked_data_frame, new_pr, top1=True, top3=False, top
     return test_accuracy_by_field(ranked_data_frame, new_pr, 'final_rank', top1, top3, top5)
 
 
-# TODO: add a global variable for database- add getter and setter
 # TODO ADD comments like ''' some text ''' for all the scripts
 # TODO Implement Recall
-# TODO Add a method to a new coming PR- make it applicable for PullRequest object
-def test_accuracy_for_all_prs(database, offset, limit):
+def test_accuracy_for_all_prs(offset, limit):
     logging.basicConfig(level=logging.INFO, filename='app.log', format='%(name)s - %(levelname)s - %(message)s')
 
-    query1 = "SELECT * FROM pull_request " \
+    query1 = "SELECT pr_id, pull_number, requester_login, title, description, created_date, merged_date, " \
+             "integrator_login, files " \
+             "FROM pull_request " \
              "WHERE pr_id > '%s' and pr_id <= '%s' " \
              "ORDER BY pr_id " \
              "LIMIT %d" % (offset, offset + limit, limit)
@@ -210,7 +208,7 @@ def test_accuracy_for_all_prs(database, offset, limit):
     for new_pr in all_prs.collect():
         total_prs += 1
         new_pr = PullRequest(new_pr)
-        print(new_pr.pr_id)
+        print(new_pr.pr_id)  # TODO: Remove this
         ranked_data_frame = generate_ranked_list(new_pr)
         combined_accuracy = test_combined_accuracy(ranked_data_frame, new_pr, True, True, True)
         file_path_accuracy = test_file_path_similarity_accuracy(ranked_data_frame, new_pr, True, True, True)
@@ -273,4 +271,28 @@ def test_accuracy_for_all_prs(database, offset, limit):
           str(avg_act_top3_accuracy) + "         " + str(avg_act_top5_accuracy))
 
 
-test_accuracy_for_all_prs('bitcoin', 2000, 2)
+def get_recommendation(column_name, required_integrators):  # new_pr,
+    logging.basicConfig(level=logging.INFO, filename='app.log', format='%(name)s - %(levelname)s - %(message)s')
+
+    query_demo = "SELECT pr_id, pull_number, requester_login, title, description, created_date, merged_date, " \
+                 "integrator_login, files " \
+                 "FROM pull_request " \
+                 "WHERE pr_id = '2001'"
+    pr_demo = spark.sql(query_demo)
+    new_pr = pr_demo.collect()[0]
+    new_pr = PullRequest(new_pr)
+
+    print(new_pr.pr_id)
+    ranked_data_frame = generate_ranked_list(new_pr)
+    sorted_ranked_data_frame = ranked_data_frame.sort_values(column_name, ascending=True)
+    recommended_integrators = sorted_ranked_data_frame[sorted_ranked_data_frame[column_name] <= required_integrators]
+    print("Position             Integrator")
+    print("-------------------------------")
+    for row in recommended_integrators.itertuples(index=False):
+        print("  " + str(row.final_rank) + "                " + row.integrator)
+
+
+initialise_app('bitcoin')
+# test_accuracy_for_all_prs(2000, 2)
+get_recommendation('final_rank', 5)
+
