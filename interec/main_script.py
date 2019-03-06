@@ -2,6 +2,9 @@ import pandas as pd
 import pymysql
 import logging
 
+from pyspark.sql.functions import to_timestamp, date_format
+
+from pyspark.sql import SparkSession
 from interec.activeness.integrator_activeness import calculate_integrator_activeness, add_activeness_ranking
 from interec.entities.Integrator import Integrator
 from interec.entities.PullRequest import PullRequest
@@ -9,39 +12,77 @@ from interec.text_similarity.cos_similarity import cos_similarity, add_text_simi
 from interec.string_compare.string_compare import longest_common_prefix, longest_common_suffix, \
     longest_common_sub_string, longest_common_sub_sequence, add_file_path_similarity_ranking
 
+database = 'bitcoin'
 
-def calculate_scores(database, new_pr):
+spark = SparkSession \
+    .builder \
+    .master('local') \
+    .appName("Interec") \
+    .getOrCreate()
+spark.sparkContext.setLogLevel("WARN")
+
+all_prs_df = spark.read \
+    .format("jdbc") \
+    .option("url", "jdbc:mysql://localhost:3306/" + database) \
+    .option("driver", 'com.mysql.cj.jdbc.Driver') \
+    .option("dbtable", "pull_request") \
+    .option("user", "root") \
+    .option("password", "") \
+    .load()
+all_prs_df.printSchema()
+all_integrators_df = spark.read \
+    .format("jdbc") \
+    .option("url", "jdbc:mysql://localhost:3306/" + database) \
+    .option("driver", 'com.mysql.cj.jdbc.Driver') \
+    .option("dbtable", "integrator") \
+    .option("user", "root") \
+    .option("password", "") \
+    .load()
+
+all_prs_df.createOrReplaceTempView("pull_request")
+all_integrators_df.createOrReplaceTempView("integrator")
+
+query = "SELECT * FROM integrator"
+all_integrators = spark.sql(query).collect()
+
+
+def calculate_scores(new_pr):
     df1 = pd.DataFrame()
 
-    # Connection to MySQL  database
-    connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=database)
-
-    # Get all the integrators
-    try:
-        with connection.cursor() as cursor:
-            # Read records to get integrators
-            query1 = "SELECT * FROM integrator"
-            cursor.execute(query1)
-            integrators = cursor.fetchall()
-    finally:
-        connection.close()
+    # # Connection to MySQL  database
+    # connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=database)
+    #
+    # # Get all the integrators
+    # try:
+    #     with connection.cursor() as cursor:
+    #         # Read records to get integrators
+    #         query1 = "SELECT * FROM integrator"
+    #         cursor.execute(query1)
+    #         integrators = cursor.fetchall()
+    # finally:
+    #     connection.close()
 
     # Calculate scores for each integrator
-    for integrator in integrators:
+    for integrator in all_integrators:
         pr_integrator = Integrator(integrator[1])
 
-        # Connection to MySQL  database
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=database)
+        # Read all the PRs integrator reviewed before
+        query1 = "SELECT * FROM pull_request WHERE merged_date < timestamp('%s') AND integrator_login = '%s'" % \
+                 (new_pr.created_date, pr_integrator.integrator_login)
+        integrator_reviewed_prs = spark.sql(query1).collect()
 
-        try:
-            with connection.cursor() as cursor:
-                # Read all the PRs integrator reviewed before
-                query2 = "SELECT * FROM pull_request WHERE merged_date <%s AND integrator_login =%s"
-                inputs = (new_pr.created_date.strftime('%Y-%m-%d %H:%M:%S'), pr_integrator.integrator_login)
-                cursor.execute(query2, inputs)
-                integrator_reviewed_prs = cursor.fetchall()
-        finally:
-            connection.close()
+        # # Connection to MySQL  database
+        # connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=database)
+        #
+        # try:
+        #     with connection.cursor() as cursor:
+        #         # Read all the PRs integrator reviewed before
+        #         query2 = "SELECT * FROM pull_request WHERE merged_date <%s AND integrator_login =%s"
+        #         inputs = (new_pr.created_date.strftime('%Y-%m-%d %H:%M:%S'), pr_integrator.integrator_login)
+        #         cursor.execute(query2, inputs)
+        #         integrator_reviewed_prs = cursor.fetchall()
+        # finally:
+        #     connection.close()
 
         for integrator_reviewed_pr in integrator_reviewed_prs:
             old_pr = PullRequest(integrator_reviewed_pr)
@@ -113,8 +154,8 @@ def combine_ranked_lists(data_frame):
     return data_frame
 
 
-def generate_ranked_list(database, new_pr):
-    data_frame = calculate_scores(database, new_pr)
+def generate_ranked_list(new_pr):
+    data_frame = calculate_scores(new_pr)
     add_file_path_similarity_ranking(data_frame)
     add_text_similarity_ranking(data_frame)
     add_activeness_ranking(data_frame)
@@ -177,21 +218,56 @@ def test_combined_accuracy(ranked_data_frame, new_pr, top1=True, top3=False, top
 
 # TODO: add a global variable for database- add getter and setter
 # TODO ADD comments like ''' some text ''' for all the scripts
-# Implement Recall
+# TODO Implement Recall
+# TODO Add a method to a new coming PR- make it applicable for PullRequest object
 def test_accuracy_for_all_prs(database, offset, limit):
     logging.basicConfig(level=logging.INFO, filename='app.log', format='%(name)s - %(levelname)s - %(message)s')
-    # Connection to MySQL  database
-    connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=database)
+    # # Connection to MySQL  database
+    # connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=database)
 
-    try:
-        with connection.cursor() as cursor:
-            # Read records
-            query1 = "SELECT * FROM pull_request LIMIT %s OFFSET %s"
-            inputs = (limit, offset)
-            cursor.execute(query1, inputs)
-            all_prs = cursor.fetchall()
-    finally:
-        connection.close()
+    # spark = SparkSession \
+    #     .builder \
+    #     .master('local') \
+    #     .appName("Interec") \
+    #     .getOrCreate()
+    # spark.sparkContext.setLogLevel("WARN")
+    #
+    # all_prs_df = spark.read \
+    #     .format("jdbc") \
+    #     .option("url", "jdbc:mysql://localhost:3306/" + database) \
+    #     .option("driver", 'com.mysql.cj.jdbc.Driver') \
+    #     .option("dbtable", "pull_request") \
+    #     .option("user", "root") \
+    #     .option("password", "") \
+    #     .load()
+    #
+    # all_integrators_df = spark.read \
+    #     .format("jdbc") \
+    #     .option("url", "jdbc:mysql://localhost:3306/rails") \
+    #     .option("driver", 'com.mysql.cj.jdbc.Driver') \
+    #     .option("dbtable", "integrator") \
+    #     .option("user", "root") \
+    #     .option("password", "") \
+    #     .load()
+    #
+    # all_prs_df.createOrReplaceTempView("pull_request")
+    # all_integrators_df.createOrReplaceTempView("integrator")
+
+    query1 = "SELECT * FROM pull_request " \
+             "WHERE pr_id > '%s' and pr_id <= '%s' " \
+             "ORDER BY pr_id " \
+             "LIMIT %d" % (offset, offset + limit, limit)
+    all_prs = spark.sql(query1)
+
+    # try:
+    #     with connection.cursor() as cursor:
+    #         # Read records
+    #         query1 = "SELECT * FROM pull_request LIMIT %s OFFSET %s"
+    #         inputs = (limit, offset)
+    #         cursor.execute(query1, inputs)
+    #         all_prs = cursor.fetchall()
+    # finally:
+    #     connection.close()
 
     total_prs = 0
     cmb_accuracy_array = [0, 0, 0]
@@ -199,11 +275,11 @@ def test_accuracy_for_all_prs(database, offset, limit):
     txt_accuracy_array = [0, 0, 0]
     act_accuracy_array = [0, 0, 0]
 
-    for new_pr in all_prs:
+    for new_pr in all_prs.collect():
         total_prs += 1
         new_pr = PullRequest(new_pr)
         print(new_pr.pr_id)
-        ranked_data_frame = generate_ranked_list(database, new_pr)
+        ranked_data_frame = generate_ranked_list(new_pr)
         combined_accuracy = test_combined_accuracy(ranked_data_frame, new_pr, True, True, True)
         file_path_accuracy = test_file_path_similarity_accuracy(ranked_data_frame, new_pr, True, True, True)
         text_accuracy = test_text_similarity_accuracy(ranked_data_frame, new_pr, True, True, True)
@@ -272,7 +348,7 @@ def test_accuracy_for_all_prs(database, offset, limit):
     avg_act_top5_accuracy = act_accuracy_array[2] / total_prs
 
     print("---------------------------------------------------------------------------")
-    print("                         Top1          Top3            Top3")
+    print("                         Top1          Top3            Top5")
     print("Combined Accuracy         " + str(avg_combined_top1_accuracy) + "          " +
           str(avg_combined_top3_accuracy) + "         " + str(avg_combined_top5_accuracy))
     print("File Path Accuracy        " + str(avg_file_path_top1_accuracy) + "          " +
@@ -283,4 +359,4 @@ def test_accuracy_for_all_prs(database, offset, limit):
           str(avg_act_top3_accuracy) + "         " + str(avg_act_top5_accuracy))
 
 
-test_accuracy_for_all_prs('scala', 640, 400)
+test_accuracy_for_all_prs('bitcoin', 2000, 2)
