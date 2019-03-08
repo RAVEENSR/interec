@@ -295,4 +295,3 @@ def get_recommendation(column_name, required_integrators):  # new_pr,
 initialise_app('bitcoin')
 # test_accuracy_for_all_prs(2000, 2)
 get_recommendation('final_rank', 5)
-
