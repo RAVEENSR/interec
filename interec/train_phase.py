@@ -1,20 +1,25 @@
-import pandas as pd
 import logging
 
-from pyspark.sql import SparkSession
+import pandas as pd
+from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.neural_network import MLPClassifier
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import LabelEncoder, StandardScaler
+
 from interec.activeness.integrator_activeness import calculate_integrator_activeness
 from interec.entities.Integrator import Integrator
 from interec.entities.PullRequest import PullRequest
-from interec.text_similarity.cos_similarity import cos_similarity
 from interec.string_compare.string_compare import longest_common_prefix, longest_common_suffix, \
     longest_common_sub_string, longest_common_sub_sequence
+from interec.text_similarity.cos_similarity import cos_similarity
+from pyspark.sql import SparkSession
 
 database = 'rails'
 spark = ""
 all_prs_df = ""
 all_integrators_df = ""
 all_integrators = ""
-df = pd.DataFrame()
 
 
 def initialise_app(database_name):
@@ -57,7 +62,7 @@ def initialise_app(database_name):
 
 
 def calculate_scores(offset, limit):
-    global df
+    df = pd.DataFrame()
 
     logging.basicConfig(level=logging.INFO, filename='app.log', format='%(name)s - %(levelname)s - %(message)s')
 
@@ -134,5 +139,54 @@ def calculate_scores(offset, limit):
     df.to_csv(csv_file_name, index=False)
 
 
-initialise_app('scala')
-calculate_scores(0, 640)
+def standardize_score(score, min_val, max_val):
+    new_value = ((score - min_val)*100)/(max_val - min_val)
+    return new_value
+
+
+def scale_scores(csv_file_name):
+    df = pd.read_csv(csv_file_name)
+    act_min = df['activeness'].min()
+    act_max = df['activeness'].max()
+    file_sim_min = df['file_similarity'].min()
+    file_sim_max = df['file_similarity'].max()
+    txt_sim_min = df['text_similarity'].min()
+    txt_sim_max = df['text_similarity'].max()
+
+    df['std_activeness'] = df['activeness'].apply(standardize_score, args=(act_min, act_max))
+    df['std_file_similarity'] = df['file_similarity'].apply(standardize_score, args=(file_sim_min, file_sim_max))
+    df['std_text_similarity'] = df['text_similarity'].apply(standardize_score, args=(txt_sim_min, txt_sim_max))
+
+    df.to_csv('standardized_' + csv_file_name, index=False)
+    return df
+
+
+def find_weight_factors(csv_file_name):
+    df = pd.read_csv(csv_file_name)
+    label_encoder = LabelEncoder()
+    df['encoded_integrator'] = label_encoder.fit_transform(df['integrator'])
+    train_labels = df['encoded_integrator']
+    train_feature_set = df[['std_activeness', 'std_file_similarity', 'std_text_similarity']]
+
+    numeric_features = ['std_activeness', 'std_file_similarity', 'std_text_similarity']
+    numeric_transformer = Pipeline(steps=[
+        ('imputer', SimpleImputer(strategy='median'))])
+    # ('scaler', StandardScaler())])
+
+    preprocessor = ColumnTransformer(transformers=[
+        ('num', numeric_transformer, numeric_features)
+    ])
+
+    # X = preprocessor.fit_transform(X_train, y_train)
+    # X.shape
+
+    clf = Pipeline(steps=[('preprocessor', preprocessor),
+                          ('classifier', MLPClassifier(hidden_layer_sizes=(11,)))])
+    clf.fit(train_feature_set, train_labels)
+
+
+# initialise_app('scala')
+# calculate_scores(0, 640)
+
+# scale_scores('akka_test_pr_stats.csv')
+find_weight_factors('standardized_akka_test_pr_stats.csv')
