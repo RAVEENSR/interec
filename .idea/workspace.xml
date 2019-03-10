@@ -2,13 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7ed1af3-6581-48b9-98b4-6e3daf6210d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/interec/train_phase.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/other/vm_script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interec/main_script-old.py" beforeDir="false" afterPath="$PROJECT_DIR$/other/main_script-old.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interec/main_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/main_script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interec/test_script.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/train_phase.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/train_phase.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -42,20 +37,7 @@
     <favorites_list name="interec" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/interec/train_phase.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="739">
-              <caret line="135" lean-forward="true" selection-start-line="135" selection-end-line="135" />
-              <folding>
-                <element signature="e#0#19#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -76,6 +58,8 @@
       <find>merge</find>
       <find>log</find>
       <find>print</find>
+      <find>appl</find>
+      <find>apply</find>
     </findStrings>
     <replaceStrings>
       <replace>l_c_suff</replace>
@@ -121,14 +105,16 @@
         <option value="$PROJECT_DIR$/interec/sub_script.py" />
         <option value="$PROJECT_DIR$/interec/vm_script.py" />
         <option value="$PROJECT_DIR$/interec/cal_file.py" />
+        <option value="$PROJECT_DIR$/interec/train_phase.py" />
+        <option value="$PROJECT_DIR$/interec/ml_script.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="344" />
-    <option name="y" value="-16" />
-    <option name="width" value="1378" />
-    <option name="height" value="773" />
+    <option name="x" value="228" />
+    <option name="y" value="48" />
+    <option name="width" value="980" />
+    <option name="height" value="549" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -167,15 +153,15 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PythonContentEntriesConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\other" />
       <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec\machine_learning" />
       <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec" />
       <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec\entities" />
       <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec\string_compare" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -190,7 +176,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.cal_file">
+  <component name="RunManager" selected="Python.train_phase">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="interec" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -217,6 +203,9 @@
       <module name="interec" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/interec" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -258,6 +247,9 @@
       <module name="interec" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/interec" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -295,8 +287,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="train_phase" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="interec" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/interec" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/interec/train_phase.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.train_phase" />
         <item itemvalue="Python.cal_file" />
         <item itemvalue="Python.sub_script" />
         <item itemvalue="Python.main_script" />
@@ -334,7 +346,8 @@
       <workItem from="1551875654082" duration="8505000" />
       <workItem from="1551892632932" duration="13449000" />
       <workItem from="1551956663789" duration="588000" />
-      <workItem from="1552022771870" duration="11881000" />
+      <workItem from="1552022771870" duration="19900000" />
+      <workItem from="1552219791770" duration="9633000" />
     </task>
     <task id="LOCAL-00001" summary="Add initial files">
       <created>1550081193929</created>
@@ -476,11 +489,25 @@
       <option name="project" value="LOCAL" />
       <updated>1551906689174</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Update project">
+      <created>1552062070554</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1552062070555</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Update project">
+      <created>1552074488034</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1552074488034</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="252235000" />
+    <option name="totallyTimeSpent" value="269887000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -492,11 +519,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49584487" visible="true" weight="0.19296375" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4948718" visible="true" weight="0.2118003" />
+      <window_info id="Structure" order="1" sideWeight="0.5051282" side_tool="true" weight="0.2118003" />
       <window_info id="Favorites" order="2" sideWeight="0.5041551" side_tool="true" weight="0.18550107" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3180851" />
@@ -510,13 +536,13 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50159913" side_tool="true" weight="0.40425533" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.38404256" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49840087" weight="0.26170212" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49840087" weight="0.2977707" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" sideWeight="0.48089173" weight="0.24508321" />
       <window_info anchor="right" id="Database" order="4" sideWeight="0.49148935" weight="0.32782516" />
-      <window_info anchor="right" x="0" y="0" width="193" height="465" id="Documentation" order="5" sideWeight="0.5191083" side_tool="true" weight="0.28091684" />
+      <window_info anchor="right" x="0" y="0" width="193" height="465" id="Documentation" order="5" sideWeight="0.5191083" side_tool="true" weight="0.2806354" />
     </layout>
     <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09488273" />
@@ -698,13 +724,6 @@ pr_demo = spark.sql(query_demo)</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/sklearn/model_selection/_search.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="1177" column="23" selection-start-line="1177" selection-start-column="17" selection-end-line="1177" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/pymysql/cursors.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="210">
@@ -729,26 +748,6 @@ pr_demo = spark.sql(query_demo)</expression-string>
     <entry file="file://$PROJECT_DIR$/stringcompare/main_script.py" />
     <entry file="file://$PROJECT_DIR$/test.py" />
     <entry file="file://$PROJECT_DIR$/dataset/text_processor.py" />
-    <entry file="file://$PROJECT_DIR$/interec/machine_learning/data_processor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1545">
-          <caret line="17" column="31" lean-forward="true" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/machine_learning/my_script.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="59" selection-start-line="59" selection-end-line="59" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/other/main_script_2.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/logging/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -827,19 +826,8 @@ pr_demo = spark.sql(query_demo)</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interec/test_script.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/bitcointest_pr_stats.csv">
-      <provider selected="true" editor-type-id="csv-text-editor" />
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/test_script.py" />
+    <entry file="file://$PROJECT_DIR$/interec/bitcointest_pr_stats.csv" />
     <entry file="file://$PROJECT_DIR$/interec/activeness/integrator_activeness.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -878,33 +866,6 @@ pr_demo = spark.sql(query_demo)</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/other/vm_file.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3698">
-          <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/other/main_script-old.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="654">
-          <caret line="104" column="8" selection-start-line="104" selection-start-column="8" selection-end-line="104" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/other/vm_script.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="365">
-          <caret line="400" column="52" selection-end-line="425" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/interec/main_script.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -915,25 +876,110 @@ pr_demo = spark.sql(query_demo)</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interec/akka_test_pr_stats.csv">
-      <provider selected="true" editor-type-id="csv-text-editor">
-        <state relative-caret-position="-1326" />
+    <entry file="file://$PROJECT_DIR$/interec/app.log" />
+    <entry file="file://$PROJECT_DIR$/other/vm_script.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="388">
+          <caret line="400" column="52" selection-end-line="425" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other/vm_file.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1454">
+          <caret column="13" lean-forward="true" selection-start-column="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other/main_script-old.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1768">
+          <caret line="104" column="8" selection-start-line="104" selection-start-column="8" selection-end-line="104" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/standardized_akka_test_pr_stats.csv">
       <provider editor-type-id="csv-table-editor">
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
+      <provider selected="true" editor-type-id="csv-text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/interec/app.log">
+    <entry file="file://$PROJECT_DIR$/interec/akka_test_pr_stats.csv">
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
+      </provider>
+      <provider selected="true" editor-type-id="csv-text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/sklearn/pipeline.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-20301" />
+        <state relative-caret-position="48">
+          <caret line="306" column="8" selection-start-line="306" selection-start-column="8" selection-end-line="306" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/sklearn/compose/_column_transformer.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-20">
+          <caret line="422" column="8" selection-start-line="422" selection-start-column="8" selection-end-line="422" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/sklearn/neural_network/multilayer_perceptron.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-972">
+          <caret line="778" column="7" selection-start-line="778" selection-start-column="4" selection-end-line="778" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/machine_learning/my_script.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="150" column="21" selection-start-line="150" selection-start-column="21" selection-end-line="150" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/machine_learning/data_processor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-493">
+          <caret line="93" column="6" lean-forward="true" selection-start-line="93" selection-start-column="6" selection-end-line="93" selection-end-column="6" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/sklearn/model_selection/_search.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4560">
+          <caret line="1177" column="23" selection-start-line="1177" selection-start-column="17" selection-end-line="1177" selection-end-column="23" />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/interec/train_phase.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="739">
-          <caret line="135" lean-forward="true" selection-start-line="135" selection-end-line="135" />
+        <state relative-caret-position="308">
+          <caret line="199" column="34" selection-start-line="199" selection-start-column="34" selection-end-line="199" selection-end-column="34" />
           <folding>
-            <element signature="e#0#19#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other/ml_script.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="478">
+          <caret line="66" lean-forward="true" selection-start-line="66" selection-end-line="66" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
