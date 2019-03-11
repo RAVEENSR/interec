@@ -184,26 +184,27 @@ def find_weight_factors(train_data_csv_file_name, test_data_csv_file_name):
     ])
 
     clf = Pipeline(steps=[('preprocessor', preprocessor),
-                          ('classifier', MLPClassifier(tol=0.000000001))])
-    parameter_space = {
-        'classifier__hidden_layer_sizes': [(3, 11, 33, 50, 100), (3, 11, 50, 100, 33)],
-        'classifier__activation': ['tanh', 'relu', 'identity', 'logistic'],
-        'classifier__max_iter': [50000],
-        'classifier__solver': ['sgd', 'adam', 'lbfgs'],
-        'classifier__alpha': [0.0001, 0.05, 0.001],
-        'classifier__learning_rate': ['constant', 'adaptive']
-    }
-    clf = GridSearchCV(clf, parameter_space, n_jobs=-1)
+                          ('classifier', MLPClassifier(  solver='sgd', activation='identity',
+                                                       hidden_layer_sizes=(3, 100), tol=0.000000001))])
+    # parameter_space = {
+    #     'classifier__hidden_layer_sizes': [(3, 11, 33, 50, 100), (3, 11, 50, 100, 33)],
+    #     'classifier__activation': ['tanh', 'relu', 'identity', 'logistic'],
+    #     'classifier__max_iter': [50000],
+    #     'classifier__solver': ['sgd', 'adam', 'lbfgs'],
+    #     'classifier__alpha': [0.0001, 0.05, 0.001],
+    #     'classifier__learning_rate': ['constant', 'adaptive']
+    # }
+    # clf = GridSearchCV(clf, parameter_space, n_jobs=-1)
     clf.fit(train_feature_set, train_labels)
 
-    # Best paramete set
-    print('Best parameters found:\n', clf.best_params_)
+    # # Best paramete set
+    # print('Best parameters found:\n', clf.best_params_)
 
-    # All results
-    means = clf.cv_results_['mean_test_score']
-    stds = clf.cv_results_['std_test_score']
-    for mean, std, params in zip(means, stds, clf.cv_results_['params']):
-        print("%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params))
+    # # All results
+    # means = clf.cv_results_['mean_test_score']
+    # stds = clf.cv_results_['std_test_score']
+    # for mean, std, params in zip(means, stds, clf.cv_results_['params']):
+    #     print("%0.3f (+/-%0.03f) for %r" % (mean, std * 2, params))
 
     y_pred = clf.predict(test_feature_set)
     print(classification_report(test_labels, y_pred))
