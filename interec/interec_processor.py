@@ -28,7 +28,7 @@ class InterecProcessor:
         self.alpha = 0
         self.beta = 0
         self.gamma = 0
-        self.time_window = 0
+        self.date_window = 0
 
     def __initialise_app(self):
         # Create a spark session
@@ -101,17 +101,17 @@ class InterecProcessor:
                         divider = max_file_path_length * number_of_file_combinations
 
                         pr_integrator.longest_common_prefix_score += \
-                            (self.file_path_similarity_calculator.longest_common_prefix(new_pr_file_path, file_path)
-                             / divider)
+                            (self.file_path_similarity_calculator.longest_common_prefix_similarity(
+                                new_pr_file_path, file_path) / divider)
                         pr_integrator.longest_common_suffix_score += \
-                            (self.file_path_similarity_calculator.longest_common_suffix(new_pr_file_path, file_path)
-                             / divider)
+                            (self.file_path_similarity_calculator.longest_common_suffix_similarity(
+                                new_pr_file_path, file_path) / divider)
                         pr_integrator.longest_common_sub_string_score += \
-                            (self.file_path_similarity_calculator.longest_common_sub_string(new_pr_file_path, file_path)
-                             / divider)
+                            (self.file_path_similarity_calculator.longest_common_sub_string_similarity(
+                                new_pr_file_path, file_path) / divider)
                         pr_integrator.longest_common_sub_sequence_score += \
-                            (self.file_path_similarity_calculator.longest_common_sub_sequence(new_pr_file_path,
-                                                                                              file_path) / divider)
+                            (self.file_path_similarity_calculator.longest_common_sub_sequence_similarity(
+                                new_pr_file_path, file_path) / divider)
 
                 # Calculate cosine similarity of title
                 pr_integrator.pr_title_similarity \
@@ -197,7 +197,7 @@ class InterecProcessor:
         df = self.__calculate_scores_for_all_prs(offset, limit)
         self.get_weight_combinations_for_factors(offset, limit, df, use_csv_file=False)
 
-    def set_weight_combination_for_factors(self, alpha, beta, gamma, time_window):
+    def set_weight_combination_for_factors(self, alpha, beta, gamma, date_window):
         return True
 
     def add_pr_to_db(self, pr_number, requester_login, title, description, created_date, merged_date, files,
