@@ -2,10 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7ed1af3-6581-48b9-98b4-6e3daf6210d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/interec/main_script2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interec/vm_all_scores.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interec/train_phase.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/train_phase.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/cal_scores.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/cal_scores.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/string_compare/string_compare.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/string_compare/string_compare.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/text_similarity/cos_similarity.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/text_similarity/cos_similarity.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/vm_all_scores.py" beforeDir="false" afterPath="$PROJECT_DIR$/other/vm_all_scores.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,6 +18,7 @@
     <SUITE FILE_PATH="coverage/interec$main_script__1_.coverage" NAME="main_script (1) Coverage Results" MODIFIED="1551104244965" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/interec" />
     <SUITE FILE_PATH="coverage/interec$main_script_2.coverage" NAME="main_script_2 Coverage Results" MODIFIED="1550782031036" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/stringcompare" />
     <SUITE FILE_PATH="coverage/interec$main_script2.coverage" NAME="main_script2 Coverage Results" MODIFIED="1552326559803" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/interec" />
+    <SUITE FILE_PATH="coverage/interec$cal_scores.coverage" NAME="cal_scores Coverage Results" MODIFIED="1552336245759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/interec" />
     <SUITE FILE_PATH="coverage/interec$my_script.coverage" NAME="my_script Coverage Results" MODIFIED="1550875105369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/stringcompare" />
     <SUITE FILE_PATH="coverage/interec$main_script.coverage" NAME="main_script Coverage Results" MODIFIED="1551902731263" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/interec" />
     <SUITE FILE_PATH="coverage/pr_dataset$myScript.coverage" NAME="myScript Coverage Results" MODIFIED="1550247053196" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dataset" />
@@ -40,7 +42,20 @@
     <favorites_list name="interec" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/interec/cal_scores.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1018">
+              <caret line="61" column="108" selection-start-line="61" selection-start-column="108" selection-end-line="61" selection-end-column="108" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -63,13 +78,14 @@
       <find>print</find>
       <find>appl</find>
       <find>apply</find>
-      <find>df</find>
       <find>info</find>
       <find>loggi</find>
+      <find>df</find>
     </findStrings>
     <replaceStrings>
       <replace>l_c_suff</replace>
       <replace>old_pr</replace>
+      <replace>main_df</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -102,8 +118,6 @@
         <option value="$PROJECT_DIR$/other/vm_file.py" />
         <option value="$PROJECT_DIR$/interec/dataset/update_dataset.py" />
         <option value="$PROJECT_DIR$/interec/activeness/integrator_activeness.py" />
-        <option value="$PROJECT_DIR$/interec/string_compare/string_compare.py" />
-        <option value="$PROJECT_DIR$/interec/text_similarity/cos_similarity.py" />
         <option value="$PROJECT_DIR$/interec/entities/Integrator.py" />
         <option value="$PROJECT_DIR$/interec/entities/PullRequest.py" />
         <option value="$PROJECT_DIR$/interec/main_script.py" />
@@ -115,12 +129,16 @@
         <option value="$PROJECT_DIR$/interec/test_script.py" />
         <option value="$PROJECT_DIR$/interec/main_script2.py" />
         <option value="$PROJECT_DIR$/interec/vm_all_scores.py" />
+        <option value="$PROJECT_DIR$/other/vm_all_scores.py" />
+        <option value="$PROJECT_DIR$/interec/string_compare/string_compare.py" />
+        <option value="$PROJECT_DIR$/interec/text_similarity/cos_similarity.py" />
+        <option value="$PROJECT_DIR$/interec/cal_scores.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+    <option name="x" value="107" />
+    <option name="y" value="76" />
     <option name="width" value="980" />
     <option name="height" value="733" />
   </component>
@@ -148,6 +166,27 @@
               <item name="interec" type="462c0819:PsiDirectoryNode" />
               <item name="interec" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="interec" type="b2602c69:ProjectViewProjectNode" />
+              <item name="interec" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="interec" type="462c0819:PsiDirectoryNode" />
+              <item name="interec" type="462c0819:PsiDirectoryNode" />
+              <item name="activeness" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="interec" type="b2602c69:ProjectViewProjectNode" />
+              <item name="interec" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="interec" type="462c0819:PsiDirectoryNode" />
+              <item name="interec" type="462c0819:PsiDirectoryNode" />
+              <item name="string_compare" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="interec" type="b2602c69:ProjectViewProjectNode" />
+              <item name="interec" type="47feb1d3:ProjectViewModuleNode" />
+              <item name="interec" type="462c0819:PsiDirectoryNode" />
+              <item name="interec" type="462c0819:PsiDirectoryNode" />
+              <item name="text_similarity" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -162,9 +201,9 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec" />
       <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\other" />
       <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec\machine_learning" />
-      <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec" />
       <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec\entities" />
       <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec\string_compare" />
     </key>
@@ -184,7 +223,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main_script2">
+  <component name="RunManager" selected="Python.cal_scores">
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="interec" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -207,20 +246,17 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="cal_file" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="cal_scores" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="interec" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/interec" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec\train_phase.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/interec/cal_scores.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -243,28 +279,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/interec/main_script2.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="true" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="sub_script" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="interec" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/interec" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\other\vm_script.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="true" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -317,13 +331,32 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="vm_all_scores" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="interec" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/other" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/other/vm_all_scores.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="true" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.cal_scores" />
+        <item itemvalue="Python.vm_all_scores" />
         <item itemvalue="Python.main_script2" />
         <item itemvalue="Python.test_script" />
         <item itemvalue="Python.train_phase" />
-        <item itemvalue="Python.cal_file" />
-        <item itemvalue="Python.sub_script" />
       </list>
     </recent_temporary>
   </component>
@@ -361,6 +394,8 @@
       <workItem from="1552219791770" duration="9695000" />
       <workItem from="1552284883319" duration="1187000" />
       <workItem from="1552320817118" duration="9174000" />
+      <workItem from="1552332829814" duration="599000" />
+      <workItem from="1552333466332" duration="5791000" />
     </task>
     <task id="LOCAL-00001" summary="Add initial files">
       <created>1550081193929</created>
@@ -530,11 +565,18 @@
       <option name="project" value="LOCAL" />
       <updated>1552233240110</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Update project">
+      <created>1552332910744</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1552332910744</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="280310000" />
+    <option name="totallyTimeSpent" value="286700000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -548,13 +590,13 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4948718" visible="true" weight="0.23298033" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4948718" visible="true" weight="0.24054463" />
       <window_info id="Structure" order="1" sideWeight="0.5051282" side_tool="true" weight="0.2118003" />
       <window_info id="Favorites" order="2" sideWeight="0.5041551" side_tool="true" weight="0.18550107" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3180851" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.24148937" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4410828" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.28184712" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
@@ -563,38 +605,14 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50159913" side_tool="true" weight="0.40425533" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.38404256" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49840087" weight="0.31687897" />
+      <window_info active="true" anchor="bottom" id="Python Console" order="12" sideWeight="0.49840087" visible="true" weight="0.20859873" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" sideWeight="0.48089173" weight="0.24508321" />
+      <window_info anchor="right" id="SciView" order="3" sideWeight="0.47929937" weight="0.24508321" />
       <window_info anchor="right" id="Database" order="4" sideWeight="0.49148935" weight="0.32782516" />
-      <window_info anchor="right" x="0" y="0" width="193" height="465" id="Documentation" order="5" sideWeight="0.5191083" side_tool="true" weight="0.27987897" />
+      <window_info anchor="right" x="0" y="0" width="193" height="465" id="Documentation" order="5" sideWeight="0.52070063" side_tool="true" weight="0.24508321" />
     </layout>
-    <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.09488273" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3287234" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.24148937" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3042553" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50053304" side_tool="true" weight="0.45531914" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.21914893" />
-      <window_info active="true" anchor="bottom" id="Python Console" order="12" sideWeight="0.49946696" visible="true" weight="0.13936171" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="SciView" order="3" sideWeight="0.4894895" weight="0.24629775" />
-      <window_info anchor="right" id="Database" order="4" sideWeight="0.4924925" weight="0.3289166" />
-      <window_info anchor="right" x="0" y="0" width="193" height="465" id="Documentation" order="5" sideWeight="0.5105105" side_tool="true" weight="0.24629775" />
-    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -860,18 +878,8 @@ pr_demo = spark.sql(query_demo)</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interec/standardized_akka_test_pr_stats.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/akka_test_pr_stats.csv">
-      <provider editor-type-id="csv-table-editor">
-        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
-      </provider>
-      <provider selected="true" editor-type-id="csv-text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/standardized_akka_test_pr_stats.csv" />
+    <entry file="file://$PROJECT_DIR$/interec/akka_test_pr_stats.csv" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/sklearn/pipeline.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
@@ -920,20 +928,6 @@ pr_demo = spark.sql(query_demo)</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interec/test_script.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="58" selection-start-line="4" selection-start-column="58" selection-end-line="4" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/string_compare/string_compare.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" selection-start-line="8" selection-end-line="73" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/interec/entities/Integrator.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="189">
@@ -945,50 +939,6 @@ pr_demo = spark.sql(query_demo)</expression-string>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="18" column="20" lean-forward="true" selection-end-line="88" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/text_similarity/cos_similarity.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="5" selection-end-column="59" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/activeness/integrator_activeness.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" selection-start-line="1" selection-end-line="15" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/main_script2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="58">
-          <caret line="130" selection-start-line="129" selection-end-line="130" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/main_script.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="12" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/train_phase.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-446">
-          <caret line="161" column="40" selection-start-line="161" selection-start-column="40" selection-end-line="161" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1019,10 +969,81 @@ pr_demo = spark.sql(query_demo)</expression-string>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interec/vm_all_scores.py">
+    <entry file="file://$PROJECT_DIR$/interec/main_script2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="461">
-          <caret line="430" column="32" selection-start-line="430" selection-start-column="32" selection-end-line="430" selection-end-column="32" />
+        <state relative-caret-position="325">
+          <caret line="134" column="22" lean-forward="true" selection-start-line="134" selection-start-column="22" selection-end-line="134" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other/vm_all_scores.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="387" column="25" selection-start-line="387" selection-start-column="16" selection-end-line="387" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/text_similarity/cos_similarity.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="37" column="4" selection-start-line="37" selection-start-column="6" selection-end-line="37" selection-end-column="93" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/string_compare/string_compare.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="427">
+          <caret line="77" column="4" selection-start-line="77" selection-start-column="4" selection-end-line="78" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/main_script.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="115" selection-start-line="115" selection-end-line="124" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/test_script.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="4" selection-end-column="68" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/train_phase.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="143" selection-start-line="143" selection-end-line="145" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/activeness/integrator_activeness.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/cal_scores.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1018">
+          <caret line="61" column="108" selection-start-line="61" selection-start-column="108" selection-end-line="61" selection-end-column="108" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>

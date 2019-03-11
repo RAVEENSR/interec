@@ -35,5 +35,5 @@ def cos_similarity(string1, string2):
 
 
 def add_text_similarity_ranking(data_frame):
-    data_frame['text_similarity'] = data_frame['cos_title'] + data_frame['cos_description']
+    # data_frame['text_similarity'] = data_frame['cos_title'] + data_frame['cos_description']
     data_frame["text_rank"] = data_frame["text_similarity"].rank(method='min', ascending=False)

@@ -317,21 +317,21 @@ def initialise_app(database_name):
     # Read table pull_request
     all_prs_df = spark.read \
         .format("jdbc") \
-        .option("url", "jdbc:mysql://35.226.101.214:3306/" + database) \
+        .option("url", "jdbc:mysql://localhost:3306/" + database) \
         .option("driver", 'com.mysql.cj.jdbc.Driver') \
         .option("dbtable", "pull_request") \
         .option("user", "root") \
-        .option("password", "Rahula123") \
+        .option("password", "") \
         .load()
 
     # Read table integrator
     all_integrators_df = spark.read \
         .format("jdbc") \
-        .option("url", "jdbc:mysql://35.226.101.214:3306/" + database) \
+        .option("url", "jdbc:mysql://localhost:3306/" + database) \
         .option("driver", 'com.mysql.cj.jdbc.Driver') \
         .option("dbtable", "integrator") \
         .option("user", "root") \
-        .option("password", "Rahula123") \
+        .option("password", "") \
         .load()
 
     all_prs_df.createOrReplaceTempView("pull_request")
@@ -428,4 +428,4 @@ def calculate_scores_for_all_prs(offset, limit):
 
 
 initialise_app('akka')
-calculate_scores_for_all_prs(600, 1000)
+calculate_scores_for_all_prs(600, 5)
