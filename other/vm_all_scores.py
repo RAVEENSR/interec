@@ -1,5 +1,6 @@
 import logging
 import string
+from datetime import timedelta
 
 import pandas as pd
 from nltk.corpus import stopwords
@@ -342,18 +343,29 @@ def initialise_app(database_name):
     all_integrators = spark.sql(query).collect()
 
 
-def calculate_scores(df, new_pr):
+def calculate_scores(df, new_pr, date_window=0):
     # Calculate scores for each integrator
     for integrator in all_integrators:
         pr_integrator = Integrator(integrator[1])
 
         # Read all the PRs integrator reviewed before
-        query1 = "SELECT pr_id, pull_number, requester_login, title, description, created_date, merged_date, " \
-                 "integrator_login, files " \
-                 "FROM pull_request " \
-                 "WHERE merged_date < timestamp('%s') AND integrator_login = '%s'" % \
-                 (new_pr.created_date, pr_integrator.integrator_login)
-        integrator_reviewed_prs = spark.sql(query1).collect()
+        if date_window == 0:
+            query1 = "SELECT pr_id, pull_number, requester_login, title, description, created_date, merged_date, " \
+                     "integrator_login, files " \
+                     "FROM pull_request " \
+                     "WHERE merged_date < timestamp('%s') AND integrator_login = '%s'" % \
+                     (new_pr.created_date, pr_integrator.integrator_login)
+            integrator_reviewed_prs = spark.sql(query1).collect()
+        else:
+            query1 = "SELECT pr_id, pull_number, requester_login, title, description, created_date, merged_date, " \
+                     "integrator_login, files " \
+                     "FROM pull_request " \
+                     "WHERE merged_date < timestamp('%s') " \
+                     "AND merged_date > timestamp('%s') " \
+                     "AND integrator_login = '%s'" % \
+                     (new_pr.created_date, new_pr.created_date - timedelta(days=date_window),
+                      pr_integrator.integrator_login)
+            integrator_reviewed_prs = spark.sql(query1).collect()
 
         for integrator_reviewed_pr in integrator_reviewed_prs:
             old_pr = PullRequest(integrator_reviewed_pr)
@@ -404,7 +416,7 @@ def calculate_scores(df, new_pr):
     return df
 
 
-def calculate_scores_for_all_prs(offset, limit):
+def calculate_scores_for_all_prs(offset, limit, date_window=0):
     logging.basicConfig(level=logging.INFO, filename='app.log', format='%(name)s - %(levelname)s - %(message)s')
 
     query1 = "SELECT pr_id, pull_number, requester_login, title, description, created_date, merged_date, " \
@@ -421,11 +433,15 @@ def calculate_scores_for_all_prs(offset, limit):
     for new_pr in all_prs.collect():
         total_prs += 1
         new_pr = PullRequest(new_pr)
-        df = calculate_scores(df, new_pr)
-        print(new_pr.pr_id)  # TODO: Remove this
-        logging.info(new_pr.pr_id)
-    df.to_csv(database + "_all_integrator_scores_for_each_test_pr.csv", index=False)
+        df = calculate_scores(df, new_pr, date_window)
+        print(str(date_window) + "_" + str(new_pr.pr_id))  # TODO: Remove this
+        logging.info(str(date_window) + "_" + str(new_pr.pr_id))
+    df.to_csv(str(date_window) + "_" + database + "_all_integrator_scores_for_each_test_pr.csv", index=False)
 
 
 initialise_app('akka')
-calculate_scores_for_all_prs(600, 5)
+calculate_scores_for_all_prs(600, 5, 7)
+calculate_scores_for_all_prs(600, 5, 15)
+calculate_scores_for_all_prs(600, 5, 30)
+calculate_scores_for_all_prs(600, 5, 60)
+calculate_scores_for_all_prs(600, 5, 120)
