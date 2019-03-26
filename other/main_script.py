@@ -3,10 +3,10 @@ import logging
 
 from pyspark.sql import SparkSession
 from interec.activeness.integrator_activeness import calculate_integrator_activeness, add_activeness_ranking
-from interec.entities.Integrator import Integrator
-from interec.entities.PullRequest import PullRequest
-from interec.text_similarity.cos_similarity import cos_similarity, add_text_similarity_ranking
-from interec.string_compare.string_compare import longest_common_prefix, longest_common_suffix, \
+from interec.entities.integrator import Integrator
+from interec.entities.pull_request import PullRequest
+from interec.text_similarity.text_similarity import cos_similarity, add_text_similarity_ranking
+from interec.string_compare.file_path_similarity import longest_common_prefix, longest_common_suffix, \
     longest_common_sub_string, longest_common_sub_sequence, add_file_path_similarity_ranking
 
 database = 'rails'

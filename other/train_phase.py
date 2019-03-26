@@ -10,11 +10,11 @@ from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
 from interec.activeness.integrator_activeness import calculate_integrator_activeness
-from interec.entities.Integrator import Integrator
-from interec.entities.PullRequest import PullRequest
-from interec.string_compare.string_compare import longest_common_prefix, longest_common_suffix, \
+from interec.entities.integrator import Integrator
+from interec.entities.pull_request import PullRequest
+from interec.string_compare.file_path_similarity import longest_common_prefix, longest_common_suffix, \
     longest_common_sub_string, longest_common_sub_sequence
-from interec.text_similarity.cos_similarity import cos_similarity
+from interec.text_similarity.text_similarity import cos_similarity
 from pyspark.sql import SparkSession
 
 database = 'rails'

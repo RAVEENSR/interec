@@ -7,9 +7,9 @@ from nltk.stem.porter import *
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 
-from interec.entities.Integrator import Integrator
-from interec.entities.PullRequest import PullRequest
-from interec.string_compare.string_compare import longest_common_prefix, longest_common_suffix, \
+from interec.entities.integrator import Integrator
+from interec.entities.pull_request import PullRequest
+from interec.string_compare.file_path_similarity import longest_common_prefix, longest_common_suffix, \
     longest_common_sub_string, longest_common_sub_sequence
 
 

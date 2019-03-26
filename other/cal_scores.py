@@ -3,10 +3,10 @@ import logging
 import pandas as pd
 
 from interec.activeness.integrator_activeness import add_activeness_ranking
-from interec.string_compare.string_compare import add_file_path_similarity_ranking
-from interec.text_similarity.cos_similarity import add_text_similarity_ranking
+from interec.string_compare.file_path_similarity import add_file_path_similarity_ranking
+from interec.text_similarity.text_similarity import add_text_similarity_ranking
 from pyspark.sql import SparkSession
-from interec.entities.PullRequest import PullRequest
+from interec.entities.pull_request import PullRequest
 
 database = 'rails'
 spark = ""
