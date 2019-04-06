@@ -30,7 +30,7 @@ class TextSimilarityCalculator:
         stemmer = PorterStemmer()
         return [stemmer.stem(word) for word in before_stem]
 
-    def cos_similarity(self,string1, string2):
+    def cos_similarity(self, string1, string2):
         term_frequency = self.tfidf_vectorizer.fit_transform([string1, string2])
         return (term_frequency * term_frequency.T).A[0, 1]
 

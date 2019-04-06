@@ -1,7 +1,7 @@
 class PullRequest:
 
     @staticmethod
-    def initialise_files(files_string):
+    def __initialize_files(files_string):
         return files_string.split("|")
 
     def __init__(self, data):
@@ -13,7 +13,7 @@ class PullRequest:
         self.created_date = data[5]
         self.merged_data = data[6]
         self.integrator_login = data[7]
-        self.files = self.initialise_files(data[8])
+        self.files = self.__initialize_files(data[8])
 
     @property
     def pr_id(self):
