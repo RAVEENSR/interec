@@ -20,9 +20,9 @@ class FilePathSimilarityCalculator:
         file1 = self.path_separator(file1)
         file2 = self.path_separator(file2)
         common_file_path = 0
-        r = range(min(len(file1), len(file2)))
-        reversed(r)
-        for i in r:
+        rng = range(min(len(file1), len(file2)))
+        reversed(rng)
+        for i in rng:
             if file1[i] == file2[i]:
                 common_file_path += 1
             else:
@@ -34,32 +34,32 @@ class FilePathSimilarityCalculator:
         file2 = self.path_separator(file2)
         common_file_path = 0
         if len(set(file1) & set(file2)) > 0:
-            mat = [[0 for x in range(len(file2) + 1)] for x in range(len(file1) + 1)]
+            matrix = [[0 for x in range(len(file2) + 1)] for x in range(len(file1) + 1)]
             for i in range(len(file1) + 1):
                 for j in range(len(file2) + 1):
                     if i == 0 or j == 0:
-                        mat[i][j] = 0
+                        matrix[i][j] = 0
                     elif file1[i - 1] == file2[j - 1]:
-                        mat[i][j] = mat[i - 1][j - 1] + 1
-                        common_file_path = max(common_file_path, mat[i][j])
+                        matrix[i][j] = matrix[i - 1][j - 1] + 1
+                        common_file_path = max(common_file_path, matrix[i][j])
                     else:
-                        mat[i][j] = 0
+                        matrix[i][j] = 0
         return common_file_path
 
     def longest_common_sub_sequence_similarity(self, file1, file2):
         file1 = self.path_separator(file1)
         file2 = self.path_separator(file2)
         if len(set(file1) & set(file2)) > 0:
-            l = [[0 for x in range(len(file2) + 1)] for x in range(len(file1) + 1)]
+            lst = [[0 for x in range(len(file2) + 1)] for x in range(len(file1) + 1)]
             for i in range(len(file1) + 1):
                 for j in range(len(file2) + 1):
                     if i == 0 or j == 0:
-                        l[i][j] = 0
+                        lst[i][j] = 0
                     elif file1[i - 1] == file2[j - 1]:
-                        l[i][j] = l[i - 1][j - 1] + 1
+                        lst[i][j] = lst[i - 1][j - 1] + 1
                     else:
-                        l[i][j] = max(l[i - 1][j], l[i][j - 1])
-            common_file_path = l[len(file1)][len(file2)]
+                        lst[i][j] = max(lst[i - 1][j], lst[i][j - 1])
+            common_file_path = lst[len(file1)][len(file2)]
         else:
             common_file_path = 0
         return common_file_path

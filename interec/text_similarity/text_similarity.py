@@ -8,27 +8,27 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 class TextSimilarityCalculator:
     def __init__(self, ):
-        self.tfidf_vectorizer = TfidfVectorizer(analyzer=self.text_process)
+        self.tfidf_vectorizer = TfidfVectorizer(analyzer=self.process_text)
 
     @staticmethod
-    def text_process(string_variable):
+    def process_text(text):
         """
-        Takes in a string of text, then performs the following:
-        1. Remove all punctuation
-        2. Remove all stopwords
-        3. Returns a list of the cleaned text
+        Takes a text string and performs:
+        1. Removing all punctuation marks
+        2. Removing all the stopwords
+        and returns a list of the cleaned text
         """
-        # Check characters to see if they are in punctuation
-        no_punctuation = [char for char in string_variable if char not in string.punctuation]
+        # Check character by character whether the character is a punctuation
+        without_punctuation = [char for char in text if char not in string.punctuation]
 
-        # Join the characters again to form the string.
-        no_punctuation = ''.join(no_punctuation)
+        # Form the string by joining characters.
+        without_punctuation = ''.join(without_punctuation)
 
-        # Now just remove any stopwords
-        before_stem = [word for word in no_punctuation.split() if word.lower() not in stopwords.words('english')]
+        # Remove any stopwords from the text
+        prior_to_stem = [word for word in without_punctuation.split() if word.lower() not in stopwords.words('english')]
 
         stemmer = PorterStemmer()
-        return [stemmer.stem(word) for word in before_stem]
+        return [stemmer.stem(word) for word in prior_to_stem]
 
     def cos_similarity(self, string1, string2):
         term_frequency = self.tfidf_vectorizer.fit_transform([string1, string2])
