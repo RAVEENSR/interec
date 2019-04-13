@@ -2,6 +2,7 @@ import logging
 from datetime import timedelta
 
 import pandas as pd
+import pymysql
 
 from interec.accuracy_calculation.accuracy_calculation import AccuracyCalculator
 from interec.activeness.integrator_activeness import ActivenessCalculator
@@ -198,22 +199,48 @@ class InterecProcessor:
         self.get_weight_combinations_for_factors(offset, limit, df, use_csv_file=False)
 
     def set_weight_combination_for_factors(self, alpha, beta, gamma, date_window):
-        return True
+        self.alpha = alpha
+        self.beta = beta
+        self.gamma = gamma
+        self.date_window = date_window
 
-    def add_pr_to_db(self, pr_number, requester_login, title, description, created_date, merged_date, files,
-                     integrator_login=None):
-        return True
-
-    def add_reviewed_integrator_to_pr(self, pr_number, integrator_login):
-        return True
+    def add_pr_to_db(self, pr_number, requester_login, title, description, created_date, merged_date, integrator_login,
+                     files):
+        # Connection to MySQL  database
+        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=self.database)
+        try:
+            with connection.cursor() as cursor:
+                # save pull-request to the database
+                sql = "INSERT INTO pull_request (pull_number, requester_login, title, description, created_date," \
+                      "merged_date, integrator_login, files) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+                inputs = (pr_number, requester_login, title, description, created_date, merged_date, integrator_login,
+                          files)
+                cursor.execute(sql, inputs)
+        finally:
+            connection.commit()
+            connection.close()
 
     def get_pr_details(self, pr_number):
-        return True
+        # Connection to MySQL  database
+        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=self.database)
+        try:
+            with connection.cursor() as cursor:
+                # get pull-request data from the database
+                sql = "SELECT * FROM pull_request WHERE pull_number=%s"
+                cursor.execute(sql, pr_number)
+                result = cursor.fetchone()
+        finally:
+            connection.commit()
+            connection.close()
+        return result
 
     def get_related_integrators_for_pr(self, pr_number, requester_login, title, description, created_date, merged_date,
                                        files):
-        return True
+        pr_data = [pr_number, requester_login, title, description, created_date, merged_date, files]
+        new_pr = PullRequest(pr_data)
+        df = pd.DataFrame()
+        df = self.__calculate_scores(df, new_pr, self.date_window)
+        ranked_df = self.generate_ranked_list(df, self.alpha, self.beta, self.gamma)
 
-# TODO: in all the 4 databases make the 'integrator_login' field can be null
 # initialise_app('akka')
 # test_accuracy_for_all_prs('akka_all_integrator_scores_for_each_test_pr.csv', 600, 5)
