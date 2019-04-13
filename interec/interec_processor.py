@@ -241,6 +241,33 @@ class InterecProcessor:
         df = pd.DataFrame()
         df = self.__calculate_scores(df, new_pr, self.date_window)
         ranked_df = self.generate_ranked_list(df, self.alpha, self.beta, self.gamma)
+        print(ranked_df)
+
+    def get_related_integrators_for_pr_by_pr_number(self, pr_number):
+        # Connection to MySQL  database
+        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=self.database)
+        try:
+            with connection.cursor() as cursor:
+                # get pull-request data from the database
+                sql = "SELECT * FROM pull_request WHERE pull_number=%s"
+                cursor.execute(sql, pr_number)
+                result = cursor.fetchone()
+        finally:
+            connection.commit()
+            connection.close()
+
+        new_pr = PullRequest(result)
+        df = pd.DataFrame()
+        df = self.__calculate_scores(df, new_pr, self.date_window)
+        df = self.accuracy_calculator.add_standard_scores_to_data_frame(df)
+        ranked_df = self.generate_ranked_list(df, self.alpha, self.beta, self.gamma)
+        sorted_ranked_data_frame = ranked_df.sort_values('final_rank', ascending=True)
+        ranked_five_df = sorted_ranked_data_frame[sorted_ranked_data_frame['final_rank'] <= 5]
+        print(ranked_five_df)
+
 
 # initialise_app('akka')
 # test_accuracy_for_all_prs('akka_all_integrator_scores_for_each_test_pr.csv', 600, 5)
+inp = InterecProcessor('akka')
+inp.set_weight_combination_for_factors(alpha=0.1, beta=0.2, gamma=0.7, date_window=0)
+inp.get_related_integrators_for_pr_by_pr_number(18046)

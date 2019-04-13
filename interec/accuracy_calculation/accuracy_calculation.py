@@ -64,9 +64,7 @@ class AccuracyCalculator:
         new_value = ((score - min_val) * 100) / (max_val - min_val)
         return new_value
 
-    def test_weight_combination_accuracy_for_all_prs(self, interec_processor, offset, limit, main_data_frame):
-        main_df = main_data_frame
-
+    def add_standard_scores_to_data_frame(self, main_df):
         act_min = main_df['activeness'].min()
         act_max = main_df['activeness'].max()
         file_sim_min = main_df['file_similarity'].min()
@@ -80,6 +78,11 @@ class AccuracyCalculator:
             main_df['file_similarity'].apply(self.__standardize_score, args=(file_sim_min, file_sim_max))
         main_df['std_text_similarity'] = \
             main_df['text_similarity'].apply(self.__standardize_score, args=(txt_sim_min, txt_sim_max))
+
+        return main_df
+
+    def test_weight_combination_accuracy_for_all_prs(self, interec_processor, offset, limit, main_data_frame):
+        main_df = self.add_standard_scores_to_data_frame(main_data_frame)
 
         query1 = "SELECT pr_id, pull_number, requester_login, title, description, created_date, merged_date, " \
                  "integrator_login, files " \
