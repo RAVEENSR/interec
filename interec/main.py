@@ -1,3 +1,9 @@
+"""
+main.py
+====================================
+The interface module of InteRec
+"""
+
 import logging
 
 from flask import Flask, redirect, url_for
@@ -20,11 +26,23 @@ navbar_info = {'repository': interec.database,
 @app.route('/')
 @app.route('/index')
 def index():
+    """
+    Return the most important thing about a person.
+
+    Parameters
+    ----------
+    your_name
+        A string indicating the name of the person.
+
+    """
     return render_template('index.html', navbar_info=navbar_info)
 
 
 @app.route('/load_set_weights')
 def load_set_weights():
+    """
+    Return information about an instance created from ExampleClass.
+    """
     return render_template('load_set_weights.html', navbar_info=navbar_info)
 
 
@@ -90,8 +108,8 @@ def new_pr():
     files = request.form['files']
     integrator_login = request.form['integrator_login']
     interec.add_pr_to_db(pr_number=pr_id, requester_login=requester_login, title=title, description=description,
-                         created_date=created_date, merged_date=merged_date, integrator_login=integrator_login,
-                         files=files)
+                         created_date_time=created_date, merged_date_time=merged_date,
+                         integrator_login=integrator_login, files=files)
     # update the nav bar info
     navbar_info = {'repository': interec.database,
                    'pr_count': interec.pr_count,
@@ -114,8 +132,9 @@ def find_integrators():
         created_date = request.form['created_date']
         files = request.form['files']
 
-        ranked_five_df = interec.get_related_integrators_for_pr(pr_id, requester_login, title, description, created_date,
-                                                                files)
+        ranked_five_df = interec.get_related_integrators_for_pr(pr_number=pr_id, requester_login=requester_login,
+                                                                title=title, description=description,
+                                                                created_date_time=created_date, files=files)
     else:
         pr_id = request.args['prId']
         logging.info(pr_id)
@@ -164,8 +183,8 @@ def api_add_new_pr():
     files = request.form['files']
     integrator_login = request.form['integrator_login']
     flag = interec.add_pr_to_db(pr_number=pr_id, requester_login=requester_login, title=title, description=description,
-                                created_date=created_date, merged_date=merged_date, integrator_login=integrator_login,
-                                files=files)
+                                created_date_time=created_date, merged_date_time=merged_date,
+                                integrator_login=integrator_login, files=files)
     return jsonify(result=flag)
 
 
@@ -177,7 +196,7 @@ def api_get_integrators():
     return jsonify(integrators=integrator_list)
 
 
-@app.route('/set_weights', methods=['POST'])
+@app.route('/set_weight_factors', methods=['POST'])
 def api_set_weights():
     alpha = request.form['alpha']
     beta = request.form['beta']
@@ -188,8 +207,8 @@ def api_set_weights():
 
 @app.route('/get_weight_combination_accuracy', methods=['POST'])
 def api_get_weight_accuracy():
-    offset = request.form['offset1']
-    limit = request.form['limit1']
+    offset = request.form['offset']
+    limit = request.form['limit']
     result_object = interec.calculate_scores_and_get_weight_combinations_for_factors(offset=int(offset),
                                                                                      limit=int(limit))
     return jsonify(result=result_object)
@@ -204,8 +223,9 @@ def api_find_pr_integrators():
     created_date = request.form['created_date']
     files = request.form['files']
 
-    ranked_five_df = interec.get_related_integrators_for_pr(pr_id, requester_login, title, description, created_date,
-                                                                files)
+    ranked_five_df = interec.get_related_integrators_for_pr(pr_number=pr_id, requester_login=requester_login,
+                                                            title=title, description=description,
+                                                            created_date_time=created_date, files=files)
 
     rec_integrators = []
     for index, row in ranked_five_df.iterrows():

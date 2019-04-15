@@ -66,6 +66,4 @@ class FilePathSimilarityCalculator:
 
     @staticmethod
     def add_file_path_similarity_ranking(data_frame):
-        # data_frame['file_similarity'] = data_frame['lc_substr'] + data_frame['ls_subseq'] + data_frame['lcp'] \
-        #                                 + data_frame['lcs']
         data_frame["file_path_rank"] = data_frame["file_similarity"].rank(method='min', ascending=False)

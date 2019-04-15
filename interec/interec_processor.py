@@ -230,22 +230,82 @@ class InterecProcessor:
                                                                                      main_data_frame=main_df)
 
     def calculate_scores_and_get_weight_combinations_for_factors(self, offset, limit):
+        """
+        This function sets the weights for each factor(file path similarity, text similarity, activeness) of the system.
+        These weights are used to determine the final score for the integrator.
+
+        :EXAMPLE:
+
+        >>> interec.calculate_scores_and_get_weight_combinations_for_factors(600, 300)
+
+        :param offset: Starting PR number which scores are needed to be calculated
+        :type offset: int
+        :param limit: Limit of the PRs needed to be considered when calculating scores from the start PR number
+        :type limit: int
+        :return: Accuracy for each factor weight combination in terms of top1, top3, top5 accuracy
+        :rtype: object
+        """
         offset = int(offset)
         limit = int(limit)
         df = self.__calculate_scores_for_all_prs(offset, limit)
         return self.get_weight_combinations_for_factors(offset, limit, df, use_csv_file=False)
 
     def set_weight_combination_for_factors(self, alpha, beta, gamma, date_window=0):
+        """
+        This function sets the weights for each factor(file path similarity, text similarity, activeness) of the system.
+        These weights are used to determine the final score for the integrator. If date_window is not set default value
+        will be considered.
+
+        :EXAMPLE:
+
+        >>> interec.set_weight_combination_for_factors(0.1, 0.2, 0.7)
+
+        :param alpha: Weight for file path similarity score
+        :type alpha: float
+        :param beta: Weight for text similarity score
+        :type beta: float
+        :param gamma: Weight for activeness score
+        :type gamma: float
+        :param date_window: (optional) Dates needed to be considered back from PR created date to calculate scores
+        :return: Whether the operation is successful or not
+        :rtype: bool
+        """
         self.alpha = float(alpha)
         self.beta = float(beta)
         self.gamma = float(gamma)
         self.date_window = date_window
         return True
 
-    def add_pr_to_db(self, pr_number, requester_login, title, description, created_date, merged_date, integrator_login,
-                     files):
-        created_date = datetime.strptime(created_date, '%Y-%m-%d %H:%M:%S')
-        merged_date = datetime.strptime(merged_date, '%Y-%m-%d %H:%M:%S')
+    def add_pr_to_db(self, pr_number, requester_login, title, description, created_date_time, merged_date_time,
+                     integrator_login, files):
+        """
+        This function adds a already reviewed and merged pr to the database.
+
+        :EXAMPLE:
+
+        >>> interec.add_pr_to_db(10, 'John', 'PR Title', 'PR Description', '2019-03-10 17:52:31', '2019-03-11 19:52:31', 'philip', 'abc.js|def.js|ghi.js')
+
+        :param pr_number: PR id number
+        :type pr_number: int
+        :param requester_login: Contributor username
+        :type requester_login: String
+        :param title: Title of the PR
+        :type title: String
+        :param description: Description of the PR
+        :type description: String
+        :param created_date_time: PR created date and the time
+        :type created_date_time: String
+        :param merged_date_time: PR merged date and the time
+        :type merged_date_time: String
+        :param integrator_login: PR integrator username
+        :type integrator_login: String
+        :param files: File paths of the PR
+        :type files: String
+        :return: Top five integrators data frame
+        :rtype: DataFrame
+        """
+        created_date_time = datetime.strptime(created_date_time, '%Y-%m-%d %H:%M:%S')
+        merged_date_time = datetime.strptime(merged_date_time, '%Y-%m-%d %H:%M:%S')
         # Connection to MySQL  database
         connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=self.database)
         try:
@@ -253,8 +313,8 @@ class InterecProcessor:
                 # save pull-request to the database
                 sql = "INSERT INTO pull_request (pull_number, requester_login, title, description, created_date," \
                       "merged_date, integrator_login, files) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
-                inputs = (pr_number, requester_login, title, description, created_date, merged_date, integrator_login,
-                          files)
+                inputs = (pr_number, requester_login, title, description, created_date_time, merged_date_time,
+                          integrator_login, files)
                 cursor.execute(sql, inputs)
         finally:
             connection.commit()
@@ -277,6 +337,18 @@ class InterecProcessor:
         return True
 
     def get_pr_details(self, pr_number):
+        """
+        This function provides details of a PR.
+
+        :EXAMPLE:
+
+        >>> interec.get_pr_details(10)
+
+        :param pr_number: PR id number
+        :type pr_number: int
+        :return: Details of the PR
+        :rtype: list
+        """
         # Connection to MySQL  database
         connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=self.database)
         try:
@@ -290,9 +362,32 @@ class InterecProcessor:
             connection.close()
         return result
 
-    def get_related_integrators_for_pr(self, pr_number, requester_login, title, description, created_date, files):
-        created_date = datetime.strptime(created_date, '%Y-%m-%d %H:%M:%S')
-        pr_data = [0, pr_number, requester_login, title, description, created_date, 0, " ", files]
+    def get_related_integrators_for_pr(self, pr_number, requester_login, title, description, created_date_time, files):
+        """
+        This function calculates scores for each factor for each integrator and provides a ranked data frame which
+        includes top five integrators.
+
+        :EXAMPLE:
+
+        >>> interec.get_related_integrators_for_pr(10, 'John', 'PR Title', 'PR Description', '2019-03-10 17:52:31', 'abc.js|def.js|ghi.js')
+
+        :param pr_number: PR id number
+        :type pr_number: int
+        :param requester_login: Contributor username
+        :type requester_login: String
+        :param title: Title of the PR
+        :type title: String
+        :param description: Description of the PR
+        :type description: String
+        :param created_date_time: PR created date and the time
+        :type created_date_time: String
+        :param files: File paths of the PR
+        :type files: String
+        :return: Top five integrators data frame
+        :rtype: DataFrame
+        """
+        created_date_time = datetime.strptime(created_date_time, '%Y-%m-%d %H:%M:%S')
+        pr_data = [0, pr_number, requester_login, title, description, created_date_time, 0, " ", files]
         new_pr = PullRequest(pr_data)
         df = pd.DataFrame()
         df = self.__calculate_scores(df, new_pr, self.date_window)
@@ -302,6 +397,19 @@ class InterecProcessor:
         return ranked_five_df
 
     def get_related_integrators_for_pr_by_pr_number(self, pr_number):
+        """
+        This function calculates scores for each factor for each integrator and provides a ranked data frame which
+        includes top five integrators.
+
+        :EXAMPLE:
+
+        >>> interec.get_related_integrators_for_pr_by_pr_number(10)
+
+        :param pr_number: PR id number
+        :type pr_number: int
+        :return: Top five integrators data frame
+        :rtype: DataFrame
+        """
         # Connection to MySQL  database
         connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=self.database)
         try:
@@ -321,18 +429,3 @@ class InterecProcessor:
         sorted_ranked_data_frame = ranked_df.sort_values('final_rank', ascending=True)
         ranked_five_df = sorted_ranked_data_frame[sorted_ranked_data_frame['final_rank'] <= 5]
         return ranked_five_df
-
-
-# test_accuracy_for_all_prs('akka_all_integrator_scores_for_each_test_pr.csv', 600, 5)
-# inp = InterecProcessor('akka')
-# inp.set_weight_combination_for_factors(alpha=0.1, beta=0.2, gamma=0.7, date_window=0)
-# inp.get_related_integrators_for_pr(23445, 'raveeen', 'title1', 'description', '2019-06-10 17:52:31', 'avc.js')
-# inp.get_pr_details(18026)
-# print(inp.all_integrators_df)
-# inp.add_pr_to_db(23445, 'raveeen', 'title1', 'description', '2019-06-10 17:52:31', '2019-06-11 17:52:31', 'jboner',
-#                                                                                                           'avc.js')
-# TODO: Exception handling
-# inp.get_weight_combinations_for_factors(offset=600, limit=5,
-#                                         main_data_csv_file_name='akka_all_integrator_scores_for_each_test_pr.csv',
-#                                         use_csv_file=True)
-# inp.calculate_scores_and_get_weight_combinations_for_factors(offset=600, limit=5)

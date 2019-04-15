@@ -8,7 +8,7 @@ def update_with_github_api(database, repo):
     connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=database)
 
     # Connection to GitHub
-    g = Github('91e299613b59fe50950fb110d079c2b7f39c70f8')  # TODO: Remove this
+    g = Github('91e299613b59fe50950fb110d079c2b7f39c70f8')
     # Accessing the required repository
     repo = g.get_repo(repo)
     pr_number = 0
