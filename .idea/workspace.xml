@@ -2,24 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7ed1af3-6581-48b9-98b4-6e3daf6210d0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/interec/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interec/static/css/bootstrap-datetimepicker.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interec/static/js/bootstrap-datetimepicker.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interec/templates/404.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interec/templates/500.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interec/templates/find_integrators.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interec/templates/footer.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interec/templates/header.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interec/templates/hello.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interec/templates/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interec/templates/integrators.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interec/templates/load_find_integrators.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/interec/templates/load_new_pr.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/other/test_script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/interec.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/interec.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/interec/templates/load_integrators.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interec/accuracy_calculation/accuracy_calculation.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/accuracy_calculation/accuracy_calculation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interec/interec_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/interec_processor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/interec/templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/templates/integrators.html" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -62,20 +49,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/interec/interec_processor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="308" column="32" lean-forward="true" selection-start-line="308" selection-start-column="32" selection-end-line="308" selection-end-column="32" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/interec/main.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="80" column="26" lean-forward="true" selection-start-line="80" selection-start-column="26" selection-end-line="80" selection-end-column="26" />
+            <state relative-caret-position="5032">
+              <caret line="308" column="32" selection-start-line="308" selection-start-column="32" selection-end-line="308" selection-end-column="32" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -84,14 +59,43 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/interec/templates/load_new_pr.html">
+        <entry file="file://$PROJECT_DIR$/interec/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="138">
-              <caret line="73" column="52" selection-start-line="73" selection-start-column="52" selection-end-line="73" selection-end-column="52" />
+            <state relative-caret-position="-559">
+              <caret line="29" column="77" selection-start-line="29" selection-start-column="77" selection-end-line="29" selection-end-column="77" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/interec/app.log">
+          <provider selected="true" editor-type-id="LogFileEditorProvider">
+            <state relative-caret-position="-331" />
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/interec/templates/load_integrators.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="308">
+              <caret line="31" column="20" lean-forward="true" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#table#1;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/interec/templates/header.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="969">
+              <caret line="57" column="80" selection-start-line="57" selection-start-column="80" selection-end-line="57" selection-end-column="80" />
             </state>
           </provider>
         </entry>
@@ -138,7 +142,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/stringcompare/entities.py" />
         <option value="$PROJECT_DIR$/stringcompare/PullRequest.py" />
         <option value="$PROJECT_DIR$/stringcompare/Integrator.py" />
         <option value="$PROJECT_DIR$/interec/information_retrieval/cos_similarity.py" />
@@ -175,7 +178,6 @@
         <option value="$PROJECT_DIR$/interec/text_similarity/text_similarity.py" />
         <option value="$PROJECT_DIR$/interec/__init__.py" />
         <option value="$PROJECT_DIR$/interec/templates/hello.html" />
-        <option value="$PROJECT_DIR$/interec/templates/integrators.html" />
         <option value="$PROJECT_DIR$/interec/templates/index.html" />
         <option value="$PROJECT_DIR$/interec/templates/find_integrators.html" />
         <option value="$PROJECT_DIR$/interec/templates/footer.html" />
@@ -184,17 +186,19 @@
         <option value="$PROJECT_DIR$/interec/templates/404.html" />
         <option value="$PROJECT_DIR$/interec/templates/500.html" />
         <option value="$PROJECT_DIR$/interec/templates/new_pr.html" />
+        <option value="$PROJECT_DIR$/interec/interec_processor.py" />
+        <option value="$PROJECT_DIR$/interec/templates/load_new_pr.html" />
+        <option value="$PROJECT_DIR$/interec/templates/integrators.html" />
         <option value="$PROJECT_DIR$/interec/templates/header.html" />
         <option value="$PROJECT_DIR$/interec/app.log" />
         <option value="$PROJECT_DIR$/interec/main.py" />
-        <option value="$PROJECT_DIR$/interec/interec_processor.py" />
-        <option value="$PROJECT_DIR$/interec/templates/load_new_pr.html" />
+        <option value="$PROJECT_DIR$/interec/templates/load_integrators.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="80" />
-    <option name="y" value="-15" />
+    <option name="x" value="211" />
+    <option name="y" value="-16" />
     <option name="width" value="964" />
     <option name="height" value="788" />
   </component>
@@ -345,9 +349,6 @@
       <module name="interec" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/interec" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -467,6 +468,7 @@
       <workItem from="1555225635627" duration="28719000" />
       <workItem from="1555274276999" duration="274000" />
       <workItem from="1555304199709" duration="9066000" />
+      <workItem from="1555313372471" duration="1509000" />
     </task>
     <task id="LOCAL-00001" summary="Add initial files">
       <created>1550081193929</created>
@@ -699,11 +701,18 @@
       <option name="project" value="LOCAL" />
       <updated>1555184633233</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Add UI components">
+      <created>1555313416047</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1555313416047</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="383335000" />
+    <option name="totallyTimeSpent" value="384844000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -716,8 +725,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4948718" visible="true" weight="0.19894099" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4948718" visible="true" weight="0.20196672" />
       <window_info id="Structure" order="1" sideWeight="0.5051282" side_tool="true" weight="0.2118003" />
       <window_info id="Favorites" order="2" sideWeight="0.5041551" side_tool="true" weight="0.18550107" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -732,7 +742,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50159913" side_tool="true" weight="0.40286624" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.31687897" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49840087" weight="0.5923567" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49840087" visible="true" weight="0.21656051" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -1131,9 +1141,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interec/templates/integrators.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/interec/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -1233,10 +1240,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/flask/app.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="1798" selection-start-line="1798" selection-end-line="1798" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/interec_processor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5032">
+          <caret line="308" column="32" selection-start-line="308" selection-start-column="32" selection-end-line="308" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/templates/load_new_pr.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1241">
+          <caret line="73" column="52" selection-start-line="73" selection-start-column="52" selection-end-line="73" selection-end-column="52" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/interec/templates/find_integrators.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="67" column="16" selection-start-line="67" selection-start-column="16" selection-end-line="67" selection-end-column="28" />
+        <state relative-caret-position="170">
+          <caret line="10" column="10" lean-forward="true" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
           <folding>
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
@@ -1249,48 +1284,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/interec/templates/header.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="60" column="77" selection-start-line="60" selection-start-column="77" selection-end-line="60" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/flask/app.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="1798" selection-start-line="1798" selection-end-line="1798" />
+        <state relative-caret-position="969">
+          <caret line="57" column="80" selection-start-line="57" selection-start-column="80" selection-end-line="57" selection-end-column="80" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/interec/app.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/interec_processor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="308" column="32" lean-forward="true" selection-start-line="308" selection-start-column="32" selection-end-line="308" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/templates/load_new_pr.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="73" column="52" selection-start-line="73" selection-start-column="52" selection-end-line="73" selection-end-column="52" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-          </folding>
-        </state>
+      <provider selected="true" editor-type-id="LogFileEditorProvider">
+        <state relative-caret-position="-331" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/interec/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="80" column="26" lean-forward="true" selection-start-line="80" selection-start-column="26" selection-end-line="80" selection-end-column="26" />
+        <state relative-caret-position="-559">
+          <caret line="29" column="77" selection-start-line="29" selection-start-column="77" selection-end-line="29" selection-end-column="77" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/templates/load_integrators.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="31" column="20" lean-forward="true" selection-start-line="31" selection-start-column="20" selection-end-line="31" selection-end-column="20" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#1;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

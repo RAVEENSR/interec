@@ -22,9 +22,12 @@ def index():
     return render_template('index.html', navbar_info=navbar_info)
 
 
-@app.route('/integrators')
-def integrators():
-    return render_template('integrators.html')
+@app.route('/load_integrators')
+def load_integrators():
+    integrator_list = []
+    for row in interec.all_integrators:
+        integrator_list.append({'id': row['integrator_id'], 'name': row['integrator_login']})
+    return render_template('load_integrators.html', navbar_info=navbar_info, integrator_list=integrator_list)
 
 
 @app.route('/load_new_pr')
