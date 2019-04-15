@@ -214,24 +214,26 @@ class InterecProcessor:
 
     def get_weight_combinations_for_factors(self, offset, limit, main_data_frame=None, main_data_csv_file_name=None,
                                             use_csv_file=False):
+        offset = int(offset)
+        limit = int(limit)
         if use_csv_file:
             if main_data_csv_file_name is None:
-                print("main_data_csv_file_name parameter is none!")
-                exit(0)
+                logging.error("main_data_csv_file_name parameter is none!")
             main_df = pd.read_csv(main_data_csv_file_name)
         else:
             if main_data_frame is None:
-                print("main_data_frame parameter is none!")
-                exit(0)
-                # TODO: Exception handling
+                logging.error("main_data_frame parameter is none!")
             main_df = main_data_frame
 
-        self.accuracy_calculator.test_weight_combination_accuracy_for_all_prs(interec_processor=self, offset=offset,
-                                                                              limit=limit, main_data_frame=main_df)
+        return self.accuracy_calculator.test_weight_combination_accuracy_for_all_prs(interec_processor=self,
+                                                                                     offset=offset, limit=limit,
+                                                                                     main_data_frame=main_df)
 
     def calculate_scores_and_get_weight_combinations_for_factors(self, offset, limit):
+        offset = int(offset)
+        limit = int(limit)
         df = self.__calculate_scores_for_all_prs(offset, limit)
-        self.get_weight_combinations_for_factors(offset, limit, df, use_csv_file=False)
+        return self.get_weight_combinations_for_factors(offset, limit, df, use_csv_file=False)
 
     def set_weight_combination_for_factors(self, alpha, beta, gamma, date_window=0):
         self.alpha = float(alpha)
@@ -312,4 +314,8 @@ class InterecProcessor:
 # print(inp.all_integrators_df)
 # inp.add_pr_to_db(23445, 'raveeen', 'title1', 'description', '2019-06-10 17:52:31', '2019-06-11 17:52:31', 'jboner',
 #                                                                                                           'avc.js')
-
+# TODO: Exception handling
+# inp.get_weight_combinations_for_factors(offset=600, limit=5,
+#                                         main_data_csv_file_name='akka_all_integrator_scores_for_each_test_pr.csv',
+#                                         use_csv_file=True)
+# inp.calculate_scores_and_get_weight_combinations_for_factors(offset=600, limit=5)
