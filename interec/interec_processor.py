@@ -1,5 +1,5 @@
 import logging
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 import pandas as pd
 import pymysql
@@ -20,6 +20,8 @@ class InterecProcessor:
         self.all_prs_df = ""
         self.all_integrators_df = ""
         self.all_integrators = ""
+        self.pr_count = 0
+        self.integrator_count = 0
         self.file_path_similarity_calculator = FilePathSimilarityCalculator()
         self.activeness_calculator = ActivenessCalculator(const_lambda=-1)
         self.text_similarity_calculator = TextSimilarityCalculator()
@@ -65,6 +67,12 @@ class InterecProcessor:
         # Get all the integrators for the project
         query = "SELECT * FROM integrator"
         self.all_integrators = self.spark.sql(query).collect()
+
+        # Count the number of PRs
+        self.pr_count = self.all_prs_df.count()
+
+        # Count the number of integrators
+        self.integrator_count = self.all_integrators_df.count()
 
     def __calculate_scores(self, df, new_pr, date_window=0):
         # Calculate scores for each integrator
@@ -162,18 +170,45 @@ class InterecProcessor:
             total_prs += 1
             new_pr = PullRequest(new_pr)
             df = self.__calculate_scores(df, new_pr, date_window)
-            print(str(date_window) + "_" + str(new_pr.pr_id))  # TODO: Remove this
+            print(str(date_window) + "_" + str(new_pr.pr_id))
             logging.info(str(date_window) + "_" + str(new_pr.pr_id))
         df.to_csv(str(date_window) + "_" + self.database + "_all_integrator_scores_for_each_test_pr.csv", index=False)
         return df
+
+    @staticmethod
+    def __standardize_score(score, min_val, max_val):
+        if (max_val - min_val) == 0:
+            new_value = 0
+        else:
+            new_value = ((score - min_val) * 100) / (max_val - min_val)
+        return new_value
+
+    def __add_standard_scores_to_data_frame(self, main_df):
+        act_min = main_df['activeness'].min()
+        act_max = main_df['activeness'].max()
+        file_sim_min = main_df['file_similarity'].min()
+        file_sim_max = main_df['file_similarity'].max()
+        txt_sim_min = main_df['text_similarity'].min()
+        txt_sim_max = main_df['text_similarity'].max()
+
+        main_df['std_activeness'] = \
+            main_df['activeness'].apply(self.__standardize_score, args=(act_min, act_max))
+        main_df['std_file_similarity'] = \
+            main_df['file_similarity'].apply(self.__standardize_score, args=(file_sim_min, file_sim_max))
+        main_df['std_text_similarity'] = \
+            main_df['text_similarity'].apply(self.__standardize_score, args=(txt_sim_min, txt_sim_max))
+
+        return main_df
 
     def generate_ranked_list(self, data_frame, alpha, beta, gamma):
         self.file_path_similarity_calculator.add_file_path_similarity_ranking(data_frame)
         self.text_similarity_calculator.add_text_similarity_ranking(data_frame)
         self.activeness_calculator.add_activeness_ranking(data_frame)
 
-        data_frame['combined_score'] = data_frame['std_file_similarity'] * alpha + \
-            data_frame['std_text_similarity'] * beta + data_frame['std_activeness'] * gamma
+        data_frame = self.__add_standard_scores_to_data_frame(data_frame)
+        data_frame['combined_score'] = (data_frame['std_file_similarity'] * alpha) + \
+                                       (data_frame['std_text_similarity'] * beta) + \
+                                       (data_frame['std_activeness'] * gamma)
         data_frame["final_rank"] = data_frame["combined_score"].rank(method='min', ascending=False)
         return data_frame
 
@@ -206,6 +241,8 @@ class InterecProcessor:
 
     def add_pr_to_db(self, pr_number, requester_login, title, description, created_date, merged_date, integrator_login,
                      files):
+        created_date = datetime.strptime(created_date, '%Y-%m-%d %H:%M:%S')
+        merged_date = datetime.strptime(merged_date, '%Y-%m-%d %H:%M:%S')
         # Connection to MySQL  database
         connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=self.database)
         try:
@@ -234,14 +271,16 @@ class InterecProcessor:
             connection.close()
         return result
 
-    def get_related_integrators_for_pr(self, pr_number, requester_login, title, description, created_date, merged_date,
-                                       files):
-        pr_data = [pr_number, requester_login, title, description, created_date, merged_date, files]
+    def get_related_integrators_for_pr(self, pr_number, requester_login, title, description, created_date, files):
+        created_date = datetime.strptime(created_date, '%Y-%m-%d %H:%M:%S')
+        pr_data = [0, pr_number, requester_login, title, description, created_date, 0, " ", files]
         new_pr = PullRequest(pr_data)
         df = pd.DataFrame()
         df = self.__calculate_scores(df, new_pr, self.date_window)
         ranked_df = self.generate_ranked_list(df, self.alpha, self.beta, self.gamma)
-        print(ranked_df)
+        sorted_ranked_data_frame = ranked_df.sort_values('final_rank', ascending=True)
+        ranked_five_df = sorted_ranked_data_frame[sorted_ranked_data_frame['final_rank'] <= 5]
+        return ranked_five_df
 
     def get_related_integrators_for_pr_by_pr_number(self, pr_number):
         # Connection to MySQL  database
@@ -259,15 +298,18 @@ class InterecProcessor:
         new_pr = PullRequest(result)
         df = pd.DataFrame()
         df = self.__calculate_scores(df, new_pr, self.date_window)
-        df = self.accuracy_calculator.add_standard_scores_to_data_frame(df)
         ranked_df = self.generate_ranked_list(df, self.alpha, self.beta, self.gamma)
         sorted_ranked_data_frame = ranked_df.sort_values('final_rank', ascending=True)
         ranked_five_df = sorted_ranked_data_frame[sorted_ranked_data_frame['final_rank'] <= 5]
-        print(ranked_five_df)
+        return ranked_five_df
 
 
-# initialise_app('akka')
 # test_accuracy_for_all_prs('akka_all_integrator_scores_for_each_test_pr.csv', 600, 5)
-inp = InterecProcessor('akka')
-inp.set_weight_combination_for_factors(alpha=0.1, beta=0.2, gamma=0.7, date_window=0)
-inp.get_related_integrators_for_pr_by_pr_number(18046)
+# inp = InterecProcessor('akka')
+# inp.set_weight_combination_for_factors(alpha=0.1, beta=0.2, gamma=0.7, date_window=0)
+# inp.get_related_integrators_for_pr(23445, 'raveeen', 'title1', 'description', '2019-06-10 17:52:31', 'avc.js')
+# inp.get_pr_details(18026)
+# print(inp.all_integrators_df)
+# inp.add_pr_to_db(23445, 'raveeen', 'title1', 'description', '2019-06-10 17:52:31', '2019-06-11 17:52:31', 'jboner',
+#                                                                                                           'avc.js')
+

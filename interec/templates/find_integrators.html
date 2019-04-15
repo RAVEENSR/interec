@@ -1,0 +1,74 @@
+{% with navbar_info=navbar_info %}
+{% include "header.html" %}
+{% endwith %}
+<div style="background-color: rgba(86,61,124,.15); padding-top: 50px; padding-bottom: 50px">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="text-center">
+                <h2>Recommended Integrators</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="row" style="margin:20px;">
+        <div class="col-lg-3 col-md-3 col-sm-5 col-xs-12">
+            <div class="card bg-light mb-3">
+                <div class="card-header">Title: {{ pr.title }}</div>
+                <div class="card-body">
+                    <h6 class="card-title">Id: {{ pr.pr_id}}</h6>
+                    <h6 class="card-title">Description: </h6>
+                    <p class="card-text">{{ pr.description}}</p>
+                    <h6 class="card-title">Created Date: {{ pr.created_date}}</h6>
+                    <h6 class="card-title">Files: </h6>
+                    <p class="card-text">{{ pr.files }}</p>
+                    <h6 class="card-title">Requester: {{ pr.requester_login }}</h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
+            <table class="table thead-dark" style="margin-top: 15px; margin-bottom: 15px">
+                <thead>
+                <tr>
+                    <th scope="col" class="table-text-center">File Path Similarity Weight(alpha)</th>
+                    <th scope="col" class="table-text-center">Text Similarity Weight(beta)</th>
+                    <th scope="col" class="table-text-center">Activeness Weight(gamma)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="table-text-center"><button class="button button8">{{weights.alpha}}</button></td>
+                    <td class="table-text-center"><button class="button button8">{{weights.beta}}</button></td>
+                    <td class="table-text-center"><button class="button button8">{{weights.gamma}}</button></td>
+                </tr>
+                </tbody>
+            </table>
+            <h4 style="margin-bottom:10px; ">Recommended Integrators to review the PR</h4>
+            <table class="table table-striped" style="margin-top: 15px">
+                <thead>
+                <tr>
+                    <th scope="col" class="table-text-center">#</th>
+                    <th scope="col" class="table-text-center">User Name</th>
+                    <th scope="col" class="table-text-center">Final Score</th>
+                    <th scope="col" class="table-text-center">File Path Similarity Score</th>
+                    <th scope="col" class="table-text-center">Text Similarity Score</th>
+                    <th scope="col" class="table-text-center">Activeness Score</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for integrator in integrators %}
+                <tr>
+                    <th scope="row">{{integrator.rank}}</th>
+                    <td class="table-text-center">{{integrator.username}}</td>
+                    <td class="table-text-center"><button class="button button4">{{integrator.f_score}}</button></td>
+                    <td class="table-text-center"><button class="button button5">{{integrator.fp_score}}</button></td>
+                    <td class="table-text-center"><button class="button button6">{{integrator.t_score}}</button></td>
+                    <td class="table-text-center"><button class="button button7">{{integrator.a_score}}</button></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% include "footer.html" %}

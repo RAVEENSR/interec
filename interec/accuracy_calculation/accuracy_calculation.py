@@ -59,30 +59,30 @@ class AccuracyCalculator:
     def __test_combined_accuracy(self, ranked_data_frame, new_pr, top1=True, top3=False, top5=False):
         return self.__test_accuracy_by_field(ranked_data_frame, new_pr, 'final_rank', top1, top3, top5)
 
-    @staticmethod
-    def __standardize_score(score, min_val, max_val):
-        new_value = ((score - min_val) * 100) / (max_val - min_val)
-        return new_value
-
-    def add_standard_scores_to_data_frame(self, main_df):
-        act_min = main_df['activeness'].min()
-        act_max = main_df['activeness'].max()
-        file_sim_min = main_df['file_similarity'].min()
-        file_sim_max = main_df['file_similarity'].max()
-        txt_sim_min = main_df['text_similarity'].min()
-        txt_sim_max = main_df['text_similarity'].max()
-
-        main_df['std_activeness'] = \
-            main_df['activeness'].apply(self.__standardize_score, args=(act_min, act_max))
-        main_df['std_file_similarity'] = \
-            main_df['file_similarity'].apply(self.__standardize_score, args=(file_sim_min, file_sim_max))
-        main_df['std_text_similarity'] = \
-            main_df['text_similarity'].apply(self.__standardize_score, args=(txt_sim_min, txt_sim_max))
-
-        return main_df
+    # @staticmethod
+    # def __standardize_score(score, min_val, max_val):
+    #     new_value = ((score - min_val) * 100) / (max_val - min_val)
+    #     return new_value
+    #
+    # def add_standard_scores_to_data_frame(self, main_df):
+    #     act_min = main_df['activeness'].min()
+    #     act_max = main_df['activeness'].max()
+    #     file_sim_min = main_df['file_similarity'].min()
+    #     file_sim_max = main_df['file_similarity'].max()
+    #     txt_sim_min = main_df['text_similarity'].min()
+    #     txt_sim_max = main_df['text_similarity'].max()
+    #
+    #     main_df['std_activeness'] = \
+    #         main_df['activeness'].apply(self.__standardize_score, args=(act_min, act_max))
+    #     main_df['std_file_similarity'] = \
+    #         main_df['file_similarity'].apply(self.__standardize_score, args=(file_sim_min, file_sim_max))
+    #     main_df['std_text_similarity'] = \
+    #         main_df['text_similarity'].apply(self.__standardize_score, args=(txt_sim_min, txt_sim_max))
+    #
+    #     return main_df
 
     def test_weight_combination_accuracy_for_all_prs(self, interec_processor, offset, limit, main_data_frame):
-        main_df = self.add_standard_scores_to_data_frame(main_data_frame)
+        # main_df = self.add_standard_scores_to_data_frame(main_data_frame)
 
         query1 = "SELECT pr_id, pull_number, requester_login, title, description, created_date, merged_date, " \
                  "integrator_login, files " \
@@ -111,7 +111,7 @@ class AccuracyCalculator:
                             total_prs += 1
                             new_pr = PullRequest(new_pr)
 
-                            scores_df = main_df.loc[main_df['new_pr_id'] == new_pr.pr_id].copy()
+                            scores_df = main_data_frame.loc[main_data_frame['new_pr_id'] == new_pr.pr_id].copy()
 
                             # print(new_pr.pr_id)
 
