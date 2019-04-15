@@ -78,6 +78,8 @@ def load_new_pr():
 
 @app.route('/new_pr', methods=['POST'])
 def new_pr():
+    global navbar_info
+
     pr_id = request.form['id']
     requester_login = request.form['requester_login']
     title = request.form['title']
@@ -89,6 +91,10 @@ def new_pr():
     interec.add_pr_to_db(pr_number=pr_id, requester_login=requester_login, title=title, description=description,
                          created_date=created_date, merged_date=merged_date, integrator_login=integrator_login,
                          files=files)
+    # update the nav bar info
+    navbar_info = {'repository': interec.database,
+                   'pr_count': interec.pr_count,
+                   'integrator_count': interec.integrator_count}
     return redirect(url_for('index'))
 
 

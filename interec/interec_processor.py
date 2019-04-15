@@ -259,6 +259,21 @@ class InterecProcessor:
             connection.commit()
             connection.close()
 
+        # Read table pull_request
+        self.all_prs_df = self.spark.read \
+            .format("jdbc") \
+            .option("url", "jdbc:mysql://localhost:3306/" + self.database) \
+            .option("driver", 'com.mysql.cj.jdbc.Driver') \
+            .option("dbtable", "pull_request") \
+            .option("user", "root") \
+            .option("password", "") \
+            .load()
+
+        self.all_prs_df.createOrReplaceTempView("pull_request")
+
+        # update the number of PRs
+        self.pr_count = self.all_prs_df.count()
+
     def get_pr_details(self, pr_number):
         # Connection to MySQL  database
         connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=self.database)
