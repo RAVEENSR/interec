@@ -32,7 +32,7 @@ def set_weights():
     alpha = request.form['alpha']
     beta = request.form['beta']
     gamma = request.form['gamma']
-    interec.set_weight_combination_for_factors(alpha=alpha, beta=beta, gamma=gamma, date_window=0)
+    interec.set_weight_combination_for_factors(alpha=float(alpha), beta=float(beta), gamma=float(gamma), date_window=0)
     return render_template('index.html', navbar_info=navbar_info)
 
 
@@ -41,9 +41,23 @@ def load_get_weight_accuracy():
     return render_template('load_get_weight_accuracy.html', navbar_info=navbar_info)
 
 
-@app.route('/get_weight_accuracy')
+@app.route('/get_weight_accuracy', methods=['POST'])
 def get_weight_accuracy():
-    return render_template('get_weight_accuracy.html', navbar_info=navbar_info)
+    offset = request.form['offset1']
+    limit = request.form['limit1']
+    result_object = interec.calculate_scores_and_get_weight_combinations_for_factors(offset=int(offset),
+                                                                                     limit=int(limit))
+    return render_template('get_weight_accuracy.html', navbar_info=navbar_info, results=result_object)
+
+
+@app.route('/get_weight_accuracy_by_file', methods=['POST'])
+def get_weight_accuracy_by_file():
+    offset = request.form['offset2']
+    limit = request.form['limit2']
+    file_name = request.form['file_name']
+    result_object = interec.get_weight_combinations_for_factors(offset=int(offset), limit=int(limit),
+                                                                main_data_csv_file_name=file_name, use_csv_file=True)
+    return render_template('get_weight_accuracy.html', navbar_info=navbar_info, results=result_object)
 
 
 @app.route('/load_integrators')

@@ -1,10 +1,77 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% with navbar_info=navbar_info %}
+{% include "header.html" %}
+{% endwith %}
+<div style="background-color: rgba(86,61,124,.15); padding-top: 50px; padding-bottom: 50px">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="text-center">
+                <h3>Get Factor Weight Combination Accuracy</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="row" style="margin:20px;">
+        <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12"></div>
+        <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
+            <div class="card ">
+                <div class="card-header">
+                    <ul class="nav nav-tabs card-header-tabs pull-right" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="main-tab" data-toggle="tab" href="#tab1" role="tab"
+                               aria-controls="tab1" aria-selected="true">Calculate Accuracy from Scratch</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="second-tab" data-toggle="tab" href="#tab2" role="tab"
+                               aria-controls="tab2" aria-selected="false">Calculate Accuracy by File</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="card-body">
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="main-tab">
+                            <form action="http://localhost:5000/get_weight_accuracy" method="POST">
+                                <div class="form-group">
+                                    <label for="offset1">Offset</label>
+                                    <input type="text" class="form-control" id="offset1" name="offset1"
+                                           placeholder="Enter offset value ex: 601">
+                                </div>
+                                <div class="form-group">
+                                    <label for="limit1">Limit</label>
+                                    <input type="text" class="form-control" id="limit1" name="limit1"
+                                           placeholder="Enter limit value ex: 300">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Calculate</button>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="second-tab">
+                            <form action="http://localhost:5000/get_weight_accuracy_by_file" method="POST">
+                                <div class="form-group">
+                                    <label for="file_name">File Name</label>
+                                    <input type="text" class="form-control" id="file_name" name="file_name"
+                                           placeholder="Enter file name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="offset2">Offset</label>
+                                    <input type="text" class="form-control" id="offset2" name="offset2"
+                                           placeholder="Enter offset value ex: 601">
+                                </div>
+                                <div class="form-group">
+                                    <label for="limit2">Limit</label>
+                                    <input type="text" class="form-control" id="limit2" name="limit2"
+                                           placeholder="Enter limit value ex: 300">
+                                </div>
+                                <div class="form-group">
+                                    <label>** Only CSV files are allowed. **</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Calculate</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12"></div>
+    </div>
+</div>
+{% include "footer.html" %}

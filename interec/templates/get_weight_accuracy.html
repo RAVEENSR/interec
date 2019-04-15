@@ -1,10 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+{% with navbar_info=navbar_info %}
+{% include "header.html" %}
+{% endwith %}
+<div style="background-color: rgba(86,61,124,.15); padding-top: 50px; padding-bottom: 50px">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="text-center">
+                <h2>Factor Weight Combination Accuracy</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="row" style="margin:20px;">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12"></div>
+        <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+            <table class="table table-striped" style="margin-top: 15px">
+                <thead>
+                <tr>
+                    <th scope="col" class="table-text-center">File Path Similarity Weight(alpha)</th>
+                    <th scope="col" class="table-text-center">Text Similarity Weight(beta)</th>
+                    <th scope="col" class="table-text-center">Activeness Weight(gamma)</th>
+                    <th scope="col" class="table-text-center">Top 1 Accuracy</th>
+                    <th scope="col" class="table-text-center">Top 3 Accuracy</th>
+                    <th scope="col" class="table-text-center">Top 5 Accuracy</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for result in results %}
+                <tr>
+                    <td class="table-text-center"><button class="button button4">{{result.alpha}}</button></td>
+                    <td class="table-text-center"><button class="button button4">{{result.beta}}</button></td>
+                    <td class="table-text-center"><button class="button button4">{{result.gamma}}</button></td>
+                    <td class="table-text-center"><button class="button button5">{{result.top1}}</button></td>
+                    <td class="table-text-center"><button class="button button6">{{result.top3}}</button></td>
+                    <td class="table-text-center"><button class="button button7">{{result.top5}}</button></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12"></div>
+    </div>
+</div>
+{% include "footer.html" %}
