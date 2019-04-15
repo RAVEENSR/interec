@@ -240,6 +240,7 @@ class InterecProcessor:
         self.beta = float(beta)
         self.gamma = float(gamma)
         self.date_window = date_window
+        return True
 
     def add_pr_to_db(self, pr_number, requester_login, title, description, created_date, merged_date, integrator_login,
                      files):
@@ -273,6 +274,7 @@ class InterecProcessor:
 
         # update the number of PRs
         self.pr_count = self.all_prs_df.count()
+        return True
 
     def get_pr_details(self, pr_number):
         # Connection to MySQL  database
