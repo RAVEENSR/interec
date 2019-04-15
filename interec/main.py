@@ -22,6 +22,30 @@ def index():
     return render_template('index.html', navbar_info=navbar_info)
 
 
+@app.route('/load_set_weights')
+def load_set_weights():
+    return render_template('load_set_weights.html', navbar_info=navbar_info)
+
+
+@app.route('/set_weights', methods=['POST'])
+def set_weights():
+    alpha = request.form['alpha']
+    beta = request.form['beta']
+    gamma = request.form['gamma']
+    interec.set_weight_combination_for_factors(alpha=alpha, beta=beta, gamma=gamma, date_window=0)
+    return render_template('index.html', navbar_info=navbar_info)
+
+
+@app.route('/load_get_weight_accuracy')
+def load_get_weight_accuracy():
+    return render_template('load_get_weight_accuracy.html', navbar_info=navbar_info)
+
+
+@app.route('/get_weight_accuracy')
+def get_weight_accuracy():
+    return render_template('get_weight_accuracy.html', navbar_info=navbar_info)
+
+
 @app.route('/load_integrators')
 def load_integrators():
     integrator_list = []

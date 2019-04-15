@@ -1,0 +1,39 @@
+{% with navbar_info=navbar_info %}
+{% include "header.html" %}
+{% endwith %}
+<div style="background-color: rgba(86,61,124,.15); padding-top: 50px; padding-bottom: 50px">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="text-center">
+                <h2>Set Weights for Factors</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="row" style="margin:20px;">
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <form action="http://localhost:5000/set_weights" method="POST">
+                <div class="form-group">
+                    <label for="alpha">File Path Similarity Weight(alpha)</label>
+                    <input type="text" class="form-control" id="alpha" name="alpha" placeholder="ex: 0.1">
+                </div>
+                <div class="form-group">
+                    <label for="beta">Text Similarity Weight(beta)</label>
+                    <input type="text" class="form-control" id="beta" name="beta" placeholder="ex: 0.1">
+                </div>
+                <div class="form-group">
+                    <label for="gamma">Activeness Weight(gamma)</label>
+                    <input type="text" class="form-control" id="gamma" name="gamma" placeholder="ex: 0.1">
+                </div>
+                <div class="form-group">
+                    <label>** Please note that (alpha + beta + gamma) should be equal to 1. **</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
+    </div>
+</div>
+{% include "footer.html" %}

@@ -11,17 +11,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-datetimepicker.min.css') }}">
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
 
     <style>
         .button {
-          border: none;
-          color: white;
-          text-align: center;
-          text-decoration: none;
-          display: inline-block;
-          cursor: pointer;
+            border: none;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
         }
 
         .table-text-center {
@@ -29,16 +29,54 @@
             vertical-align: middle;
         }
 
-        .button1 {font-weight: 700; border-radius: 35px; background-color: #4CAF50; /* Green */}
-        .button2 {font-weight: 600; border-radius: 35px; background-color: #4169E1; /* Royal Blue */}
-        .button3 {font-weight: 600; border-radius: 35px; background-color: #4169E1; /* Royal Blue */}
-        .button4 {font-weight: 700; border-radius: 35px; background-color: #4CAF50; /* Green */}
-        .button5 {font-weight: 600; border-radius: 35px; background-color: #FE0101; /* Red */}
-        .button6 {font-weight: 600; border-radius: 35px; background-color: #FEE501; /* Yellow */}
-        .button7 {font-weight: 600; border-radius: 35px; background-color: #2CAEFA; /* Light Blue */}
-        .button8 {font-weight: 700; border-radius: 10px; background-color: #c357fa; /* Light Blue */}
+        .button1 {
+            font-weight: 700;
+            border-radius: 35px;
+            background-color: #4CAF50; /* Green */
+        }
+
+        .button2 {
+            font-weight: 600;
+            border-radius: 35px;
+            background-color: #4169E1; /* Royal Blue */
+        }
+
+        .button3 {
+            font-weight: 600;
+            border-radius: 35px;
+            background-color: #4169E1; /* Royal Blue */
+        }
+
+        .button4 {
+            font-weight: 700;
+            border-radius: 35px;
+            background-color: #4CAF50; /* Green */
+        }
+
+        .button5 {
+            font-weight: 600;
+            border-radius: 35px;
+            background-color: #FE0101; /* Red */
+        }
+
+        .button6 {
+            font-weight: 600;
+            border-radius: 35px;
+            background-color: #FEE501; /* Yellow */
+        }
+
+        .button7 {
+            font-weight: 600;
+            border-radius: 35px;
+            background-color: #2CAEFA; /* Light Blue */
+        }
+
+        .button8 {
+            font-weight: 700;
+            border-radius: 10px;
+            background-color: #c357fa; /* Light Blue */
+        }
     </style>
-    <!--<title>{% block title %}The Page Title{% endblock %}</title>-->
     <title>InteRec</title>
 </head>
 <body>
@@ -60,8 +98,19 @@
             <li class="nav-item">
                 <a class="nav-link" id="new_pr" href="{{ url_for('load_new_pr')}}">Add New PR</a>
             </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Factor Weights
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ url_for('load_set_weights')}}">Set Weights for Factors</a>
+                    <a class="dropdown-item" href="{{ url_for('load_get_weight_accuracy')}}">Get Weight Combination Accuracy</a>
+                </div>
+            </li>
             <li class="nav-item">
-                <a class="nav-link" id="find_integrators" href="{{ url_for('load_find_integrators')}}">Find Integrators for PR</a>
+                <a class="nav-link" id="find_integrators" href="{{ url_for('load_find_integrators')}}">Find Integrators
+                    for PR</a>
             </li>
         </ul>
         <span class="navbar-text text-white">

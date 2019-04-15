@@ -233,10 +233,10 @@ class InterecProcessor:
         df = self.__calculate_scores_for_all_prs(offset, limit)
         self.get_weight_combinations_for_factors(offset, limit, df, use_csv_file=False)
 
-    def set_weight_combination_for_factors(self, alpha, beta, gamma, date_window):
-        self.alpha = alpha
-        self.beta = beta
-        self.gamma = gamma
+    def set_weight_combination_for_factors(self, alpha, beta, gamma, date_window=0):
+        self.alpha = float(alpha)
+        self.beta = float(beta)
+        self.gamma = float(gamma)
         self.date_window = date_window
 
     def add_pr_to_db(self, pr_number, requester_login, title, description, created_date, merged_date, integrator_login,
