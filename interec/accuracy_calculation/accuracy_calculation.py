@@ -11,7 +11,8 @@ class AccuracyCalculator:
     :type spark: SparkSession
     """
     def __init__(self, spark):
-        logging.basicConfig(level=logging.INFO, filename='app.log', format='%(name)s - %(levelname)s - %(message)s')
+        logging.basicConfig(level=logging.INFO, filename='app.log', format='%(asctime)s-%(name)s-%(levelname)s - '
+                                                                           '%(message)s')
         self.spark = spark
 
     @staticmethod
@@ -23,7 +24,7 @@ class AccuracyCalculator:
         return is_included
 
     def __test_accuracy_by_field(self, ranked_data_frame, new_pr, column_name='final_rank', top1=True, top3=False,
-                               top5=False):
+                                 top5=False):
         included_in_top1 = False
         included_in_top3 = False
         included_in_top5 = False
@@ -163,6 +164,10 @@ class AccuracyCalculator:
                         print("                         Top1          Top3            Top5")
                         print("Combined Accuracy         " + str(avg_combined_top1_accuracy) + "          " +
                               str(avg_combined_top3_accuracy) + "         " + str(avg_combined_top5_accuracy))
+                        logging.info("---------------------------------------------------------------------------")
+                        logging.info("                         Top1          Top3            Top5")
+                        logging.info("Combined Accuracy         " + str(avg_combined_top1_accuracy) + "          " +
+                                     str(avg_combined_top3_accuracy) + "         " + str(avg_combined_top5_accuracy))
                         if flag:
                             print("File Path Accuracy        " + str(avg_file_path_top1_accuracy) + "          " +
                                   str(avg_file_path_top3_accuracy) + "         " + str(avg_file_path_top5_accuracy))
@@ -170,6 +175,13 @@ class AccuracyCalculator:
                                   str(avg_text_top3_accuracy) + "         " + str(avg_text_top5_accuracy))
                             print("Activeness Accuracy       " + str(avg_act_top1_accuracy) + "          " +
                                   str(avg_act_top3_accuracy) + "         " + str(avg_act_top5_accuracy))
+                            logging.info("File Path Accuracy        " + str(avg_file_path_top1_accuracy) + "          "
+                                         + str(avg_file_path_top3_accuracy) + "         "
+                                         + str(avg_file_path_top5_accuracy))
+                            logging.info("Text Accuracy             " + str(avg_text_top1_accuracy) + "          " +
+                                         str(avg_text_top3_accuracy) + "         " + str(avg_text_top5_accuracy))
+                            logging.info("Activeness Accuracy       " + str(avg_act_top1_accuracy) + "          " +
+                                         str(avg_act_top3_accuracy) + "         " + str(avg_act_top5_accuracy))
                         flag = False
         return results
 
@@ -264,6 +276,10 @@ class AccuracyCalculator:
                         print("                         Top1          Top3            Top5")
                         print("Combined Accuracy         " + str(avg_combined_top1_accuracy) + "          " +
                               str(avg_combined_top3_accuracy) + "         " + str(avg_combined_top5_accuracy))
+                        logging.info("---------------------------------------------------------------------------")
+                        logging.info("                         Top1          Top3            Top5")
+                        logging.info("Combined Accuracy         " + str(avg_combined_top1_accuracy) + "          " +
+                                     str(avg_combined_top3_accuracy) + "         " + str(avg_combined_top5_accuracy))
                         if flag:
                             print("File Path Accuracy        " + str(avg_file_path_top1_accuracy) + "          " +
                                   str(avg_file_path_top3_accuracy) + "         " + str(avg_file_path_top5_accuracy))
@@ -271,4 +287,11 @@ class AccuracyCalculator:
                                   str(avg_text_top3_accuracy) + "         " + str(avg_text_top5_accuracy))
                             print("Activeness Accuracy       " + str(avg_act_top1_accuracy) + "          " +
                                   str(avg_act_top3_accuracy) + "         " + str(avg_act_top5_accuracy))
+                            logging.info("File Path Accuracy        " + str(avg_file_path_top1_accuracy) + "          "
+                                         + str(avg_file_path_top3_accuracy) + "         "
+                                         + str(avg_file_path_top5_accuracy))
+                            logging.info("Text Accuracy             " + str(avg_text_top1_accuracy) + "          " +
+                                         str(avg_text_top3_accuracy) + "         " + str(avg_text_top5_accuracy))
+                            logging.info("Activeness Accuracy       " + str(avg_act_top1_accuracy) + "          " +
+                                         str(avg_act_top3_accuracy) + "         " + str(avg_act_top5_accuracy))
                         flag = False

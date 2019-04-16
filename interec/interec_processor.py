@@ -42,6 +42,9 @@ class InterecProcessor:
         self.beta = 0
         self.gamma = 0
         self.date_window = 0
+        logging.basicConfig(level=logging.INFO, filename='app.log', format='%(asctime)s-%(name)s-%(levelname)s '
+                                                                           '- %(message)s')
+        logging.info("Interec Processor created")
 
     def __initialise_app(self):
         # Create a spark session
@@ -163,8 +166,6 @@ class InterecProcessor:
         return df
 
     def __calculate_scores_for_all_prs(self, offset, limit, date_window=0):
-        logging.basicConfig(level=logging.INFO, filename='app.log', format='%(name)s - %(levelname)s - %(message)s')
-
         query1 = "SELECT pr_id, pull_number, requester_login, title, description, created_date, merged_date, " \
                  "integrator_login, files " \
                  "FROM pull_request " \
@@ -180,8 +181,8 @@ class InterecProcessor:
             total_prs += 1
             new_pr = PullRequest(new_pr)
             df = self.__calculate_scores(df, new_pr, date_window)
-            print(str(date_window) + "_" + str(new_pr.pr_id))
-            logging.info(str(date_window) + "_" + str(new_pr.pr_id))
+            print("Scores calculated for: " + str(date_window) + "_" + str(new_pr.pr_id))
+            logging.info("Scores calculated for: " + str(date_window) + "_" + str(new_pr.pr_id))
         df.to_csv(str(date_window) + "_" + self.database + "_all_integrator_scores_for_each_test_pr.csv", index=False)
         return df
 
@@ -211,6 +212,7 @@ class InterecProcessor:
         return main_df
 
     def generate_ranked_list(self, data_frame, alpha, beta, gamma):
+        logging.info("Generating ranked list started")
         self.file_path_similarity_calculator.add_file_path_similarity_ranking(data_frame)
         self.text_similarity_calculator.add_text_similarity_ranking(data_frame)
         self.activeness_calculator.add_activeness_ranking(data_frame)
@@ -220,6 +222,7 @@ class InterecProcessor:
                                        (data_frame['std_text_similarity'] * beta) + \
                                        (data_frame['std_activeness'] * gamma)
         data_frame["final_rank"] = data_frame["combined_score"].rank(method='min', ascending=False)
+        logging.info("Generating ranked list finished")
         return data_frame
 
     def get_weight_combinations_for_factors(self, offset, limit, main_data_frame=None, main_data_csv_file_name=None,
@@ -254,9 +257,11 @@ class InterecProcessor:
         :return: Accuracy for each factor weight combination in terms of top1, top3, top5 accuracy
         :rtype: object
         """
+        logging.info("Calculating scores and getting weight combinations for factors started")
         offset = int(offset)
         limit = int(limit)
         df = self.__calculate_scores_for_all_prs(offset, limit)
+        logging.info("Calculating scores and getting weight combinations for factors finished")
         return self.get_weight_combinations_for_factors(offset, limit, df, use_csv_file=False)
 
     def set_weight_combination_for_factors(self, alpha, beta, gamma, date_window=0):
@@ -283,6 +288,8 @@ class InterecProcessor:
         self.beta = float(beta)
         self.gamma = float(gamma)
         self.date_window = date_window
+        logging.info("Setting weights for factors finished. alpha: " + str(alpha) + " beta: " + str(beta) + " gamma: "
+                     + str(gamma))
 
     def add_pr_to_db(self, pr_number, requester_login, title, description, created_date_time, merged_date_time,
                      integrator_login, files):
@@ -312,6 +319,7 @@ class InterecProcessor:
         :return: Top five integrators data frame
         :rtype: DataFrame
         """
+        logging.info("Adding PR " + str(pr_number) + " to the database started")
         created_date_time = datetime.strptime(created_date_time, '%Y-%m-%d %H:%M:%S')
         merged_date_time = datetime.strptime(merged_date_time, '%Y-%m-%d %H:%M:%S')
         # Connection to MySQL  database
@@ -327,6 +335,8 @@ class InterecProcessor:
         finally:
             connection.commit()
             connection.close()
+
+        logging.info("Adding PR " + str(pr_number) + " to the database successful")
 
         # Read table pull_request
         self.all_prs_df = self.spark.read \
@@ -356,6 +366,7 @@ class InterecProcessor:
         :return: Details of the PR
         :rtype: list
         """
+        logging.info("Getting PR details for PR " + str(pr_number) + " started")
         # Connection to MySQL  database
         connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=self.database)
         try:
@@ -367,6 +378,7 @@ class InterecProcessor:
         finally:
             connection.commit()
             connection.close()
+        logging.info("PR details for PR " + str(pr_number) + " presented")
         return result
 
     def get_related_integrators_for_pr(self, pr_number, requester_login, title, description, created_date_time, files):
@@ -393,6 +405,7 @@ class InterecProcessor:
         :return: Top five integrators data frame
         :rtype: DataFrame
         """
+        logging.info("Getting related integrators by PR details for PR " + str(pr_number) + " started")
         created_date_time = datetime.strptime(created_date_time, '%Y-%m-%d %H:%M:%S')
         pr_data = [0, pr_number, requester_login, title, description, created_date_time, 0, " ", files]
         new_pr = PullRequest(pr_data)
@@ -401,6 +414,7 @@ class InterecProcessor:
         ranked_df = self.generate_ranked_list(df, self.alpha, self.beta, self.gamma)
         sorted_ranked_data_frame = ranked_df.sort_values('final_rank', ascending=True)
         ranked_five_df = sorted_ranked_data_frame[sorted_ranked_data_frame['final_rank'] <= 5]
+        logging.info("Top five integrators for PR " + str(pr_number) + " presented")
         return ranked_five_df
 
     def get_related_integrators_for_pr_by_pr_number(self, pr_number):
@@ -417,6 +431,7 @@ class InterecProcessor:
         :return: Top five integrators data frame
         :rtype: DataFrame
         """
+        logging.info("Getting related integrators by PR number for PR" + str(pr_number) + " started")
         # Connection to MySQL  database
         connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=self.database)
         try:
@@ -435,4 +450,5 @@ class InterecProcessor:
         ranked_df = self.generate_ranked_list(df, self.alpha, self.beta, self.gamma)
         sorted_ranked_data_frame = ranked_df.sort_values('final_rank', ascending=True)
         ranked_five_df = sorted_ranked_data_frame[sorted_ranked_data_frame['final_rank'] <= 5]
+        logging.info("Top five integrators for PR " + str(pr_number) + " presented")
         return ranked_five_df
