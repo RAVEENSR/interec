@@ -1,4 +1,7 @@
 class FilePathSimilarityCalculator:
+    """
+    This class handles file path similarity score calculating operations.
+    """
 
     @staticmethod
     def path_separator(file_string):

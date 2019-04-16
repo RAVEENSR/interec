@@ -1,4 +1,10 @@
 class ActivenessCalculator:
+    """
+    This class handles integrator activeness score calculations related tasks.
+
+    :param const_lambda: constant used to calculate the activeness of an integrator.
+    :type const_lambda: int
+    """
     def __init__(self, const_lambda=-1):
         # time_decaying_parameter
         self.const_lambda = const_lambda

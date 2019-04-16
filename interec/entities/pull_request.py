@@ -1,4 +1,7 @@
 class PullRequest:
+    """
+    This class models a pull-request.
+    """
 
     @staticmethod
     def __initialize_files(files_string):

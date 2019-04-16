@@ -4,13 +4,15 @@ from interec.entities.pull_request import PullRequest
 
 
 class AccuracyCalculator:
-    def __init__(self, database, spark, all_prs_df, all_integrators_df, all_integrators):
+    """
+    This class calculates the accuracy for factor weight combinations.
+
+    :param spark: spark session variable
+    :type spark: SparkSession
+    """
+    def __init__(self, spark):
         logging.basicConfig(level=logging.INFO, filename='app.log', format='%(name)s - %(levelname)s - %(message)s')
-        self.database = database
         self.spark = spark
-        self.all_prs_df = all_prs_df
-        self.all_integrators_df = all_integrators_df
-        self.all_integrators = all_integrators
 
     @staticmethod
     def __is_in_top_k(ranked_df, actual_pr_integrator):

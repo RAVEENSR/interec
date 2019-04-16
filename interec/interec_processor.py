@@ -1,3 +1,8 @@
+"""
+interec_processor.py
+====================================
+The core of the InteRec system
+"""
 import logging
 from datetime import timedelta, datetime
 
@@ -14,6 +19,12 @@ from interec.entities.pull_request import PullRequest
 
 
 class InterecProcessor:
+    """
+    This is the main class for the InteRec system. This class handles all the major operations in the system
+
+    :param database_name: Name of the database which needed to run the system
+    :type database_name: String
+    """
     def __init__(self, database_name):
         self.database = database_name
         self.spark = ""
@@ -26,8 +37,7 @@ class InterecProcessor:
         self.activeness_calculator = ActivenessCalculator(const_lambda=-1)
         self.text_similarity_calculator = TextSimilarityCalculator()
         self.__initialise_app()
-        self.accuracy_calculator = AccuracyCalculator(self.database, self.spark, self.all_prs_df,
-                                                      self.all_integrators_df, self.all_integrators)
+        self.accuracy_calculator = AccuracyCalculator(spark=self.spark)
         self.alpha = 0
         self.beta = 0
         self.gamma = 0
@@ -231,8 +241,7 @@ class InterecProcessor:
 
     def calculate_scores_and_get_weight_combinations_for_factors(self, offset, limit):
         """
-        This function sets the weights for each factor(file path similarity, text similarity, activeness) of the system.
-        These weights are used to determine the final score for the integrator.
+        This function calculates scores for every PR and provides accuracy for each factor weight combination.
 
         :EXAMPLE:
 
@@ -274,7 +283,6 @@ class InterecProcessor:
         self.beta = float(beta)
         self.gamma = float(gamma)
         self.date_window = date_window
-        return True
 
     def add_pr_to_db(self, pr_number, requester_login, title, description, created_date_time, merged_date_time,
                      integrator_login, files):
@@ -334,7 +342,6 @@ class InterecProcessor:
 
         # update the number of PRs
         self.pr_count = self.all_prs_df.count()
-        return True
 
     def get_pr_details(self, pr_number):
         """

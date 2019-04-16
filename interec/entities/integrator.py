@@ -1,4 +1,7 @@
 class Integrator:
+    """
+    This class models an Integrator.
+    """
     def __init__(self, login_name):
         self.integrator_login = login_name
         self.longest_common_prefix_score = 0

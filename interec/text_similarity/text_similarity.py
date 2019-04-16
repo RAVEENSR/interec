@@ -7,7 +7,10 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 
 class TextSimilarityCalculator:
-    def __init__(self, ):
+    """
+    This class handles text similarity score calculating operations.
+    """
+    def __init__(self):
         self.tfidf_vectorizer = TfidfVectorizer(analyzer=self.process_text)
 
     @staticmethod

@@ -26,23 +26,11 @@ navbar_info = {'repository': interec.database,
 @app.route('/')
 @app.route('/index')
 def index():
-    """
-    Return the most important thing about a person.
-
-    Parameters
-    ----------
-    your_name
-        A string indicating the name of the person.
-
-    """
     return render_template('index.html', navbar_info=navbar_info)
 
 
 @app.route('/load_set_weights')
 def load_set_weights():
-    """
-    Return information about an instance created from ExampleClass.
-    """
     return render_template('load_set_weights.html', navbar_info=navbar_info)
 
 
@@ -99,7 +87,7 @@ def load_new_pr():
 def new_pr():
     global navbar_info
 
-    pr_id = request.form['id']
+    pr_id = int(request.form['id'])
     requester_login = request.form['requester_login']
     title = request.form['title']
     description = request.form['description']
@@ -172,20 +160,21 @@ def find_integrators():
                            navbar_info=navbar_info)
 
 
-@app.route('/new')
+@app.route('/new', methods=['POST'])
 def api_add_new_pr():
-    pr_id = request.form['id']
+    pr_id = int(request.form['id'])
     requester_login = request.form['requester_login']
     title = request.form['title']
     description = request.form['description']
-    created_date = request.form['created_date']
-    merged_date = request.form['merged_date']
+    created_date_time = request.form['created_date_time']
+    merged_date_time = request.form['merged_date_time']
     files = request.form['files']
     integrator_login = request.form['integrator_login']
-    flag = interec.add_pr_to_db(pr_number=pr_id, requester_login=requester_login, title=title, description=description,
-                                created_date_time=created_date, merged_date_time=merged_date,
-                                integrator_login=integrator_login, files=files)
-    return jsonify(result=flag)
+    interec.add_pr_to_db(pr_number=pr_id, requester_login=requester_login, title=title, description=description,
+                         created_date_time=created_date_time, merged_date_time=merged_date_time,
+                         integrator_login=integrator_login, files=files)
+    response = app.response_class(status=200)
+    return response
 
 
 @app.route('/integrators')
@@ -193,7 +182,7 @@ def api_get_integrators():
     integrator_list = []
     for row in interec.all_integrators:
         integrator_list.append({'id': row['integrator_id'], 'name': row['integrator_login']})
-    return jsonify(integrators=integrator_list)
+    return jsonify(integrators=integrator_list), 200
 
 
 @app.route('/set_weight_factors', methods=['POST'])
@@ -201,8 +190,9 @@ def api_set_weights():
     alpha = request.form['alpha']
     beta = request.form['beta']
     gamma = request.form['gamma']
-    flag = interec.set_weight_combination_for_factors(alpha=float(alpha), beta=float(beta), gamma=float(gamma))
-    return jsonify(result=flag)
+    interec.set_weight_combination_for_factors(alpha=float(alpha), beta=float(beta), gamma=float(gamma))
+    response = app.response_class(status=200)
+    return response
 
 
 @app.route('/get_weight_combination_accuracy', methods=['POST'])
@@ -211,7 +201,7 @@ def api_get_weight_accuracy():
     limit = request.form['limit']
     result_object = interec.calculate_scores_and_get_weight_combinations_for_factors(offset=int(offset),
                                                                                      limit=int(limit))
-    return jsonify(result=result_object)
+    return jsonify(result=result_object), 200
 
 
 @app.route('/find_pr_integrators', methods=['POST'])
@@ -220,12 +210,12 @@ def api_find_pr_integrators():
     requester_login = request.form['requester_login']
     title = request.form['title']
     description = request.form['description']
-    created_date = request.form['created_date']
+    created_date_time = request.form['created_date_time']
     files = request.form['files']
 
     ranked_five_df = interec.get_related_integrators_for_pr(pr_number=pr_id, requester_login=requester_login,
                                                             title=title, description=description,
-                                                            created_date_time=created_date, files=files)
+                                                            created_date_time=created_date_time, files=files)
 
     rec_integrators = []
     for index, row in ranked_five_df.iterrows():
@@ -237,7 +227,7 @@ def api_find_pr_integrators():
                              'a_score': "{0:.2f}".format(row['std_activeness'])}
         rec_integrators.append(integrator_object)
 
-    return jsonify(integrators=rec_integrators)
+    return jsonify(integrators=rec_integrators), 200
 
 
 @app.errorhandler(404)
