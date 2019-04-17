@@ -14,7 +14,7 @@ class PullRequest:
         self.title = data[3]
         self.description = data[4]
         self.created_date = data[5]
-        self.merged_data = data[6]
+        self.merged_date = data[6]
         self.integrator_login = data[7]
         self.files = self.__initialize_files(data[8])
 
@@ -43,8 +43,8 @@ class PullRequest:
         return self.__created_date
 
     @property
-    def merged_data(self):
-        return self.__merged_data
+    def merged_date(self):
+        return self.__merged_date
 
     @property
     def integrator_login(self):
@@ -78,9 +78,9 @@ class PullRequest:
     def created_date(self, val):
         self.__created_date = val
 
-    @merged_data.setter
-    def merged_data(self, val):
-        self.__merged_data = val
+    @merged_date.setter
+    def merged_date(self, val):
+        self.__merged_date = val
 
     @integrator_login.setter
     def integrator_login(self, val):

@@ -11,7 +11,7 @@ class ActivenessCalculator:
 
     def calculate_integrator_activeness(self, new_pr, old_pr):
         # calculate activeness of the integrator
-        activeness = new_pr.created_date - old_pr.merged_data
+        activeness = new_pr.created_date - old_pr.merged_date
         if hasattr(activeness, 'days'):
             activeness = activeness.days
         else:
