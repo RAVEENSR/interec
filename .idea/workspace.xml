@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="a7ed1af3-6581-48b9-98b4-6e3daf6210d0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interec/activeness/integrator_activeness.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/activeness/integrator_activeness.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/accuracy_calculation/accuracy_calculation.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/accuracy_calculation/accuracy_calculation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/interec/dataset/update_dataset.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/dataset/update_dataset.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interec/entities/pull_request.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/entities/pull_request.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/interec_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/interec_processor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -45,11 +46,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/interec/interec_processor.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="238" column="67" lean-forward="true" selection-start-line="238" selection-start-column="67" selection-end-line="238" selection-end-column="67" />
+              <folding>
+                <element signature="e#97#111#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/interec/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="159" column="39" lean-forward="true" selection-start-line="159" selection-start-column="39" selection-end-line="159" selection-end-column="39" />
+            <state relative-caret-position="408">
+              <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
               <folding>
                 <element signature="e#86#100#0" expanded="true" />
               </folding>
@@ -58,22 +71,18 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/interec/interec_processor.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="93" />
-              <folding>
-                <element signature="e#97#111#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/interec/app.log">
+          <provider selected="true" editor-type-id="LogFileEditorProvider" />
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/interec/activeness/integrator_activeness.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/interec/accuracy_calculation/accuracy_calculation.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="221">
-              <caret line="13" column="61" selection-start-line="13" selection-start-column="61" selection-end-line="13" selection-end-column="61" />
+            <state relative-caret-position="374">
+              <caret line="118" column="117" selection-start-line="118" selection-start-column="117" selection-end-line="118" selection-end-column="117" />
+              <folding>
+                <element signature="e#0#14#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -113,12 +122,18 @@
       <find>database</find>
       <find>print</find>
       <find>logging</find>
+      <find>data</find>
+      <find>merged_data</find>
+      <find>merged_date</find>
     </findStrings>
     <replaceStrings>
       <replace>l_c_suff</replace>
       <replace>old_pr</replace>
       <replace>main_df</replace>
     </replaceStrings>
+    <dirStrings>
+      <dir>D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -170,19 +185,19 @@
         <option value="$PROJECT_DIR$/interec/text_similarity/text_similarity.py" />
         <option value="$PROJECT_DIR$/docs/conf.py" />
         <option value="$PROJECT_DIR$/docs/index.rst" />
-        <option value="$PROJECT_DIR$/interec/accuracy_calculation/accuracy_calculation.py" />
-        <option value="$PROJECT_DIR$/interec/interec_processor.py" />
-        <option value="$PROJECT_DIR$/interec/main.py" />
         <option value="$PROJECT_DIR$/interec/app.log" />
         <option value="$PROJECT_DIR$/interec/dataset/update_dataset.py" />
-        <option value="$PROJECT_DIR$/interec/entities/pull_request.py" />
         <option value="$PROJECT_DIR$/interec/activeness/integrator_activeness.py" />
+        <option value="$PROJECT_DIR$/interec/entities/pull_request.py" />
+        <option value="$PROJECT_DIR$/interec/accuracy_calculation/accuracy_calculation.py" />
+        <option value="$PROJECT_DIR$/interec/main.py" />
+        <option value="$PROJECT_DIR$/interec/interec_processor.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="283" />
-    <option name="y" value="-8" />
+    <option name="x" value="771" />
+    <option name="y" value="-20" />
     <option name="width" value="964" />
     <option name="height" value="680" />
   </component>
@@ -192,6 +207,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -215,13 +231,12 @@
               <item name="interec" type="47feb1d3:ProjectViewModuleNode" />
               <item name="interec" type="462c0819:PsiDirectoryNode" />
               <item name="interec" type="462c0819:PsiDirectoryNode" />
-              <item name="entities" type="462c0819:PsiDirectoryNode" />
+              <item name="accuracy_calculation" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -232,17 +247,17 @@
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\other" />
-      <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec\templates" />
-      <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec" />
       <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec\static" />
       <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\other" />
       <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec\accuracy_calculation" />
       <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec\machine_learning" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec" />
+      <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\other" />
+      <recent name="D:\IIT Academic Folder\4th Year\Final Year Project Module\Implementation\interec\interec\templates" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -453,7 +468,10 @@
       <workItem from="1555313372471" duration="24310000" />
       <workItem from="1555359103283" duration="13609000" />
       <workItem from="1555400324275" duration="6679000" />
-      <workItem from="1555482126024" duration="8251000" />
+      <workItem from="1555482126024" duration="14415000" />
+      <workItem from="1555531273042" duration="656000" />
+      <workItem from="1555574247786" duration="6362000" />
+      <workItem from="1555591354686" duration="929000" />
     </task>
     <task id="LOCAL-00001" summary="Add initial files">
       <created>1550081193929</created>
@@ -763,11 +781,18 @@
       <option name="project" value="LOCAL" />
       <updated>1555403761147</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="Rename merged_data to merged_date">
+      <created>1555511526983</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1555511526983</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="436184000" />
+    <option name="totallyTimeSpent" value="450295000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -782,10 +807,9 @@
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4948718" visible="true" weight="0.13539445" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.4948718" visible="true" weight="0.14072494" />
       <window_info id="Structure" order="1" sideWeight="0.5051282" side_tool="true" weight="0.2118003" />
       <window_info id="Favorites" order="2" sideWeight="0.5041551" side_tool="true" weight="0.18550107" />
-      <window_info anchor="bottom" id="Inspection Results" weight="0.32961783" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.31595746" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.24148937" />
@@ -797,14 +821,15 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32961783" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50159913" side_tool="true" weight="0.40286624" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.33778626" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49840087" weight="0.4389313" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.33723405" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49840087" weight="0.36489362" />
+      <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32961783" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="SciView" order="3" sideWeight="0.47929937" weight="0.24508321" />
       <window_info anchor="right" id="Database" order="4" sideWeight="0.49148935" weight="0.32782516" />
-      <window_info anchor="right" x="0" y="0" width="193" height="465" id="Documentation" order="5" sideWeight="0.52070063" side_tool="true" weight="0.23672566" />
+      <window_info anchor="right" x="0" y="0" width="193" height="465" id="Documentation" order="5" sideWeight="0.52070063" side_tool="true" weight="0.34488273" />
     </layout>
     <layout-to-restore>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4948718" visible="true" weight="0.20499243" />
@@ -861,7 +886,8 @@
     <MESSAGE value="Clean code and add doc comments" />
     <MESSAGE value="Add doc comments and add documentation for system functions and APIs" />
     <MESSAGE value="Add logs to the system" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add logs to the system" />
+    <MESSAGE value="Rename merged_data to merged_date" />
+    <option name="LAST_COMMIT_MESSAGE" value="Rename merged_data to merged_date" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -981,11 +1007,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/other/app.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="-156" />
-      </provider>
-    </entry>
     <entry file="uml://Python/#D:/IIT Academic Folder/4th Year/Final Year Project Module/Implementation/interec/interec/text_similarity/cos_similarity.py">
       <provider selected="true" editor-type-id="UmlEditorProvider">
         <state>
@@ -1206,7 +1227,6 @@
         <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interec/akka_all_integrator_scores_for_each_test_pr.csv" />
     <entry file="file://$PROJECT_DIR$/interec/templates/find_integrators.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -1258,23 +1278,90 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/Makefile" />
     <entry file="file://$PROJECT_DIR$/docs/make.bat" />
-    <entry file="file://$PROJECT_DIR$/docs/conf.py">
+    <entry file="file://$PROJECT_DIR$/docs/index.rst">
+      <provider selected="true" editor-type-id="restructured-text-editor" />
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/logging/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="34" column="72" lean-forward="true" selection-start-line="34" selection-start-column="72" selection-end-line="34" selection-end-column="72" />
+        <state relative-caret-position="-921">
+          <caret line="1780" column="4" selection-start-line="1780" selection-start-column="4" selection-end-line="1780" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor />
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/templates/footer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/templates/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="42" lean-forward="true" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/dataset/update_dataset.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
           <folding>
-            <element signature="e#534#543#0" expanded="true" />
+            <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/docs/index.rst">
-      <provider selected="true" editor-type-id="restructured-text-editor" />
+    <entry file="file://$PROJECT_DIR$/interec/text_similarity/text_similarity.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/string_compare/file_path_similarity.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="736">
+          <caret line="69" column="12" selection-start-line="69" selection-start-column="12" selection-end-line="69" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/entities/integrator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="4" lean-forward="true" selection-start-line="1" selection-start-column="4" selection-end-line="3" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/entities/pull_request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="39">
+          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/activeness/integrator_activeness.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" lean-forward="true" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/docs/_build/html/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="4" lean-forward="true" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+        <state relative-caret-position="52">
+          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
           <folding>
             <element signature="n#style#0;n#li#0;n#ul#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="e#3331#3335#0" expanded="true" />
@@ -1445,113 +1532,53 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/logging/__init__.py">
+    <entry file="file://$PROJECT_DIR$/docs/conf.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-921">
-          <caret line="1780" column="4" selection-start-line="1780" selection-start-column="4" selection-end-line="1780" selection-end-column="4" />
+        <state relative-caret-position="416">
+          <caret line="32" column="107" lean-forward="true" selection-start-line="32" selection-start-column="83" selection-end-line="32" selection-end-column="107" />
+          <folding>
+            <element signature="e#534#543#0" expanded="true" />
+          </folding>
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/7_bitcoin_all_integrator_scores_for_each_test_pr.csv" />
+    <entry file="file://$PROJECT_DIR$/interec/akka_all_integrator_scores_for_each_test_pr.csv">
+      <provider selected="true" editor-type-id="csv-text-editor" />
+      <provider editor-type-id="csv-table-editor">
+        <state showInfoPanel="true" fixedHeaders="false" rowLines="3" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/interec/app.log">
       <provider selected="true" editor-type-id="LogFileEditorProvider" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/interec/accuracy_calculation/accuracy_calculation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="89" selection-start-line="14" selection-start-column="89" selection-end-line="14" selection-end-column="89" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor />
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/templates/footer.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="7" lean-forward="true" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/templates/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="42" lean-forward="true" selection-start-line="8" selection-start-column="42" selection-end-line="8" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/dataset/update_dataset.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/interec/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="159" column="39" lean-forward="true" selection-start-line="159" selection-start-column="39" selection-end-line="159" selection-end-column="39" />
+        <state relative-caret-position="408">
+          <caret line="24" lean-forward="true" selection-start-line="24" selection-end-line="24" />
           <folding>
             <element signature="e#86#100#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interec/text_similarity/text_similarity.py">
+    <entry file="file://$PROJECT_DIR$/interec/accuracy_calculation/accuracy_calculation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+        <state relative-caret-position="374">
+          <caret line="118" column="117" selection-start-line="118" selection-start-column="117" selection-end-line="118" selection-end-column="117" />
           <folding>
-            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#0#14#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/string_compare/file_path_similarity.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="736">
-          <caret line="69" column="12" selection-start-line="69" selection-start-column="12" selection-end-line="69" selection-end-column="12" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/interec/interec_processor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="93" lean-forward="true" selection-start-line="93" selection-end-line="93" />
+        <state relative-caret-position="323">
+          <caret line="238" column="67" lean-forward="true" selection-start-line="238" selection-start-column="67" selection-end-line="238" selection-end-column="67" />
           <folding>
             <element signature="e#97#111#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/entities/integrator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="4" lean-forward="true" selection-start-line="1" selection-start-column="4" selection-end-line="3" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/entities/pull_request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1547">
-          <caret line="91" lean-forward="true" selection-start-line="91" selection-end-line="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/activeness/integrator_activeness.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="61" selection-start-line="13" selection-start-column="61" selection-end-line="13" selection-end-column="61" />
         </state>
       </provider>
     </entry>

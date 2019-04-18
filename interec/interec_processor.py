@@ -232,6 +232,7 @@ class InterecProcessor:
         if use_csv_file:
             if main_data_csv_file_name is None:
                 logging.error("main_data_csv_file_name parameter is none!")
+            logging.info("Getting weight combinations for factors for csv file:" + str(main_data_csv_file_name))
             main_df = pd.read_csv(main_data_csv_file_name)
         else:
             if main_data_frame is None:

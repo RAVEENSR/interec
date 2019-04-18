@@ -50,15 +50,6 @@ class AccuracyCalculator:
 
         return accuracy
 
-    def __test_file_path_similarity_accuracy(self, ranked_data_frame, new_pr, top1=True, top3=False, top5=False):
-        return self.__test_accuracy_by_field(ranked_data_frame, new_pr, 'file_path_rank', top1, top3, top5)
-
-    def __test_text_similarity_accuracy(self, ranked_data_frame, new_pr, top1=True, top3=False, top5=False):
-        return self.__test_accuracy_by_field(ranked_data_frame, new_pr, 'text_rank', top1, top3, top5)
-
-    def __test_activeness_accuracy(self, ranked_data_frame, new_pr, top1=True, top3=False, top5=False):
-        return self.__test_accuracy_by_field(ranked_data_frame, new_pr, 'activeness_rank', top1, top3, top5)
-
     def __test_combined_accuracy(self, ranked_data_frame, new_pr, top1=True, top3=False, top5=False):
         return self.__test_accuracy_by_field(ranked_data_frame, new_pr, 'final_rank', top1, top3, top5)
 
@@ -79,9 +70,6 @@ class AccuracyCalculator:
                     if i != 0 and j != 0 and k != 0 and i + j + k == 10:
                         total_prs = 0
                         cmb_accuracy_array = [0, 0, 0]
-                        file_accuracy_array = [0, 0, 0]
-                        txt_accuracy_array = [0, 0, 0]
-                        act_accuracy_array = [0, 0, 0]
 
                         print("")
                         print("---------------------------------------------------------------------------")
@@ -98,12 +86,6 @@ class AccuracyCalculator:
 
                             combined_accuracy \
                                 = self.__test_combined_accuracy(ranked_data_frame, new_pr, True, True, True)
-                            file_path_accuracy \
-                                = self.__test_file_path_similarity_accuracy(ranked_data_frame, new_pr, True, True, True)
-                            text_accuracy \
-                                = self.__test_text_similarity_accuracy(ranked_data_frame, new_pr, True, True, True)
-                            activeness_accuracy \
-                                = self.__test_activeness_accuracy(ranked_data_frame, new_pr, True, True, True)
 
                             if hasattr(combined_accuracy, 'top1') and combined_accuracy.top1:
                                 cmb_accuracy_array[0] += 1
@@ -112,42 +94,9 @@ class AccuracyCalculator:
                             if hasattr(combined_accuracy, 'top5') and combined_accuracy.top5:
                                 cmb_accuracy_array[2] += 1
 
-                            if hasattr(file_path_accuracy, 'top1') and file_path_accuracy.top1:
-                                file_accuracy_array[0] += 1
-                            if hasattr(file_path_accuracy, 'top3') and file_path_accuracy.top3:
-                                file_accuracy_array[1] += 1
-                            if hasattr(file_path_accuracy, 'top5') and file_path_accuracy.top5:
-                                file_accuracy_array[2] += 1
-
-                            if hasattr(text_accuracy, 'top1') and text_accuracy.top1:
-                                txt_accuracy_array[0] += 1
-                            if hasattr(text_accuracy, 'top3') and text_accuracy.top3:
-                                txt_accuracy_array[1] += 1
-                            if hasattr(text_accuracy, 'top5') and text_accuracy.top5:
-                                txt_accuracy_array[2] += 1
-
-                            if hasattr(activeness_accuracy, 'top1') and activeness_accuracy.top1:
-                                act_accuracy_array[0] += 1
-                            if hasattr(activeness_accuracy, 'top3') and activeness_accuracy.top3:
-                                act_accuracy_array[1] += 1
-                            if hasattr(activeness_accuracy, 'top5') and activeness_accuracy.top5:
-                                act_accuracy_array[2] += 1
-
                         avg_combined_top1_accuracy = cmb_accuracy_array[0] / total_prs
                         avg_combined_top3_accuracy = cmb_accuracy_array[1] / total_prs
                         avg_combined_top5_accuracy = cmb_accuracy_array[2] / total_prs
-
-                        avg_file_path_top1_accuracy = file_accuracy_array[0] / total_prs
-                        avg_file_path_top3_accuracy = file_accuracy_array[1] / total_prs
-                        avg_file_path_top5_accuracy = file_accuracy_array[2] / total_prs
-
-                        avg_text_top1_accuracy = txt_accuracy_array[0] / total_prs
-                        avg_text_top3_accuracy = txt_accuracy_array[1] / total_prs
-                        avg_text_top5_accuracy = txt_accuracy_array[2] / total_prs
-
-                        avg_act_top1_accuracy = act_accuracy_array[0] / total_prs
-                        avg_act_top3_accuracy = act_accuracy_array[1] / total_prs
-                        avg_act_top5_accuracy = act_accuracy_array[2] / total_prs
 
                         combination_result = {
                             'alpha': (i / 10),
@@ -168,22 +117,16 @@ class AccuracyCalculator:
                         logging.info("                         Top1          Top3            Top5")
                         logging.info("Combined Accuracy         " + str(avg_combined_top1_accuracy) + "          " +
                                      str(avg_combined_top3_accuracy) + "         " + str(avg_combined_top5_accuracy))
-                        if flag:
-                            print("File Path Accuracy        " + str(avg_file_path_top1_accuracy) + "          " +
-                                  str(avg_file_path_top3_accuracy) + "         " + str(avg_file_path_top5_accuracy))
-                            print("Text Accuracy             " + str(avg_text_top1_accuracy) + "          " +
-                                  str(avg_text_top3_accuracy) + "         " + str(avg_text_top5_accuracy))
-                            print("Activeness Accuracy       " + str(avg_act_top1_accuracy) + "          " +
-                                  str(avg_act_top3_accuracy) + "         " + str(avg_act_top5_accuracy))
-                            logging.info("File Path Accuracy        " + str(avg_file_path_top1_accuracy) + "          "
-                                         + str(avg_file_path_top3_accuracy) + "         "
-                                         + str(avg_file_path_top5_accuracy))
-                            logging.info("Text Accuracy             " + str(avg_text_top1_accuracy) + "          " +
-                                         str(avg_text_top3_accuracy) + "         " + str(avg_text_top5_accuracy))
-                            logging.info("Activeness Accuracy       " + str(avg_act_top1_accuracy) + "          " +
-                                         str(avg_act_top3_accuracy) + "         " + str(avg_act_top5_accuracy))
-                        flag = False
         return results
+
+    def __test_file_path_similarity_accuracy(self, ranked_data_frame, new_pr, top1=True, top3=False, top5=False):
+        return self.__test_accuracy_by_field(ranked_data_frame, new_pr, 'file_path_rank', top1, top3, top5)
+
+    def __test_text_similarity_accuracy(self, ranked_data_frame, new_pr, top1=True, top3=False, top5=False):
+        return self.__test_accuracy_by_field(ranked_data_frame, new_pr, 'text_rank', top1, top3, top5)
+
+    def __test_activeness_accuracy(self, ranked_data_frame, new_pr, top1=True, top3=False, top5=False):
+        return self.__test_accuracy_by_field(ranked_data_frame, new_pr, 'activeness_rank', top1, top3, top5)
 
     def test_weight_combination_accuracy_for_all_prs_with_individual_factor_accuracy(self, interec_processor, offset,
                                                                                      limit, main_data_frame):
