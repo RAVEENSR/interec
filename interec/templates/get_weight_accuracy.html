@@ -23,6 +23,7 @@
                     <th scope="col" class="table-text-center">Top 1 Accuracy</th>
                     <th scope="col" class="table-text-center">Top 3 Accuracy</th>
                     <th scope="col" class="table-text-center">Top 5 Accuracy</th>
+                    <th scope="col" class="table-text-center">Mean Reciprocal Rank(MRR)</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -34,6 +35,7 @@
                     <td class="table-text-center"><button class="button button5">{{result.top1}}</button></td>
                     <td class="table-text-center"><button class="button button6">{{result.top3}}</button></td>
                     <td class="table-text-center"><button class="button button7">{{result.top5}}</button></td>
+                    <td class="table-text-center"><button class="button button9">{{result.mrr}}</button></td>
                 </tr>
                 {% endfor %}
                 </tbody>

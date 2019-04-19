@@ -251,11 +251,11 @@ class InterecProcessor:
 
         >>> interec.calculate_scores_and_get_weight_combinations_for_factors(600, 300)
 
-        :param offset: Starting PR number which scores are needed to be calculated
+        :param offset: One less than starting PR number which scores are needed to be calculated
         :type offset: int
         :param limit: Limit of the PRs needed to be considered when calculating scores from the start PR number
         :type limit: int
-        :return: Accuracy for each factor weight combination in terms of top1, top3, top5 accuracy
+        :return: Accuracy for each factor weight combination in terms of top1, top3, top5 accuracy and MRR
         :rtype: object
         """
         logging.info("Calculating scores and getting weight combinations for factors started")

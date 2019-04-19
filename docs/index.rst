@@ -96,7 +96,8 @@ InteRec APIs
             "gamma": 0.8,
             "top1": 0.33,
             "top3": 1,
-            "top5": 1
+            "top5": 1,
+            "mrr":0.79
         },
         {
             "alpha": 0.1,
@@ -104,7 +105,8 @@ InteRec APIs
             "gamma": 0.7,
             "top1": 0,
             "top3": 1,
-            "top5": 1
+            "top5": 1,
+            "mrr":0.65
         },
         {
             "alpha": 0.1,
@@ -112,13 +114,14 @@ InteRec APIs
             "gamma": 0.6,
             "top1": 0,
             "top3": 1,
-            "top5": 1
+            "top5": 1,
+            "mrr":0.78
         },
       ...
         ]
       }
 
-   :form offset: tarting PR number which scores are needed to be calculated
+   :form offset: One less than starting PR number which scores are needed to be calculated
    :form limit: Limit of the PRs needed to be considered when calculating scores from the start PR number
    :resheader Content-Type: application/json
    :status 200: Successfully returns accuracy for each factor weight combination.
