@@ -41,7 +41,7 @@ class InterecProcessor:
         self.alpha = 0
         self.beta = 0
         self.gamma = 0
-        self.date_window = 0
+        self.date_window = 120
         logging.basicConfig(level=logging.INFO, filename='app.log', format='%(asctime)s-%(name)s-%(levelname)s '
                                                                            '- %(message)s')
         logging.info("Interec Processor created")
@@ -87,7 +87,7 @@ class InterecProcessor:
         # Count the number of integrators
         self.integrator_count = self.all_integrators_df.count()
 
-    def __calculate_scores(self, df, new_pr, date_window=0):
+    def __calculate_scores(self, df, new_pr, date_window=120):
         # Calculate scores for each integrator
         for integrator in self.all_integrators:
             pr_integrator = Integrator(integrator[1])
@@ -165,7 +165,7 @@ class InterecProcessor:
             df = df.append(row, ignore_index=True)
         return df
 
-    def __calculate_scores_for_all_prs(self, offset, limit, date_window=0):
+    def __calculate_scores_for_all_prs(self, offset, limit, date_window=120):
         query1 = "SELECT pr_id, pull_number, requester_login, title, description, created_date, merged_date, " \
                  "integrator_login, files " \
                  "FROM pull_request " \
@@ -265,7 +265,7 @@ class InterecProcessor:
         logging.info("Calculating scores and getting weight combinations for factors finished")
         return self.get_weight_combinations_for_factors(offset, limit, df, use_csv_file=False)
 
-    def set_weight_combination_for_factors(self, alpha, beta, gamma, date_window=0):
+    def set_weight_combination_for_factors(self, alpha, beta, gamma, date_window=120):
         """
         This function sets the weights for each factor(file path similarity, text similarity, activeness) of the system.
         These weights are used to determine the final score for the integrator. If date_window is not set default value

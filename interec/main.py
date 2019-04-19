@@ -42,7 +42,8 @@ def set_weights():
     alpha = request.form['alpha']
     beta = request.form['beta']
     gamma = request.form['gamma']
-    interec.set_weight_combination_for_factors(alpha=float(alpha), beta=float(beta), gamma=float(gamma), date_window=0)
+    interec.set_weight_combination_for_factors(alpha=float(alpha), beta=float(beta), gamma=float(gamma),
+                                               date_window=120)
     logging.info("Weights have been set: alpha:" + alpha + " beta: " + beta + " gamma: " + gamma)
     return render_template('index.html', navbar_info=navbar_info)
 
