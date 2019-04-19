@@ -18,7 +18,7 @@ app = Flask(__name__)
 logging.basicConfig(level=logging.INFO, filename='app.log', format='%(asctime)s-%(name)s-%(levelname)s - %(message)s')
 logging.Formatter("%(asctime)s;%(levelname)s;%(message)s", "%Y-%m-%d %H:%M:%S")
 interec = InterecProcessor('akka')
-interec.set_weight_combination_for_factors(alpha=0.1, beta=0.2, gamma=0.7, date_window=0)
+interec.set_weight_combination_for_factors(alpha=0.1, beta=0.2, gamma=0.7, date_window=120)
 navbar_info = {'repository': interec.database,
                'pr_count': interec.pr_count,
                'integrator_count': interec.integrator_count}
@@ -247,11 +247,13 @@ def api_find_pr_integrators():
 
 @app.errorhandler(404)
 def not_found_error(error):
+    logging.error(str(error))
     return render_template('404.html'), 404
 
 
 @app.errorhandler(500)
 def internal_error(error):
+    logging.error(str(error))
     return render_template('500.html'), 500
 
 
