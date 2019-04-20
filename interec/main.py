@@ -17,7 +17,7 @@ from interec.interec_processor import InterecProcessor
 app = Flask(__name__)
 logging.basicConfig(level=logging.INFO, filename='app.log', format='%(asctime)s-%(name)s-%(levelname)s - %(message)s')
 logging.Formatter("%(asctime)s;%(levelname)s;%(message)s", "%Y-%m-%d %H:%M:%S")
-interec = InterecProcessor('akka')
+interec = InterecProcessor('bitcoin')
 interec.set_weight_combination_for_factors(alpha=0.1, beta=0.2, gamma=0.7, date_window=120)
 navbar_info = {'repository': interec.database,
                'pr_count': interec.pr_count,
@@ -173,14 +173,15 @@ def find_integrators():
 
 @app.route('/new', methods=['POST'])
 def api_add_new_pr():
-    pr_id = int(request.form['id'])
-    requester_login = request.form['requester_login']
-    title = request.form['title']
-    description = request.form['description']
-    created_date_time = request.form['created_date_time']
-    merged_date_time = request.form['merged_date_time']
-    files = request.form['files']
-    integrator_login = request.form['integrator_login']
+    content = request.json
+    pr_id = int(content['id'])
+    requester_login = content['requester_login']
+    title = content['title']
+    description = content['description']
+    created_date_time = content['created_date_time']
+    merged_date_time = content['merged_date_time']
+    files = content['files']
+    integrator_login = content['integrator_login']
     interec.add_pr_to_db(pr_number=pr_id, requester_login=requester_login, title=title, description=description,
                          created_date_time=created_date_time, merged_date_time=merged_date_time,
                          integrator_login=integrator_login, files=files)
@@ -200,9 +201,10 @@ def api_get_integrators():
 
 @app.route('/set_weight_factors', methods=['POST'])
 def api_set_weights():
-    alpha = request.form['alpha']
-    beta = request.form['beta']
-    gamma = request.form['gamma']
+    content = request.json
+    alpha = content['alpha']
+    beta = content['beta']
+    gamma = content['gamma']
     interec.set_weight_combination_for_factors(alpha=float(alpha), beta=float(beta), gamma=float(gamma))
     logging.info("Weights have been set: alpha:" + alpha + " beta: " + beta + " gamma: " + gamma)
     response = app.response_class(status=200)
@@ -211,22 +213,24 @@ def api_set_weights():
 
 @app.route('/get_weight_combination_accuracy', methods=['POST'])
 def api_get_weight_accuracy():
-    offset = request.form['offset']
-    limit = request.form['limit']
+    content = request.json
+    offset = content['offset']
+    limit = content['limit']
     result_object = interec.calculate_scores_and_get_weight_combinations_for_factors(offset=int(offset),
                                                                                      limit=int(limit))
     logging.info("Weight Combination Accuracy Results Served")
     return jsonify(result=result_object), 200
 
 
-@app.route('/find_pr_integrators', methods=['POST'])
+@app.route('/find_pr_integrators', methods=['POST', 'GET'])
 def api_find_pr_integrators():
-    pr_id = request.form['id']
-    requester_login = request.form['requester_login']
-    title = request.form['title']
-    description = request.form['description']
-    created_date_time = request.form['created_date_time']
-    files = request.form['files']
+    content = request.json
+    pr_id = content['id']
+    requester_login = content['requester_login']
+    title = content['title']
+    description = content['description']
+    created_date_time = content['created_date_time']
+    files = content['files']
 
     ranked_five_df = interec.get_related_integrators_for_pr(pr_number=pr_id, requester_login=requester_login,
                                                             title=title, description=description,
