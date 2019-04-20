@@ -3,7 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="a7ed1af3-6581-48b9-98b4-6e3daf6210d0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interec/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/interec/templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/interec_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/interec_processor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,7 +23,7 @@
     <SUITE FILE_PATH="coverage/pr_dataset$myScript.coverage" NAME="myScript Coverage Results" MODIFIED="1550247053196" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dataset" />
     <SUITE FILE_PATH="coverage/interec$vm_all_scores.coverage" NAME="vm_all_scores Coverage Results" MODIFIED="1552832091524" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/other" />
     <SUITE FILE_PATH="coverage/interec$update_dataset.coverage" NAME="update_dataset Coverage Results" MODIFIED="1551281392801" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/interec/dataset" />
-    <SUITE FILE_PATH="coverage/interec$main.coverage" NAME="main Coverage Results" MODIFIED="1555272836676" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/interec" />
+    <SUITE FILE_PATH="coverage/interec$main.coverage" NAME="main Coverage Results" MODIFIED="1555756077060" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/interec" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -43,11 +44,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/interec/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="230" column="34" selection-start-line="230" selection-start-column="34" selection-end-line="230" selection-end-column="34" />
+            <state relative-caret-position="-3358">
+              <caret line="20" column="89" selection-start-line="20" selection-start-column="89" selection-end-line="20" selection-end-column="89" />
               <folding>
                 <element signature="e#86#100#0" expanded="true" />
               </folding>
@@ -55,20 +56,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/interec/templates/header.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="8" column="102" selection-start-line="8" selection-start-column="102" selection-end-line="8" selection-end-column="102" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/interec/interec_processor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-5432">
-              <caret line="89" column="8" selection-start-line="89" selection-start-column="8" selection-end-line="89" selection-end-column="8" />
+            <state relative-caret-position="1870">
+              <caret line="110" column="57" selection-start-line="110" selection-start-column="57" selection-end-line="110" selection-end-column="57" />
               <folding>
                 <element signature="e#97#111#0" expanded="true" />
               </folding>
@@ -115,6 +107,7 @@
       <find>merged_data</find>
       <find>merged_date</find>
       <find>date_window</find>
+      <find>iter</find>
     </findStrings>
     <replaceStrings>
       <replace>l_c_suff</replace>
@@ -175,19 +168,19 @@
         <option value="$PROJECT_DIR$/interec/activeness/integrator_activeness.py" />
         <option value="$PROJECT_DIR$/interec/entities/pull_request.py" />
         <option value="$PROJECT_DIR$/interec/app.log" />
-        <option value="$PROJECT_DIR$/interec/main.py" />
         <option value="$PROJECT_DIR$/interec/accuracy_calculation/accuracy_calculation.py" />
         <option value="$PROJECT_DIR$/interec/dataset/update_dataset.py" />
         <option value="$PROJECT_DIR$/interec/templates/get_weight_accuracy.html" />
         <option value="$PROJECT_DIR$/docs/index.rst" />
-        <option value="$PROJECT_DIR$/interec/interec_processor.py" />
         <option value="$PROJECT_DIR$/interec/templates/header.html" />
+        <option value="$PROJECT_DIR$/interec/main.py" />
+        <option value="$PROJECT_DIR$/interec/interec_processor.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
+    <option name="x" value="584" />
+    <option name="y" value="-17" />
     <option name="width" value="964" />
     <option name="height" value="853" />
   </component>
@@ -215,20 +208,6 @@
               <item name="interec" type="47feb1d3:ProjectViewModuleNode" />
               <item name="interec" type="462c0819:PsiDirectoryNode" />
               <item name="interec" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="interec" type="b2602c69:ProjectViewProjectNode" />
-              <item name="interec" type="47feb1d3:ProjectViewModuleNode" />
-              <item name="interec" type="462c0819:PsiDirectoryNode" />
-              <item name="interec" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="interec" type="b2602c69:ProjectViewProjectNode" />
-              <item name="interec" type="47feb1d3:ProjectViewModuleNode" />
-              <item name="interec" type="462c0819:PsiDirectoryNode" />
-              <item name="interec" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -463,14 +442,7 @@
       <workItem from="1555531273042" duration="656000" />
       <workItem from="1555574247786" duration="6362000" />
       <workItem from="1555591354686" duration="9526000" />
-      <workItem from="1555665719958" duration="19639000" />
-    </task>
-    <task id="LOCAL-00002" summary="Add string comparison methods">
-      <created>1550216668754</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1550216668754</updated>
+      <workItem from="1555665719958" duration="25562000" />
     </task>
     <task id="LOCAL-00003" summary="Update the script to update the data set">
       <created>1550247734280</created>
@@ -808,11 +780,18 @@
       <option name="project" value="LOCAL" />
       <updated>1555702786034</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="Add favicon">
+      <created>1555708292896</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1555708292896</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="478531000" />
+    <option name="totallyTimeSpent" value="484454000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -833,7 +812,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.31595746" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.24148937" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.43723404" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3638298" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Docker" order="6" show_stripe_button="false" />
@@ -842,7 +821,7 @@
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50159913" side_tool="true" weight="0.40286624" />
       <window_info anchor="bottom" id="Terminal" order="11" weight="0.33404255" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49840087" weight="0.32978722" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49840087" weight="0.3968085" />
       <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32961783" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -883,7 +862,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Update the project" />
     <MESSAGE value="Reformat Code" />
     <MESSAGE value="Update project - Old Version for calculation" />
     <MESSAGE value="Update project - New Version for calculation" />
@@ -908,7 +886,8 @@
     <MESSAGE value="Add code formatting" />
     <MESSAGE value="Add MRR related accuracy" />
     <MESSAGE value="Add MRR related UIs and update comments" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add MRR related UIs and update comments" />
+    <MESSAGE value="Add favicon" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add favicon" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1023,13 +1002,6 @@
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/other/test_script.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="4" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/other/main_script2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2278">
@@ -1300,13 +1272,6 @@
       </provider>
       <provider selected="true" editor-type-id="csv-text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/interec/app.log">
-      <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="709">
-          <caret line="55097" column="80" selection-start-line="55097" selection-start-column="80" selection-end-line="55097" selection-end-column="80" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/interec/dataset/update_dataset.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
@@ -1387,20 +1352,41 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/interec/templates/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="102" selection-start-line="8" selection-start-column="102" selection-end-line="8" selection-end-column="102" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/interec/accuracy_calculation/accuracy_calculation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="141">
-          <caret line="58" column="52" selection-start-line="58" selection-start-column="8" selection-end-line="58" selection-end-column="52" />
+        <state relative-caret-position="-1156">
+          <caret line="19" column="17" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/1148422030/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="488" column="4" selection-start-line="488" selection-start-column="4" selection-end-line="488" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/app.log">
+      <provider selected="true" editor-type-id="LogFileEditorProvider">
+        <state relative-caret-position="-498">
+          <caret lean-forward="true" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/interec/interec_processor.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5432">
-          <caret line="89" column="8" selection-start-line="89" selection-start-column="8" selection-end-line="89" selection-end-column="8" />
+        <state relative-caret-position="1870">
+          <caret line="110" column="57" selection-start-line="110" selection-start-column="57" selection-end-line="110" selection-end-column="57" />
           <folding>
             <element signature="e#97#111#0" expanded="true" />
           </folding>
@@ -1409,18 +1395,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/interec/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="230" column="34" selection-start-line="230" selection-start-column="34" selection-end-line="230" selection-end-column="34" />
+        <state relative-caret-position="-3358">
+          <caret line="20" column="89" selection-start-line="20" selection-start-column="89" selection-end-line="20" selection-end-column="89" />
           <folding>
             <element signature="e#86#100#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/templates/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="102" selection-start-line="8" selection-start-column="102" selection-end-line="8" selection-end-column="102" />
         </state>
       </provider>
     </entry>

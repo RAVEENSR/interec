@@ -38,9 +38,9 @@ class InterecProcessor:
         self.text_similarity_calculator = TextSimilarityCalculator()
         self.__initialise_app()
         self.accuracy_calculator = AccuracyCalculator(spark=self.spark)
-        self.alpha = 0
-        self.beta = 0
-        self.gamma = 0
+        self.alpha = 0.1
+        self.beta = 0.2
+        self.gamma = 0.7
         self.date_window = 120
         logging.basicConfig(level=logging.INFO, filename='app.log', format='%(asctime)s-%(name)s-%(levelname)s '
                                                                            '- %(message)s')
