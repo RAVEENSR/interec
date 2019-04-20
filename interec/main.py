@@ -146,13 +146,13 @@ def find_integrators():
         files = pr_data[8]
 
     rec_integrators = []
-    for index, row in ranked_five_df.iterrows():
-        integrator_object = {'rank': int(row['final_rank']),
-                             'username': row['integrator'],
-                             'f_score': "{0:.2f}".format(row['combined_score']),
-                             'fp_score': "{0:.2f}".format(row['std_file_similarity']),
-                             't_score': "{0:.2f}".format(row['std_text_similarity']),
-                             'a_score': "{0:.2f}".format(row['std_activeness'])}
+    for row in ranked_five_df.itertuples(index=False):
+        integrator_object = {'rank': int(row.final_rank),
+                             'username': row.integrator,
+                             'f_score': "{0:.2f}".format(row.combined_score),
+                             'fp_score': "{0:.2f}".format(row.std_file_similarity),
+                             't_score': "{0:.2f}".format(row.std_text_similarity),
+                             'a_score': "{0:.2f}".format(row.std_activeness)}
         rec_integrators.append(integrator_object)
 
     pr = {'title': title,
@@ -233,13 +233,13 @@ def api_find_pr_integrators():
                                                             created_date_time=created_date_time, files=files)
 
     rec_integrators = []
-    for index, row in ranked_five_df.iterrows():
-        integrator_object = {'rank': int(row['final_rank']),
-                             'username': row['integrator'],
-                             'f_score': "{0:.2f}".format(row['combined_score']),
-                             'fp_score': "{0:.2f}".format(row['std_file_similarity']),
-                             't_score': "{0:.2f}".format(row['std_text_similarity']),
-                             'a_score': "{0:.2f}".format(row['std_activeness'])}
+    for row in ranked_five_df.itertuples(index=False):
+        integrator_object = {'rank': int(row.final_rank),
+                             'username': row.integrator,
+                             'f_score': "{0:.2f}".format(row.combined_score),
+                             'fp_score': "{0:.2f}".format(row.std_file_similarity),
+                             't_score': "{0:.2f}".format(row.std_text_similarity),
+                             'a_score': "{0:.2f}".format(row.std_activeness)}
         rec_integrators.append(integrator_object)
     logging.info("Recommended Integrators for PR served")
     return jsonify(integrators=rec_integrators), 200
