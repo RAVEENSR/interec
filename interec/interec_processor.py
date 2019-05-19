@@ -339,18 +339,6 @@ class InterecProcessor:
 
         logging.info("Adding PR " + str(pr_number) + " to the database successful")
 
-        # Read table pull_request
-        self.all_prs_df = self.spark.read \
-            .format("jdbc") \
-            .option("url", "jdbc:mysql://localhost:3306/" + self.database) \
-            .option("driver", 'com.mysql.cj.jdbc.Driver') \
-            .option("dbtable", "pull_request") \
-            .option("user", "root") \
-            .option("password", "") \
-            .load()
-
-        self.all_prs_df.createOrReplaceTempView("pull_request")
-
         # update the number of PRs
         self.pr_count = self.all_prs_df.count()
 
@@ -368,19 +356,13 @@ class InterecProcessor:
         :rtype: list
         """
         logging.info("Getting PR details for PR " + str(pr_number) + " started")
-        # Connection to MySQL  database
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=self.database)
-        try:
-            with connection.cursor() as cursor:
-                # get pull-request data from the database
-                sql = "SELECT * FROM pull_request WHERE pull_number=%s"
-                cursor.execute(sql, pr_number)
-                result = cursor.fetchone()
-        finally:
-            connection.commit()
-            connection.close()
+        query1 = "SELECT pr_id, pull_number, requester_login, title, description, created_date, merged_date, " \
+                 "integrator_login, files " \
+                 "FROM pull_request " \
+                 "WHERE pull_number='%s'" % pr_number
+        result = self.spark.sql(query1)
         logging.info("PR details for PR " + str(pr_number) + " presented")
-        return result
+        return result.collect()[0]
 
     def get_related_integrators_for_pr(self, pr_number, requester_login, title, description, created_date_time, files):
         """
@@ -433,19 +415,8 @@ class InterecProcessor:
         :rtype: DataFrame
         """
         logging.info("Getting related integrators by PR number for PR" + str(pr_number) + " started")
-        # Connection to MySQL  database
-        connection = pymysql.connect(host='localhost', port=3306, user='root', passwd='', db=self.database)
-        try:
-            with connection.cursor() as cursor:
-                # get pull-request data from the database
-                sql = "SELECT * FROM pull_request WHERE pull_number=%s"
-                cursor.execute(sql, pr_number)
-                result = cursor.fetchone()
-        finally:
-            connection.commit()
-            connection.close()
-
-        new_pr = PullRequest(result)
+        pr_details = self.get_pr_details(pr_number)
+        new_pr = PullRequest(pr_details)
         df = pd.DataFrame()
         df = self.__calculate_scores(df, new_pr, self.date_window)
         ranked_df = self.generate_ranked_list(df, self.alpha, self.beta, self.gamma)
