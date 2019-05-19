@@ -13,9 +13,18 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-datetimepicker.min.css') }}">
 
+    <!-- alertify CSS -->
+    <!-- style -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/alertify.min.css') }}" />
+    <!-- theme -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/themes/default.min.css') }}" />
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
             crossorigin="anonymous"></script>
+
+    <!-- alertify script -->
+    <script src="{{ url_for('static', filename='js/alertify.min.js') }}"></script>
 
     <style>
         .button {
@@ -116,7 +125,6 @@
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link" id="index" href="{{ url_for('index')}}">Home</a>
-                <!--<span class="sr-only">(current)</span>-->
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="integrators" href="{{ url_for('load_integrators')}}">Integrators</a>
