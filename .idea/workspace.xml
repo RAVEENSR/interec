@@ -2,9 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7ed1af3-6581-48b9-98b4-6e3daf6210d0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/interec/static/js/inputValidation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interec/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/interec/templates/header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/interec/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/interec/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/interec_processor.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/interec_processor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/interec/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/templates/load_find_integrators.html" beforeDir="false" afterPath="$PROJECT_DIR$/interec/templates/load_find_integrators.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/templates/load_get_weight_accuracy.html" beforeDir="false" afterPath="$PROJECT_DIR$/interec/templates/load_get_weight_accuracy.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/templates/load_new_pr.html" beforeDir="false" afterPath="$PROJECT_DIR$/interec/templates/load_new_pr.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/interec/templates/load_set_weights.html" beforeDir="false" afterPath="$PROJECT_DIR$/interec/templates/load_set_weights.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,7 +24,7 @@
     <SUITE FILE_PATH="coverage/interec$cal_scores.coverage" NAME="cal_scores Coverage Results" MODIFIED="1552336245759" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/interec" />
     <SUITE FILE_PATH="coverage/interec$my_script.coverage" NAME="my_script Coverage Results" MODIFIED="1550875105369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/stringcompare" />
     <SUITE FILE_PATH="coverage/interec$main_script.coverage" NAME="main_script Coverage Results" MODIFIED="1551902731263" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/interec" />
-    <SUITE FILE_PATH="coverage/interec$interec_processor.coverage" NAME="interec_processor Coverage Results" MODIFIED="1555686126778" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/interec" />
+    <SUITE FILE_PATH="coverage/interec$interec_processor.coverage" NAME="interec_processor Coverage Results" MODIFIED="1558295968410" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/interec" />
     <SUITE FILE_PATH="coverage/pr_dataset$myScript.coverage" NAME="myScript Coverage Results" MODIFIED="1550247053196" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/dataset" />
     <SUITE FILE_PATH="coverage/interec$vm_all_scores.coverage" NAME="vm_all_scores Coverage Results" MODIFIED="1552832091524" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/other" />
     <SUITE FILE_PATH="coverage/interec$update_dataset.coverage" NAME="update_dataset Coverage Results" MODIFIED="1551281392801" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/interec/dataset" />
@@ -44,11 +49,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/interec/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="569">
-              <caret line="255" lean-forward="true" selection-start-line="255" selection-end-line="255" />
+            <state relative-caret-position="561">
+              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
               <folding>
                 <element signature="e#86#100#0" expanded="true" />
               </folding>
@@ -56,31 +61,52 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/interec/templates/index.html">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/interec/interec_processor.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+            <state relative-caret-position="569">
+              <caret line="255" column="23" selection-start-line="255" selection-start-column="23" selection-end-line="255" selection-end-column="23" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#a#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#a#0;n#div#2;n#div#1;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#a#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#a#0;n#div#1;n#div#2;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#a#0;n#div#0;n#div#3;n#!!top" expanded="true" />
+                <element signature="e#97#111#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/interec/templates/header.html">
+        <entry file="file://$PROJECT_DIR$/interec/static/js/inputValidation.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="164">
-              <caret line="105" column="26" lean-forward="true" selection-start-line="105" selection-start-column="26" selection-end-line="105" selection-end-column="26" />
+            <state relative-caret-position="1071">
+              <caret line="63" column="34" lean-forward="true" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/interec/templates/load_find_integrators.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="892">
+              <caret line="87" column="84" selection-start-line="87" selection-start-column="80" selection-end-line="87" selection-end-column="84" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/interec/templates/load_new_pr.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="16" column="107" selection-start-line="16" selection-start-column="70" selection-end-line="16" selection-end-column="107" />
+              <folding>
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -92,12 +118,12 @@
       <list>
         <option value="Python Script" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>LCSuff</find>
       <find>new_pr</find>
       <find>rever</find>
       <find>old_pr_merged_date</find>
@@ -126,6 +152,8 @@
       <find>date_window</find>
       <find>iter</find>
       <find>request.form</find>
+      <find>get_pr_details</find>
+      <find>asyn</find>
     </findStrings>
     <replaceStrings>
       <replace>l_c_suff</replace>
@@ -143,9 +171,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/other/main_script_2.py" />
-        <option value="$PROJECT_DIR$/other/vm_file.py" />
-        <option value="$PROJECT_DIR$/interec/entities/Integrator.py" />
         <option value="$PROJECT_DIR$/interec/entities/PullRequest.py" />
         <option value="$PROJECT_DIR$/interec/main_script.py" />
         <option value="$PROJECT_DIR$/interec/sub_script.py" />
@@ -169,16 +194,12 @@
         <option value="$PROJECT_DIR$/interec/__init__.py" />
         <option value="$PROJECT_DIR$/interec/templates/hello.html" />
         <option value="$PROJECT_DIR$/interec/templates/find_integrators.html" />
-        <option value="$PROJECT_DIR$/interec/templates/load_find_integrators.html" />
         <option value="$PROJECT_DIR$/interec/templates/404.html" />
         <option value="$PROJECT_DIR$/interec/templates/500.html" />
         <option value="$PROJECT_DIR$/interec/templates/new_pr.html" />
-        <option value="$PROJECT_DIR$/interec/templates/load_new_pr.html" />
         <option value="$PROJECT_DIR$/interec/templates/integrators.html" />
         <option value="$PROJECT_DIR$/interec/templates/load_integrators.html" />
         <option value="$PROJECT_DIR$/interec/templates/set_weights.html" />
-        <option value="$PROJECT_DIR$/interec/templates/footer.html" />
-        <option value="$PROJECT_DIR$/interec/templates/load_get_weight_accuracy.html" />
         <option value="$PROJECT_DIR$/interec/entities/integrator.py" />
         <option value="$PROJECT_DIR$/interec/string_compare/file_path_similarity.py" />
         <option value="$PROJECT_DIR$/docs/conf.py" />
@@ -188,20 +209,27 @@
         <option value="$PROJECT_DIR$/interec/accuracy_calculation/accuracy_calculation.py" />
         <option value="$PROJECT_DIR$/interec/dataset/update_dataset.py" />
         <option value="$PROJECT_DIR$/interec/templates/get_weight_accuracy.html" />
-        <option value="$PROJECT_DIR$/interec/interec_processor.py" />
-        <option value="$PROJECT_DIR$/interec/main.py" />
         <option value="$PROJECT_DIR$/docs/index.rst" />
         <option value="$PROJECT_DIR$/interec/text_similarity/text_similarity.py" />
-        <option value="$PROJECT_DIR$/interec/templates/header.html" />
         <option value="$PROJECT_DIR$/interec/templates/index.html" />
+        <option value="$PROJECT_DIR$/interec/static/js/input_validation.js" />
+        <option value="$PROJECT_DIR$/interec/templates/footer.html" />
+        <option value="$PROJECT_DIR$/interec/templates/load_new_pr.html" />
+        <option value="$PROJECT_DIR$/interec/templates/header.html" />
+        <option value="$PROJECT_DIR$/interec/templates/load_set_weights.html" />
+        <option value="$PROJECT_DIR$/interec/templates/load_get_weight_accuracy.html" />
+        <option value="$PROJECT_DIR$/interec/main.py" />
+        <option value="$PROJECT_DIR$/interec/templates/load_find_integrators.html" />
+        <option value="$PROJECT_DIR$/interec/interec_processor.py" />
+        <option value="$PROJECT_DIR$/interec/static/js/inputValidation.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="338" />
-    <option name="y" value="-8" />
+    <option name="x" value="339" />
+    <option name="y" value="-22" />
     <option name="width" value="1266" />
-    <option name="height" value="863" />
+    <option name="height" value="870" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -227,29 +255,6 @@
               <item name="interec" type="47feb1d3:ProjectViewModuleNode" />
               <item name="interec" type="462c0819:PsiDirectoryNode" />
               <item name="interec" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="interec" type="b2602c69:ProjectViewProjectNode" />
-              <item name="interec" type="47feb1d3:ProjectViewModuleNode" />
-              <item name="interec" type="462c0819:PsiDirectoryNode" />
-              <item name="interec" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="interec" type="b2602c69:ProjectViewProjectNode" />
-              <item name="interec" type="47feb1d3:ProjectViewModuleNode" />
-              <item name="interec" type="462c0819:PsiDirectoryNode" />
-              <item name="interec" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="interec" type="b2602c69:ProjectViewProjectNode" />
-              <item name="interec" type="47feb1d3:ProjectViewModuleNode" />
-              <item name="interec" type="462c0819:PsiDirectoryNode" />
-              <item name="interec" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="img" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="interec" type="b2602c69:ProjectViewProjectNode" />
@@ -346,9 +351,6 @@
       <module name="interec" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/interec" />
       <option name="IS_MODULE_SDK" value="true" />
@@ -430,8 +432,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.text_similarity" />
         <item itemvalue="Python.interec_processor" />
+        <item itemvalue="Python.text_similarity" />
         <item itemvalue="Python.vm_all_scores" />
         <item itemvalue="Python.cal_scores" />
       </list>
@@ -498,35 +500,7 @@
       <workItem from="1555757463254" duration="16484000" />
       <workItem from="1555859936010" duration="5961000" />
       <workItem from="1556253293043" duration="751000" />
-      <workItem from="1558266708712" duration="9584000" />
-    </task>
-    <task id="LOCAL-00006" summary="Update the project">
-      <created>1550514731007</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1550514731008</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Update the project">
-      <created>1550766097109</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1550766097110</updated>
-    </task>
-    <task id="LOCAL-00008" summary="Update the project">
-      <created>1550785190511</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1550785190530</updated>
-    </task>
-    <task id="LOCAL-00009" summary="Update the project">
-      <created>1550825817493</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1550825817493</updated>
+      <workItem from="1558266708712" duration="37702000" />
     </task>
     <task id="LOCAL-00010" summary="Reformat Code">
       <created>1550825927226</created>
@@ -843,11 +817,39 @@
       <option name="project" value="LOCAL" />
       <updated>1555774849389</updated>
     </task>
-    <option name="localTasksCounter" value="55" />
+    <task id="LOCAL-00055" summary="Add CSS styling and images to home page">
+      <created>1558281623882</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1558281623898</updated>
+    </task>
+    <task id="LOCAL-00056" summary="Simplify PR details gathering">
+      <created>1558295556617</created>
+      <option name="number" value="00056" />
+      <option name="presentableId" value="LOCAL-00056" />
+      <option name="project" value="LOCAL" />
+      <updated>1558295556618</updated>
+    </task>
+    <task id="LOCAL-00057" summary="Add alertify library for alerts">
+      <created>1558295632106</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1558295632107</updated>
+    </task>
+    <task id="LOCAL-00058" summary="Add new version of JQuery">
+      <created>1558303593555</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1558303593555</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="517377000" />
+    <option name="totallyTimeSpent" value="545495000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -862,8 +864,8 @@
     <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.4948718" visible="true" weight="0.12313433" />
-      <window_info id="Structure" order="1" sideWeight="0.5051282" side_tool="true" weight="0.2118003" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49275362" visible="true" weight="0.16257995" />
+      <window_info id="Structure" order="1" sideWeight="0.5072464" side_tool="true" weight="0.16257995" />
       <window_info id="Favorites" order="2" sideWeight="0.5041551" side_tool="true" weight="0.18550107" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.31595746" />
@@ -876,8 +878,8 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.32867885" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50159913" side_tool="true" weight="0.40172166" />
-      <window_info anchor="bottom" id="Terminal" order="11" weight="0.33404255" />
-      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49840087" visible="true" weight="0.32234043" />
+      <window_info anchor="bottom" id="Terminal" order="11" weight="0.33286119" />
+      <window_info anchor="bottom" id="Python Console" order="12" sideWeight="0.49840087" weight="0.31914893" />
       <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.32961783" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -918,10 +920,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Update project" />
-    <MESSAGE value="Refactor code" />
-    <MESSAGE value="Format code" />
-    <MESSAGE value="Add missing implementation for functions" />
     <MESSAGE value="Update functions" />
     <MESSAGE value="Add UI components" />
     <MESSAGE value="Add load integrator ui" />
@@ -943,7 +941,11 @@
     <MESSAGE value="Change initialising values" />
     <MESSAGE value="Use itertuples instead of iterrows" />
     <MESSAGE value="Change form data to json in API request" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change form data to json in API request" />
+    <MESSAGE value="Add CSS styling and images to home page" />
+    <MESSAGE value="Simplify PR details gathering" />
+    <MESSAGE value="Add alertify library for alerts" />
+    <MESSAGE value="Add new version of JQuery" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add new version of JQuery" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -958,6 +960,33 @@
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string>for new in result.collect():
+    print(new)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>result.collect()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>for new_pr in result.collect():
+    print(new_pr)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>result</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>res</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>for index, row in inp.all_integrators:
     print(row)</expression-string>
@@ -980,104 +1009,56 @@
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>for index, row in inp.all_prs_df.iterrows():
-    print(row)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>for index, row in inp.all_integrators_df.iterrows():
-    print(row['integrator_login'])</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>print(inp.all_prs_df)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>print(inp.all_integrators_df)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>inp.all_integrators_df</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
     </expressions>
     <expressions id="evaluateExpression">
       <expression>
-        <expression-string>row</expression-string>
+        <expression-string>len(result.collect())</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>row.str(column_name)</expression-string>
+        <expression-string>result.collect().size</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>row.column_name</expression-string>
+        <expression-string>result.collect().len</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>for index, row in inp.all_prs_df.iterrows():
-    print(row)</expression-string>
+        <expression-string>result.collect().length</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>ranked_five_df</expression-string>
+        <expression-string>result.collect().lenght</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>ranked_five_df[0]</expression-string>
+        <expression-string>result.collect()</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>print(ranked_df)</expression-string>
+        <expression-string>result.collect()[0]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>da</expression-string>
+        <expression-string>result.collect[0]</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>ranked_df</expression-string>
+        <expression-string>result.collect(0\)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>EXPRESSION</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/other/main_script2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2278">
-          <caret line="134" column="22" selection-start-line="134" selection-start-column="22" selection-end-line="134" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/other/cal_scores.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2480">
-          <caret line="66" selection-end-line="240" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/other/train_phase.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1515">
@@ -1179,41 +1160,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interec/templates/load_new_pr.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1241">
-          <caret line="73" column="52" selection-start-line="73" selection-start-column="52" selection-end-line="73" selection-end-column="52" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/interec/templates/404.html">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/templates/load_set_weights.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="325">
-          <caret line="29" column="16" selection-start-line="29" selection-start-column="16" selection-end-line="31" selection-end-column="22" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/templates/load_find_integrators.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1258">
-          <caret line="86" column="93" lean-forward="true" selection-end-line="96" selection-end-column="27" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/other/akka_all_integrator_scores_for_each_test_pr.csv" />
     <entry file="file://$PROJECT_DIR$/interec/templates/load_integrators.html">
@@ -1280,29 +1228,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interec/templates/load_get_weight_accuracy.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="10" lean-forward="true" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/templates/get_weight_accuracy.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="37" column="79" selection-start-line="37" selection-start-column="79" selection-end-line="37" selection-end-column="79" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#table#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/docs/conf.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="506">
@@ -1310,13 +1235,6 @@
           <folding>
             <element signature="e#534#543#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/1148422030/builtins.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="488" column="4" selection-start-line="488" selection-start-column="4" selection-end-line="488" selection-end-column="4" />
         </state>
       </provider>
     </entry>
@@ -1522,19 +1440,66 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interec/interec_processor.py">
+    <entry file="file://$PROJECT_DIR$/interec/templates/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1514">
-          <caret line="301" column="153" selection-start-line="301" selection-start-column="33" selection-end-line="301" selection-end-column="153" />
+        <state relative-caret-position="472">
+          <caret line="92" column="60" lean-forward="true" selection-start-line="92" selection-start-column="60" selection-end-line="92" selection-end-column="60" />
           <folding>
-            <element signature="e#97#111#0" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#a#0;n#div#1;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#a#0;n#div#2;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#a#0;n#div#0;n#div#2;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#a#0;n#div#1;n#div#2;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#a#0;n#div#0;n#div#3;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/codecs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="531">
+          <caret line="311" selection-start-line="311" selection-end-line="311" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/1148422030/builtins.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="4732" column="8" selection-start-line="4732" selection-start-column="8" selection-end-line="4732" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/templates/footer.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" column="9" lean-forward="true" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/templates/header.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="8" column="14" lean-forward="true" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/templates/load_set_weights.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="26" column="64" selection-start-line="26" selection-start-column="64" selection-end-line="26" selection-end-column="64" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/interec/templates/find_integrators.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
+        <state relative-caret-position="136">
           <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
           <folding>
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
@@ -1546,44 +1511,77 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interec/templates/footer.html">
+    <entry file="file://$PROJECT_DIR$/interec/templates/get_weight_accuracy.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="7" selection-start-line="13" selection-start-column="7" selection-end-line="13" selection-end-column="7" />
+        <state relative-caret-position="337">
+          <caret line="37" column="79" selection-start-line="37" selection-start-column="79" selection-end-line="37" selection-end-column="79" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#table#0;n#div#1;n#div#0;n#div#1;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/interec/templates/header.html">
+    <entry file="file://$PROJECT_DIR$/interec/templates/load_new_pr.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="105" column="26" lean-forward="true" selection-start-line="105" selection-start-column="26" selection-end-line="105" selection-end-column="26" />
+        <state relative-caret-position="221">
+          <caret line="16" column="107" selection-start-line="16" selection-start-column="70" selection-end-line="16" selection-end-column="107" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/templates/load_get_weight_accuracy.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="52" column="89" selection-start-line="52" selection-start-column="80" selection-end-line="52" selection-end-column="89" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/templates/load_find_integrators.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="892">
+          <caret line="87" column="84" selection-start-line="87" selection-start-column="80" selection-end-line="87" selection-end-column="84" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/interec_processor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="569">
+          <caret line="255" column="23" selection-start-line="255" selection-start-column="23" selection-end-line="255" selection-end-column="23" />
+          <folding>
+            <element signature="e#97#111#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/interec/static/js/inputValidation.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1071">
+          <caret line="63" column="34" lean-forward="true" selection-start-line="63" selection-start-column="34" selection-end-line="63" selection-end-column="34" />
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/interec/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="569">
-          <caret line="255" lean-forward="true" selection-start-line="255" selection-end-line="255" />
+        <state relative-caret-position="561">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
           <folding>
             <element signature="e#86#100#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/interec/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#a#0;n#div#1;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#a#0;n#div#2;n#div#1;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#a#0;n#div#0;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#a#0;n#div#1;n#div#2;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#3;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#img#0;n#div#0;n#div#0;n#a#0;n#div#0;n#div#3;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -243,6 +243,18 @@ class InterecProcessor:
                                                                                      offset=offset, limit=limit,
                                                                                      main_data_frame=main_df)
 
+    def check_pr_number_availability(self, pr_number):
+        logging.info("Checking availability for PR number " + str(pr_number) + " started")
+        query1 = "SELECT pr_id, pull_number, requester_login, title, description, created_date, merged_date, " \
+                 "integrator_login, files " \
+                 "FROM pull_request " \
+                 "WHERE pull_number='%s'" % pr_number
+        result = self.spark.sql(query1)
+        if len(result.collect()) == 0:
+            return False
+        else:
+            return True
+
     def calculate_scores_and_get_weight_combinations_for_factors(self, offset, limit):
         """
         This function calculates scores for every PR and provides accuracy for each factor weight combination.
@@ -361,8 +373,9 @@ class InterecProcessor:
                  "FROM pull_request " \
                  "WHERE pull_number='%s'" % pr_number
         result = self.spark.sql(query1)
+        details = result.collect()[0]
         logging.info("PR details for PR " + str(pr_number) + " presented")
-        return result.collect()[0]
+        return details
 
     def get_related_integrators_for_pr(self, pr_number, requester_login, title, description, created_date_time, files):
         """

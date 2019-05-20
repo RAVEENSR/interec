@@ -30,36 +30,38 @@
                 <div class="card-body">
                     <div class="tab-content" id="myTabContent">
                         <div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="main-tab">
-                            <form action="http://localhost:5000/get_weight_accuracy" method="POST">
+                            <form action="http://localhost:5000/get_weight_accuracy" method="POST"
+                                  onsubmit="return validateGetWeightsForm1();">
                                 <div class="form-group">
-                                    <label for="offset1">Offset</label>
+                                    <label for="offset1">Offset*</label>
                                     <input type="text" class="form-control" id="offset1" name="offset1"
-                                           placeholder="Enter offset value ex: 601">
+                                           placeholder="Enter offset value ex: 601" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="limit1">Limit</label>
+                                    <label for="limit1">Limit*</label>
                                     <input type="text" class="form-control" id="limit1" name="limit1"
-                                           placeholder="Enter limit value ex: 300">
+                                           placeholder="Enter limit value ex: 300" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Calculate</button>
                             </form>
                         </div>
                         <div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="second-tab">
-                            <form action="http://localhost:5000/get_weight_accuracy_by_file" method="POST">
+                            <form action="http://localhost:5000/get_weight_accuracy_by_file" method="POST"
+                                  onsubmit="return validateGetWeightsForm2();">
                                 <div class="form-group">
-                                    <label for="file_name">File Name</label>
+                                    <label for="file_name">File Name*</label>
                                     <input type="text" class="form-control" id="file_name" name="file_name"
-                                           placeholder="Enter file name">
+                                           placeholder="Enter file name" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="offset2">Offset</label>
+                                    <label for="offset2">Offset*</label>
                                     <input type="text" class="form-control" id="offset2" name="offset2"
-                                           placeholder="Enter offset value ex: 601">
+                                           placeholder="Enter offset value ex: 601" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="limit2">Limit</label>
+                                    <label for="limit2">Limit*</label>
                                     <input type="text" class="form-control" id="limit2" name="limit2"
-                                           placeholder="Enter limit value ex: 300">
+                                           placeholder="Enter limit value ex: 300" required>
                                 </div>
                                 <div class="form-group">
                                     <label>** Only CSV files are allowed. **</label>

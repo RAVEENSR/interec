@@ -14,45 +14,43 @@
     <div class="row" style="margin:20px;">
         <div class="col-lg-3 col-md-3 col-sm-2 col-xs-12"></div>
         <div class="col-lg-6 col-md-6 col-sm-8 col-xs-12">
-            <form action="http://localhost:5000/new_pr" method="POST">
+            <form action="http://localhost:5000/new_pr" method="POST" onsubmit="return validateAddPRForm();">
                 <div class="form-group">
-                    <label for="id">Id</label>
-                    <input type="text" class="form-control" id="id" name="id" placeholder="Enter id">
+                    <label for="id">Id*</label>
+                    <input type="text" class="form-control" id="id" name="id" placeholder="Enter id" required>
                 </div>
                 <div class="form-group">
-                    <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" name="title"
-                           placeholder="Enter title">
+                    <label for="title">Title*</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" required>
                 </div>
                 <div class="form-group">
-                    <label for="description">Description</label>
-                    <textarea class="form-control" id="description" name="description"
-                              rows="5"></textarea>
+                    <label for="description">Description*</label>
+                    <textarea class="form-control" id="description" name="description" rows="5" required></textarea>
                 </div>
                 <div class="form-group">
-                    <label for="files">File Paths</label>
+                    <label for="files">File Paths*</label>
                     <input type="text" class="form-control" id="files" name="files"
-                           placeholder="Enter file paths ex: abc.js|def.js">
+                           placeholder="Enter file paths ex: abc.js|def.js" required>
                 </div>
                 <div class="form-group">
-                    <label for="requester_login">Requester User Name</label>
+                    <label for="requester_login">Requester User Name*</label>
                     <input type="text" class="form-control" id="requester_login" name="requester_login"
-                           placeholder="Enter requester login">
+                           placeholder="Enter requester login" required>
                 </div>
-                <div class="form-group"> integrator_list
-                    <label for="integrator_login">Integrator User Name</label>
-                    <select class="form-control" id="integrator_login" name="integrator_login">
+                <div class="form-group">
+                    <label for="integrator_login">Integrator User Name*</label>
+                    <select class="form-control" id="integrator_login" name="integrator_login" required>
                         {% for integrator in integrator_list %}
                         <option>{{integrator.name}}</option>
                         {% endfor %}
                     </select>
                 </div>
                 <div class="form-group">
-                    <label for="created_date">Created Date and Time</label>
+                    <label for="created_date">Created Date and Time*</label>
                     <div class="well">
                         <div id="datetimepicker1" class="input-append date">
                             <input data-format="yyyy-MM-dd hh:mm:ss" type="text" id="created_date"
-                                   name="created_date">
+                                   name="created_date" required>
                             <span class="add-on">
                                 <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
                             </span>
@@ -67,11 +65,11 @@
                     </script>
                 </div>
                 <div class="form-group">
-                    <label for="merged_date">Merged Date and Time</label>
+                    <label for="merged_date">Merged Date and Time*</label>
                     <div class="well">
                         <div id="datetimepicker2" class="input-append date">
                             <input data-format="yyyy-MM-dd hh:mm:ss" type="text" id="merged_date"
-                                   name="merged_date">
+                                   name="merged_date" required>
                             <span class="add-on">
                                 <i data-time-icon="icon-time" data-date-icon="icon-calendar"></i>
                             </span>

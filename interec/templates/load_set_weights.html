@@ -14,18 +14,18 @@
     <div class="row" style="margin:20px;">
         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12"></div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-            <form action="http://localhost:5000/set_weights" method="POST">
+            <form action="http://localhost:5000/set_weights" method="POST" onsubmit="return validateSetWeightsForm();">
                 <div class="form-group">
-                    <label for="alpha">File Path Similarity Weight(alpha)</label>
-                    <input type="text" class="form-control" id="alpha" name="alpha" placeholder="ex: 0.1">
+                    <label for="alpha">File Path Similarity Weight(alpha)*</label>
+                    <input type="text" class="form-control" id="alpha" name="alpha" placeholder="ex: 0.1" required>
                 </div>
                 <div class="form-group">
-                    <label for="beta">Text Similarity Weight(beta)</label>
-                    <input type="text" class="form-control" id="beta" name="beta" placeholder="ex: 0.1">
+                    <label for="beta">Text Similarity Weight(beta)*</label>
+                    <input type="text" class="form-control" id="beta" name="beta" placeholder="ex: 0.2" required>
                 </div>
                 <div class="form-group">
-                    <label for="gamma">Activeness Weight(gamma)</label>
-                    <input type="text" class="form-control" id="gamma" name="gamma" placeholder="ex: 0.1">
+                    <label for="gamma">Activeness Weight(gamma)*</label>
+                    <input type="text" class="form-control" id="gamma" name="gamma" placeholder="ex: 0.7" required>
                 </div>
                 <div class="form-group">
                     <label>** Please note that (alpha + beta + gamma) should be equal to 1. **</label>

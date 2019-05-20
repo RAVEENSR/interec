@@ -10,11 +10,13 @@ from flask import Flask, redirect, url_for
 from flask import render_template
 from flask import request
 from flask.json import jsonify
+from flask_cors import CORS
 from gevent.pywsgi import WSGIServer
 
 from interec.interec_processor import InterecProcessor
 
 app = Flask(__name__)
+CORS(app)
 logging.basicConfig(level=logging.INFO, filename='app.log', format='%(asctime)s-%(name)s-%(levelname)s - %(message)s')
 logging.Formatter("%(asctime)s;%(levelname)s;%(message)s", "%Y-%m-%d %H:%M:%S")
 interec = InterecProcessor('bitcoin')
@@ -29,6 +31,22 @@ navbar_info = {'repository': interec.database,
 def index():
     logging.info("Index Page Served")
     return render_template('index.html', navbar_info=navbar_info)
+
+
+@app.route('/check_pr_id', methods=['POST'])
+def check_pr_id():
+    content = request.json
+    pr_id = int(content['id'])
+    result = interec.check_pr_number_availability(pr_id)
+    logging.info("PR Id availability checked")
+    return jsonify(availability=result), 200
+
+
+@app.route('/get_pr_count', methods=['POST', 'GET'])
+def get_pr_count():
+    result = interec.pr_count
+    logging.info("PR count checked")
+    return jsonify(count=result), 200
 
 
 @app.route('/load_set_weights')
