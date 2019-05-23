@@ -19,8 +19,7 @@ app = Flask(__name__)
 CORS(app)
 logging.basicConfig(level=logging.INFO, filename='app.log', format='%(asctime)s-%(name)s-%(levelname)s - %(message)s')
 logging.Formatter("%(asctime)s;%(levelname)s;%(message)s", "%Y-%m-%d %H:%M:%S")
-interec = InterecProcessor('bitcoin')
-interec.set_weight_combination_for_factors(alpha=0.1, beta=0.2, gamma=0.7, date_window=120)
+interec = InterecProcessor()
 navbar_info = {'repository': interec.database,
                'pr_count': interec.pr_count,
                'integrator_count': interec.integrator_count}

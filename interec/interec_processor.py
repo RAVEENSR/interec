@@ -3,6 +3,7 @@ interec_processor.py
 ====================================
 The core of the InteRec system
 """
+import interec_config as icfg
 import logging
 from datetime import timedelta, datetime
 
@@ -22,11 +23,9 @@ class InterecProcessor:
     """
     This is the main class for the InteRec system. This class handles all the major operations in the system
 
-    :param database_name: Name of the database which needed to run the system
-    :type database_name: String
     """
-    def __init__(self, database_name):
-        self.database = database_name
+    def __init__(self):
+        self.database = icfg.mysql['db']
         self.spark = ""
         self.all_prs_df = ""
         self.all_integrators_df = ""
@@ -38,10 +37,10 @@ class InterecProcessor:
         self.text_similarity_calculator = TextSimilarityCalculator()
         self.__initialise_app()
         self.accuracy_calculator = AccuracyCalculator(spark=self.spark)
-        self.alpha = 0.1
-        self.beta = 0.2
-        self.gamma = 0.7
-        self.date_window = 120
+        self.alpha = icfg.system_defaults['alpha']
+        self.beta = icfg.system_defaults['beta']
+        self.gamma = icfg.system_defaults['gamma']
+        self.date_window = icfg.system_constants['date_window']
         logging.basicConfig(level=logging.INFO, filename='app.log', format='%(asctime)s-%(name)s-%(levelname)s '
                                                                            '- %(message)s')
         logging.info("Interec Processor created")
@@ -57,21 +56,21 @@ class InterecProcessor:
         # Read table pull_request
         self.all_prs_df = self.spark.read \
             .format("jdbc") \
-            .option("url", "jdbc:mysql://localhost:3306/" + self.database) \
+            .option("url", "jdbc:mysql://" + icfg.mysql['host'] + "/" + self.database) \
             .option("driver", 'com.mysql.cj.jdbc.Driver') \
-            .option("dbtable", "pull_request") \
-            .option("user", "root") \
-            .option("password", "") \
+            .option("dbtable", icfg.mysql['pr_table']) \
+            .option("user", icfg.mysql['user']) \
+            .option("password", icfg.mysql['password']) \
             .load()
 
         # Read table integrator
         self.all_integrators_df = self.spark.read \
             .format("jdbc") \
-            .option("url", "jdbc:mysql://localhost:3306/" + self.database) \
+            .option("url", "jdbc:mysql://" + icfg.mysql['host'] + "/" + self.database) \
             .option("driver", 'com.mysql.cj.jdbc.Driver') \
-            .option("dbtable", "integrator") \
-            .option("user", "root") \
-            .option("password", "") \
+            .option("dbtable", icfg.mysql['integrator_table']) \
+            .option("user", icfg.mysql['user']) \
+            .option("password", icfg.mysql['password']) \
             .load()
 
         self.all_prs_df.createOrReplaceTempView("pull_request")
