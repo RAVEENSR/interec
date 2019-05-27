@@ -4,6 +4,7 @@ from nltk.corpus import stopwords
 from nltk.stem.porter import *
 
 from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.preprocessing import normalize
 
 
 class TextSimilarityCalculator:
@@ -34,7 +35,7 @@ class TextSimilarityCalculator:
         return [stemmer.stem(word) for word in prior_to_stem]
 
     def cos_similarity(self, string1, string2):
-        term_frequency = self.tfidf_vectorizer.fit_transform([string1, string2])
+        term_frequency = normalize(self.tfidf_vectorizer.fit_transform([string1, string2]))
         return (term_frequency * term_frequency.T).A[0, 1]
 
     @staticmethod
