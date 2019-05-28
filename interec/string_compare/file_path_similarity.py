@@ -24,7 +24,7 @@ class FilePathSimilarityCalculator:
         file2 = self.path_separator(file2)
         common_file_path = 0
         rng = range(min(len(file1), len(file2)))
-        reversed(rng)
+        rng = reversed(rng)
         for i in rng:
             if file1[i] == file2[i]:
                 common_file_path += 1
@@ -52,6 +52,7 @@ class FilePathSimilarityCalculator:
     def longest_common_sub_sequence_similarity(self, file1, file2):
         file1 = self.path_separator(file1)
         file2 = self.path_separator(file2)
+        common_file_path = 0
         if len(set(file1) & set(file2)) > 0:
             lst = [[0 for x in range(len(file2) + 1)] for x in range(len(file1) + 1)]
             for i in range(len(file1) + 1):
@@ -63,8 +64,6 @@ class FilePathSimilarityCalculator:
                     else:
                         lst[i][j] = max(lst[i - 1][j], lst[i][j - 1])
             common_file_path = lst[len(file1)][len(file2)]
-        else:
-            common_file_path = 0
         return common_file_path
 
     @staticmethod
